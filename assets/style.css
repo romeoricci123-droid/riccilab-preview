@@ -748,108 +748,13 @@ body[data-page="news"] .subhero img {
   filter: none !important;
   opacity: 1 !important;
 }
-/* NEWS: force the subhero to full-bleed, identical to other pages */
-body[data-page="news"] .subhero {
-  /* full viewport width, centered */
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  padding: 0 !important;
-
-  /* image behavior */
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-
-  /* ensure nothing clips it */
-  overflow: visible !important;
-}
-
-/* If the News hero uses an <img> instead of CSS background, make it full-bleed too */
-body[data-page="news"] .subhero img {
-  display: block !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  height: auto !important;
-  margin-left: calc(50% - 50vw) !important;
-  margin-right: calc(50% - 50vw) !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
-
-/* Neutralize any inner container padding in the News hero */
-body[data-page="news"] .subhero > .container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-/* NEWS page: force the hero to true full-bleed, regardless of wrappers */
-body[data-page="news"] .subhero {
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  margin: 0 !important;
-  padding: 0 !important;
-
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  overflow: visible !important;
-}
-
-/* If the news hero uses an <img> instead of CSS background: */
-body[data-page="news"] .subhero > img {
-  display: block !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  height: auto !important;
-  margin: 0 !important;
-  filter: none !important;
-  opacity: 1 !important;
-}
 
 /* Neutralize any inner container padding at the hero level */
 body[data-page="news"] .subhero > .container {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
-/* NEWS: harden subhero to full-bleed no matter what */
-body[data-page="news"] .subhero {
-  position: relative !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  background-size: cover !important;
-  background-position: center !important;
-  background-repeat: no-repeat !important;
-  overflow: visible !important;
-}
 
-/* If an <img> is used inside subhero on news.html, full-bleed it too */
-body[data-page="news"] .subhero > img {
-  display: block !important;
-  position: relative !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 100vw !important;
-  max-width: 100vw !important;
-  height: auto !important;
-  margin: 0 !important;
-}
-
-/* Neutralize inner padding so text aligns to the same container edge */
-body[data-page="news"] .subhero > .container {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
 /* News page entries */
 .news-entry {
   padding: 18px 0;
