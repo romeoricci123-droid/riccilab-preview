@@ -267,37 +267,6 @@ img.hero{
   color: #fff;
 }
 
-
-/* Unified size for homepage activity thumbnails */
-
-
-
-/* Unified square crop for homepage activity buttons */
-
-
-
-/* Research page hero: match other hero sections */
-.page-hero{
-  position: relative;
-  min-height: 60vh;
-  display: flex;
-  align-items: flex-end;
-  overflow: hidden;
-  background: #0d1220;
-}
-.page-hero::before{filter: brightness(1.18) saturate(1.06) contrast(1.05);
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(180deg, rgba(10,14,22,.02) 0, rgba(10,14,22,.16) 40%, rgba(10,14,22,.32) 80%), url('research_hero_bright.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: brightness(1.18) saturate(1.06) contrast(1.05);
-}
-.page-hero .inner{ position: relative; padding: 40px 0; color: #fff; }
-
 /* Homepage activity cards: fixed height, fill width, crop to the right */
 .activity-card{ position: relative; display:block; overflow:hidden; height:160px; }
 .activity-card .activity-media{ width:100%; height:100%; object-fit:cover; object-position:left center; display:block; }
@@ -541,12 +510,6 @@ header nav .navbox {
   flex-wrap: wrap;
   justify-content: flex-start; /* lock to left edge */
 }
-/* Reset nav bar buttons so they align like before */
-header nav .navbox {
-  display: inline-block;     /* no flex centering here */
-  margin: 0 6px;             /* restore even spacing left/right */
-  transform: none !important;
-}
 
 /* Keep CTA buttons unified and left-aligned inside heroes */
 .hero .cta .navbox,
@@ -644,16 +607,6 @@ header nav .navbox {
 @media (max-width: 760px) {
   header nav { flex-wrap: wrap; row-gap: 8px; }
 }
-/* Pin the 'News' nav item to match others */
-header nav a[href$="news.html"] {
-  margin: 0 !important;
-  padding: 8px 12px;        /* same hit area as others */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;           /* prevent weird flex growth */
-  transform: none !important;
-}
 header nav {
   letter-spacing: 0;        /* normalize spacing in the nav row */
 }
@@ -670,11 +623,6 @@ header nav a[href$="news.html"] {
   right: auto !important;
   transform: none !important;
   letter-spacing: 0 !important;
-}
-
-/* If "News" is the 6th item, also normalize by position (belt & suspenders) */
-header nav a:nth-of-type(6) {
-  margin-left: 12px !important;
 }
 
 /* Active-page styling that does NOT visually nudge alignment */
