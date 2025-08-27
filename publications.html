@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <!-- Favicon / icons -->
+<link rel="icon" href="assets/favicon.png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="/news.xml">
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<!-- Basic SEO -->
+<meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
+
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="Ricci Lab — Publications">
+<meta property="og:description" content="Our key publications in metabolism, immunity, and organelle biology.">
+<meta property="og:image" content="https://your-domain/assets/og-publications.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://your-domain/publications.html">
+
+<meta name="twitter:card" content="summary_large_image">
+
+
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>Selected publications — Ricci Lab</title>
+    <link href="assets/style.css?v=igbmc_fix5" rel="stylesheet" />
+</head>
+
+<body data-page="publications">
+  <a href="#main" class="skip">Skip to content</a>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="lab">Ricci Lab</span></div>
+      <nav>
+        <a class="cardbox navbox" href="index.html">Home</a>
+        <a class="light cardbox navbox" href="research.html">Research</a>
+        <a class="cardbox navbox" href="team.html">Team</a>
+        <a class="light cardbox navbox" href="publications.html" aria-current="page">Publications</a>
+        <a class="light cardbox navbox" href="join.html">Join Us</a>
+        <a class="cardbox navbox" href="news.html">News</a>
+        <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+        <a class="cardbox navbox" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="subhero" style="background-image: url('assets/publication.jpg')">
+  <div class="container inner">
+    <h1>Selected publications</h1>
+    <p class="lead">Most important publications to understand our current research activity.</p>
+  </div>
+</section>
+
+<section class="page" id="pubs">
+  <div class="container">
+    <div id="pub-layout">
+      <!-- LEFT: the ONLY Cell cover -->
+      <aside id="pub-cover">
+        <a class="cover-link" href="https://doi.org/10.1016/j.cell.2008.11.018" target="_blank" rel="noopener">
+          <img src="assets/cell_cover.png" alt="Cell cover — A New Route for Insulin Secretion">
+        </a>
+      </aside>
+
+      <!-- RIGHT: publications list -->
+      <div id="pub-list" class="paper-list" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Keep your data file -->
+<script src="assets/publications.js?v=7"></script>
+
+<!-- Build the list ONCE -->
+<script>
+(function () {
+  var list = document.getElementById('pub-list');
+  if (!list) return;
+
+  // clear anything present
+  list.innerHTML = '';
+
+  var DATA = (window.PUBLICATIONS && window.PUBLICATIONS.length) ? window.PUBLICATIONS : [];
+  var AREA = { inflammasome:"Inflammasome", beta:"β-cell", neuron:"Neuroscience" };
+
+  DATA.forEach(function(p){
+    var a = document.createElement('a');
+    a.className = 'paper-card';
+    a.href = p.doi ? ('https://doi.org/' + p.doi) : '#';
+    a.target = '_blank'; a.rel = 'noopener';
+    a.innerHTML =
+      '<div class="paper-title">' + p.title + '</div>' +
+      '<div class="paper-authors">' + (p.authors||'') + '</div>' +
+      '<div class="paper-meta">' + (p.venue||'') + (p.year ? ' (' + p.year + ')' : '') + '</div>' +
+      (p.area ? '<div class="paper-tags"><span class="tag">' + (AREA[p.area] || p.area) + '</span></div>' : '');
+    list.appendChild(a);
+  });
+})();
+</script>
+
+<!-- (optional) your site script AFTERwards -->
+<script src="assets/site.js?v=7"></script>
+
+
+
+  <footer>
+    ©<span id="y"></span> Ricci Lab ·
+    <a href="legal.html">Mentions légales</a> ·
+    <a href="privacy.html">Vie privée</a>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
+<script src="assets/publications.js?v=2"></script>
+<script src="assets/site.js?v=2"></script>
+<script>
+(function () {
+  var list = document.getElementById('pub-list');
+  if (!list) return;
+
+  // If something already populated the list, do nothing
+  if (list.children && list.children.length) return;
+
+  var data = (window.PUBLICATIONS || []);
+  if (!data.length) return;
+
+  list.innerHTML = ''; // clear any stray nodes
+
+  var tagLabel = { inflammasome: 'Inflammasome', beta: 'β-cell', neuron: 'Neuroscience' };
+
+  data.forEach(function (p) {
+    var a = document.createElement('a');
+    a.className = 'paper-card';
+    a.href = p.doi ? ('https://doi.org/' + p.doi) : '#';
+    a.target = '_blank';
+    a.rel = 'noopener';
+
+    a.innerHTML =
+      '<div class="paper-title">' + p.title + '</div>' +
+      '<div class="paper-authors">' + p.authors + '</div>' +
+      '<div class="paper-meta">' + (p.venue || '') + (p.year ? ' (' + p.year + ')' : '') + '</div>' +
+      '<div class="paper-tags">' + (p.area ? '<span class="tag">' + (tagLabel[p.area] || p.area) + '</span>' : '') + '</div>';
+
+    list.appendChild(a);
+  });
+})();
+</script>
+
+</body>
+
+
+</html>
