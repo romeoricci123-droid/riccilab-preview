@@ -1,18 +1,112 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Favicon / icons -->
+  <link rel="icon" href="assets/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Ricci Lab · News" href="/news.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- Basic SEO -->
   <meta charset="utf-8">
-  <title>Vie privée — Ricci Lab</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Vie privée du site du Ricci Lab. Données du formulaire de contact, hébergement et droits RGPD.">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Vie privée · Ricci Lab">
+  <meta property="og:description" content="Informations sur les données traitées via le formulaire de contact et vos droits.">
+  <meta property="og:image" content="assets/og-home.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://romeoricci123-droid.github.io/riccilab-preview/privacy.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>Vie privée · Ricci Lab</title>
+  <link rel="stylesheet" href="assets/style.css?v=igbmc_fix6">
 </head>
 <body data-page="privacy">
-  <section class="page">
+  <a href="#main" class="skip">Aller au contenu</a>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="lab">Ricci Lab</span></div>
+
+      <!-- Mobile-only hamburger -->
+      <button class="hamburger" id="navToggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <nav id="site-nav">
+        <a class="cardbox navbox" href="index.html">Home</a>
+        <a class="light cardbox navbox" href="research.html">Research</a>
+        <a class="cardbox navbox" href="team.html">Team</a>
+        <a class="light cardbox navbox" href="publications.html">Publications</a>
+        <a class="light cardbox navbox" href="join.html">Join Us</a>
+        <a class="cardbox navbox" href="news.html">News</a>
+        <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+        <a class="cardbox navbox" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="pagehead">
     <div class="container">
       <h1>Vie privée</h1>
-      <p>Ce site ne collecte pas de données personnelles sans votre accord.</p>
-      <p>Les formulaires de contact servent uniquement à la communication avec le laboratoire.</p>
-      <p>Conformément au RGPD, vous pouvez exercer vos droits en contactant le responsable de la publication.</p>
+      <p class="muted">Dernière mise à jour : <time datetime="2025-01-01">1 janvier 2025</time></p>
     </div>
   </section>
+
+  <main id="main">
+    <section class="page">
+      <div class="container two-col">
+        <div>
+          <h2 id="responsable">Responsable du traitement</h2>
+          <p><strong>Ricci Lab</strong>, IGBMC, 1 Rue Laurent Fries, 67404 Illkirch, France.</p>
+          <p>Contact : <a href="mailto:ricci@igbmc.fr">ricci@igbmc.fr</a></p>
+
+          <h2 id="donnees">Données collectées</h2>
+          <p>Ce site ne collecte pas de données personnelles sans action de votre part. Les seules données traitées sont celles que vous envoyez via le formulaire de contact : nom, adresse e-mail, message et éléments fournis volontairement.</p>
+
+          <h2 id="finalites">Finalités et base légale</h2>
+          <p>Votre message est utilisé pour répondre à votre demande et pour assurer un suivi. La base légale est l’intérêt légitime du laboratoire à gérer les échanges entrants.</p>
+
+          <h2 id="destinataires">Destinataires et sous-traitance</h2>
+          <p>Les messages sont transmis par le service Formspree pour la remise au destinataire. Formspree agit en tant que sous-traitant pour la transmission et la journalisation technique du message.</p>
+
+          <h2 id="hebergement">Hébergement</h2>
+          <p>Le site est servi depuis GitHub Pages. Les fichiers statiques et les journaux techniques liés à l’hébergement peuvent être traités par GitHub pour l’exploitation du service.</p>
+        </div>
+
+        <div>
+          <h2 id="conservation">Durée de conservation</h2>
+          <p>Les messages sont conservés pendant la durée nécessaire au traitement de la demande puis archivés ou supprimés selon les besoins scientifiques et administratifs du laboratoire.</p>
+
+          <h2 id="cookies">Cookies et mesures d’audience</h2>
+          <p>Nous n’utilisons pas d’outils d’analyse d’audience et nous ne déposons pas de cookies de suivi. Le site fonctionne sans cookies non essentiels.</p>
+
+          <h2 id="securite">Sécurité</h2>
+          <p>Nous appliquons des mesures raisonnables pour protéger les informations transmises, y compris l’usage de connexions chiffrées lorsque votre navigateur l’autorise. Aucun système n’est exempt de risques et nous vous recommandons de ne pas envoyer d’informations sensibles via le formulaire.</p>
+
+          <h2 id="droits">Vos droits</h2>
+          <p>Vous disposez de droits d’accès, de rectification, d’effacement, de limitation, d’opposition et de portabilité lorsque cela s’applique. Pour exercer vos droits, contactez <a href="mailto:ricci@igbmc.fr">ricci@igbmc.fr</a>. Joignez les informations nécessaires pour nous permettre de vous identifier et traiter la demande.</p>
+
+          <h2 id="liens">Liens externes</h2>
+          <p>Des liens vers des sites tiers peuvent apparaître. Nous ne sommes pas responsables de leurs pratiques de confidentialité. Nous vous invitons à consulter leurs politiques dédiées.</p>
+
+          <h2 id="maj">Mises à jour</h2>
+          <p>Cette page peut être modifiée pour refléter l’évolution du site ou du cadre réglementaire. La date de mise à jour est indiquée en tête de page.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ©<span id="y"></span> Ricci Lab ·
+    <a href="legal.html">Mentions légales</a> ·
+    <a href="privacy.html" aria-current="page">Vie privée</a>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
+
+  <script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
+
