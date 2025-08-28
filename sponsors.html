@@ -24,6 +24,40 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Ricci Lab — Sponsors</title>
   <link href="assets/style.css?v=igbmc_fix5" rel="stylesheet" />
+  <style>
+  /* Funding logos: keep inside their card and scale nicely */
+  /* Works even if class names differ */
+  main [class*="sponsor"], main [class*="funding"], main [class*="Sponsors"], main [class*="Funding"] {
+    /* make each tile hide anything that tries to spill over */
+  }
+  main [class*="sponsor"] > *, main [class*="funding"] > *, main [class*="Sponsors"] > *, main [class*="Funding"] > * {
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  /* images and SVGs stay within the card */
+  main [class*="sponsor"] img,
+  main [class*="funding"] img,
+  main [class*="Sponsors"] img,
+  main [class*="Funding"] img,
+  main [class*="sponsor"] svg,
+  main [class*="funding"] svg,
+  main [class*="Sponsors"] svg,
+  main [class*="Funding"] svg {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 90px; /* tweak if you want taller logos */
+    object-fit: contain;
+    display: block;
+  }
+  /* if the ARC filename contains "arc", add an extra guard */
+  main img[src*="arc"], main svg[src*="arc"] {
+    max-height: 90px;
+  }
+</style>
+
 </head>
 
 <body data-page="sponsors">
