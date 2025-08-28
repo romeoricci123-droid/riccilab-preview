@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://romeoricci123-droid.github.io/riccilab-preview/sitemap.xml
