@@ -1,106 +1,153 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <title>Contact — Ricci Lab</title>
+
   <!-- Favicon / icons -->
-<link rel="icon" href="assets/favicon.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="/news.xml">
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="icon" href="assets/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="news.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
 
-<!-- Basic SEO -->
-<meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
+  <!-- Basic SEO -->
+  <meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
-<!-- Open Graph / Twitter -->
-<meta property="og:title" content="Ricci Lab — Organelle crosstalk in disease">
-<meta property="og:description" content="Metabolism and innate immunity through the lens of lipids and membranes.">
-<meta property="og:image" content="assets/og-home.jpg">
-<meta property="og:type" content="website">
-<meta name="twitter:card" content="summary_large_image">
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Contact — Ricci Lab">
+  <meta property="og:description" content="Send us your message.">
+  <meta property="og:image" content="https://romeoricci123-droid.github.io/riccilab-preview/assets/og-hero.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://romeoricci123-droid.github.io/riccilab-preview/contact.html">
+  <meta name="twitter:card" content="summary_large_image">
 
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <title>Contac — Ricci Lab</title>
-    <link href="assets/style.css?v=igbmc_fix5" rel="stylesheet" />
+  <link href="assets/style.css?v=igbmc_fix5" rel="stylesheet" />
 </head>
 
 <body data-page="contact">
   <a href="#main" class="skip">Skip to content</a>
-    <header>
-        <div class="container nav">
-            <div class="brand"><span class="lab">Ricci Lab</span></div>
-            <nav>
-  <a class="cardbox navbox" href="index.html">Home</a>
-  <a class="light cardbox navbox" href="research.html">Research</a>
-  <a class="cardbox navbox" href="team.html">Team</a>
-  <a class="light cardbox navbox" href="publications.html">Publications</a>
-  <a class="light cardbox navbox" href="join.html">Join Us</a>
-  <a class="cardbox navbox" href="news.html">News</a>
-  <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
-  <a class="cardbox navbox" href="contact.html" aria-current="page">Contact</a>
-</nav>
 
-        </div>
-    </header>
-    <section class="subhero" style="background-image: url('assets/contact.jpg')">
-  <div class="container inner">
-    <h1>Contact</h1>
-    <p class="lead">Send us your message.</p>
-  </div>
-</section>
-    <main id="main">
-        <section class="page">
-            <div class="container">
-                <p><strong>Institute:</strong> IGBMC</p>
-                <p><strong>Email:</strong> ricci@igbmc.fr</p>
-                <h3>Get in touch</h3>
-                
-                <form action="process_form.php" method="POST" style="max-width:560px;display:grid;gap:10px">
-  <label>
-    Name
-    <input name="name" required placeholder="Your name"
-           style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px">
-  </label>
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="lab">Ricci Lab</span></div>
+      <nav>
+        <a class="cardbox navbox" href="index.html">Home</a>
+        <a class="light cardbox navbox" href="research.html">Research</a>
+        <a class="cardbox navbox" href="team.html">Team</a>
+        <a class="light cardbox navbox" href="publications.html">Publications</a>
+        <a class="light cardbox navbox" href="join.html">Join Us</a>
+        <a class="cardbox navbox" href="news.html">News</a>
+        <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+        <a class="cardbox navbox" href="contact.html" aria-current="page">Contact</a>
+      </nav>
+    </div>
+  </header>
 
-  <label>
-    Email
-    <input name="email" type="email" required placeholder="your@email"
-           style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px">
-  </label>
+  <section class="subhero" style="background-image: url('assets/contact.jpg')">
+    <div class="container inner">
+      <h1>Contact</h1>
+      <p class="lead">Send us your message.</p>
+    </div>
+  </section>
 
-  <label>
-    Message
-    <textarea name="message" rows="5" required placeholder="How can we help?"
-              style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></textarea>
-  </label>
+  <main id="main">
+    <section class="page">
+      <div class="container">
+        <p><strong>Institute:</strong> IGBMC</p>
+        <p><strong>Email:</strong> ricci@igbmc.fr</p>
 
-  <!-- reCAPTCHA box -->
-  <div class="g-recaptcha" data-sitekey="6LfBHLMrAAAAACTvn61O3pivN-FkvtOlnmOQTVfv"></div>
+        <h3>Get in touch</h3>
 
-  <button class="btn" type="submit">Send</button>
-</form>
+        <!-- Success / error message area -->
+        <p id="msg" class="meta" aria-live="polite" hidden
+           style="margin:8px 0 12px 0; padding:10px 12px; border-radius:10px; border:1px solid #e7edf2; background:#f7fafc;"></p>
 
-<!-- Add this script just before </body> -->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <!--
+          IMPORTANT: Replace the action URL with your Formspree endpoint:
+          e.g. action="https://formspree.io/f/abcd1234"
+        -->
+        <form id="contactForm" action="https://formspree.io/f/xwpnkrzk" method="POST"
+              style="max-width:560px;display:grid;gap:10px">
 
-            </div>
-        </section>
-    </main>
-    <footer>
-  ©<span id="y"></span> Ricci Lab · 
-  <a href="legal.html">Mentions légales</a> · 
-  <a href="privacy.html">Vie privée</a>
+          <!-- Honeypot (hidden from humans; bots often fill it) -->
+          <input type="text" name="website" tabindex="-1" autocomplete="off"
+                 style="position:absolute;left:-5000px;opacity:0" aria-hidden="true">
+
+          <label>
+            Name
+            <input name="name" required placeholder="Your name"
+                   style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px">
+          </label>
+
+          <label>
+            Email
+            <input name="email" type="email" required placeholder="your@email"
+                   style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px">
+          </label>
+
+          <label>
+            Message
+            <textarea name="message" rows="5" required placeholder="How can we help?"
+                      style="width:100%;padding:10px;border:1px solid var(--line);border-radius:8px"></textarea>
+          </label>
+
+          <!-- Optional subject for the email you receive -->
+          <input type="hidden" name="_subject" value="New message from Ricci Lab site">
+
+          <button class="btn" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ©<span id="y"></span> Ricci Lab · 
+    <a href="legal.html">Mentions légales</a> · 
+    <a href="privacy.html">Vie privée</a>
+  </footer>
+
   <script>
-    document.getElementById('y').textContent = new Date().getFullYear()
+    // Footer year
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // AJAX submit to Formspree (+ honeypot), inline success/error messages
+    (function () {
+      const form = document.getElementById('contactForm');
+      const msg  = document.getElementById('msg');
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const data = new FormData(form);
+
+        // Honeypot check: if filled, silently abort
+        if (data.get('website')) return;
+
+        try {
+          const res = await fetch(form.action, {
+            method: 'POST',
+            body: data,
+            headers: { 'Accept': 'application/json' }
+          });
+
+          if (res.ok) {
+            form.reset();
+            msg.hidden = false;
+            msg.textContent = 'Thanks — your message was sent.';
+            msg.style.borderColor = '#10b981';
+            msg.style.background  = '#ecfdf5';
+            msg.style.color       = '#065f46';
+          } else {
+            msg.hidden = false;
+            msg.textContent = 'Sorry, there was a problem. Please try again later.';
+          }
+        } catch (err) {
+          msg.hidden = false;
+          msg.textContent = 'Network error. Please try again later.';
+        }
+      });
+    })();
   </script>
-</footer>
-
-
-<script>
-  document.getElementById('y').textContent = new Date().getFullYear();
-</script>
-
 </body>
-
 </html>
