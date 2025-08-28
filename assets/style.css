@@ -1016,13 +1016,25 @@ body[data-page="publications"] #pub-list .paper-card{
     justify-content: flex-start;
     border-radius: 10px;
   }
-}
-/* ===== Mobile fixes for Publications page (stop overflow) ===== */
-body[data-page="publications"] #pub-list.paper-list{
-  /* remove wide minimums so it can shrink on narrow screens */
-  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+/* ===== Publications: solid desktop + phone layout ===== */
+
+/* Desktop/laptop: keep two roomy columns and the fixed cover */
+@media (min-width: 901px){
+  body[data-page="publications"] #pub-layout{
+    grid-template-columns: auto 2cm minmax(520px, 1fr) !important; /* cover | gap | list */
+    column-gap: 2cm !important;
+  }
+  body[data-page="publications"] #pub-list.paper-list{
+    grid-template-columns: repeat(2, minmax(320px, 1fr)) !important;
+  }
+  body[data-page="publications"] #pub-cover img{
+    width: auto !important;
+    max-width: 420px !important;
+    height: auto !important;
+  }
 }
 
+/* Phones/tablets: single column, no overflow, fluid cover */
 @media (max-width: 900px){
   body[data-page="publications"] #pub-layout{
     grid-template-columns: 1fr !important;
@@ -1037,3 +1049,4 @@ body[data-page="publications"] #pub-list.paper-list{
     height: auto !important;
   }
 }
+
