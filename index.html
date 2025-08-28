@@ -58,21 +58,32 @@
 <body data-page="home">
   <a href="#main" class="skip">Skip to content</a>
     <header>
-        <div class="container nav">
-            <div class="brand"><span class="lab">Ricci Lab</span></div>
-            <nav>
-  <a class="cardbox navbox" href="index.html" aria-current="page">Home</a>
-  <a class="light cardbox navbox" href="research.html">Research</a>
-  <a class="cardbox navbox" href="team.html">Team</a>
-  <a class="light cardbox navbox" href="publications.html">Publications</a>
-  <a class="light cardbox navbox" href="join.html">Join Us</a>
-  <a class="cardbox navbox" href="news.html">News</a>
-  <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
-  <a class="cardbox navbox" href="contact.html">Contact</a>
-</nav>
+  <div class="container nav">
+    <div class="brand"><span class="lab">Ricci Lab</span></div>
 
-        </div>
-    </header>
+    <!-- Mobile-only hamburger -->
+    <button class="hamburger" id="navToggle"
+            aria-controls="site-nav"
+            aria-expanded="false"
+            aria-label="Menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
+
+    <nav id="site-nav">
+      <a class="cardbox navbox" href="index.html" aria-current="page">Home</a>
+      <a class="light cardbox navbox" href="research.html">Research</a>
+      <a class="cardbox navbox" href="team.html">Team</a>
+      <a class="light cardbox navbox" href="publications.html">Publications</a>
+      <a class="light cardbox navbox" href="join.html">Join Us</a>
+      <a class="cardbox navbox" href="news.html">News</a>
+      <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+      <a class="cardbox navbox" href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
     <main id="main">
         <section class="hero">
             <div class="container inner">
@@ -179,6 +190,7 @@
     document.getElementById('y').textContent = new Date().getFullYear()
   </script>
 </footer>
+<script src="assets/nav.js?v=1" defer></script>
 </body>
 
 </html>
