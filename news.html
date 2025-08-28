@@ -123,5 +123,57 @@
     </script>
   </footer>
 <script defer src="/assets/nav.js?v=2"></script>
+<script>
+  // Local hamburger fallback for news.html + rename Sponsors → Funding
+  (function () {
+    const header = document.querySelector('header .container.nav');
+    const nav = header && header.querySelector('nav');
+    if (!header || !nav) return;
+
+    // Give the nav an id so the button can target it
+    if (!nav.id) nav.id = 'site-nav';
+
+    // Inject minimal CSS for small screens
+    const css = `
+      header .hamburger{display:none;background:transparent;border:0;font-size:1.25rem;line-height:1;padding:.5rem .75rem}
+      @media (max-width: 900px){
+        header .hamburger{display:inline-flex;align-items:center;justify-content:center}
+        header nav{display:none}
+        header nav.open{display:block}
+      }
+    `;
+    const style = document.createElement('style');
+    style.appendChild(document.createTextNode(css));
+    document.head.appendChild(style);
+
+    // Insert the button next to the brand
+    const brand = header.querySelector('.brand') || header.firstElementChild;
+    const btn = document.createElement('button');
+    btn.className = 'hamburger';
+    btn.setAttribute('aria-label', 'Menu');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.setAttribute('aria-controls', nav.id);
+    btn.innerHTML = '<span aria-hidden="true">☰</span>';
+    brand && brand.after(btn);
+
+    // Toggle behavior
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+
+    // Local rename in this page’s nav in case nav.js missed it
+    nav.querySelectorAll('a,[aria-label],[title]').forEach(el => {
+      const t = (el.textContent || '').trim().toLowerCase();
+      if (t === 'sponsors') el.textContent = 'Funding';
+      if (el.getAttribute && (el.getAttribute('aria-label') || '').trim().toLowerCase() === 'sponsors') {
+        el.setAttribute('aria-label', 'Funding');
+      }
+      if (el.getAttribute && (el.getAttribute('title') || '').trim().toLowerCase() === 'sponsors') {
+        el.setAttribute('title', 'Funding');
+      }
+    });
+  })();
+</script>
 </body>
 </html>
