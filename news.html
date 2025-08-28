@@ -7,21 +7,21 @@
   <!-- Favicon / icons -->
   <link rel="icon" href="assets/favicon.png" sizes="32x32">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="news.xml">
+  <link rel="alternate" type="application/rss+xml" title="Ricci Lab News" href="news.xml">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
 
   <!-- Basic SEO -->
   <meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Ricci Lab — News">
+  <meta property="og:title" content="News | Ricci Lab">
   <meta property="og:description" content="Latest updates, awards, and events from the Ricci Lab.">
   <meta property="og:image" content="https://riccilab.org/assets/og-news.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://riccilab.org/news.html">
   <meta name="twitter:card" content="summary_large_image">
 
-  <title>News — Ricci Lab</title>
+  <title>News | Ricci Lab</title>
   <link href="assets/style.css?v=igbmc_fix8" rel="stylesheet"/>
   <link rel="canonical" href="https://riccilab.org/news.html">
 </head>
@@ -31,14 +31,21 @@
   <header>
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
-      <nav>
+
+      <!-- Standard hamburger button -->
+      <button class="hamburger" aria-label="Menu" aria-expanded="false" aria-controls="site-nav">
+        <span aria-hidden="true">☰</span>
+      </button>
+
+      <!-- Main nav -->
+      <nav id="site-nav">
         <a class="cardbox navbox" href="index.html">Home</a>
         <a class="light cardbox navbox" href="research.html">Research</a>
         <a class="cardbox navbox" href="team.html">Team</a>
         <a class="light cardbox navbox" href="publications.html">Publications</a>
         <a class="light cardbox navbox" href="join.html">Join Us</a>
         <a class="cardbox navbox" href="news.html" aria-current="page">News</a>
-        <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+        <a class="cardbox navbox" href="sponsors.html" aria-label="Funding" title="Funding">Funding</a>
         <a class="cardbox navbox" href="contact.html">Contact</a>
       </nav>
     </div>
@@ -57,14 +64,14 @@
       <div class="container">
 
         <!-- Matches index.html#2025-09-30 -->
-        <article class="news-entry" id="2025-09-30">
+        <article class="news-entry" id="2025-09-30-a">
           <div class="meta">30 Sep 2025</div>
           <h3>HDR of Karl Vivot</h3>
           <p>After receiving a CRCN position at Inserm, Karl will defend his habilitation in autumn of this year.</p>
         </article>
 
         <!-- Matches index.html#2025-09-30 -->
-        <article class="news-entry" id="2025-09-30">
+        <article class="news-entry" id="2025-09-30-b">
           <div class="meta">30 Sep 2025</div>
           <h3>Minisymposium at IGBMC</h3>
           <p>On the day of Karl's HDR defense, we organize a minisymposium with committee members at the IGBMC.</p>
@@ -122,58 +129,20 @@
       document.getElementById('y').textContent = new Date().getFullYear()
     </script>
   </footer>
-<script defer src="/assets/nav.js?v=2"></script>
-<script>
-  // Local hamburger fallback for news.html + rename Sponsors → Funding
-  (function () {
-    const header = document.querySelector('header .container.nav');
-    const nav = header && header.querySelector('nav');
-    if (!header || !nav) return;
 
-    // Give the nav an id so the button can target it
-    if (!nav.id) nav.id = 'site-nav';
-
-    // Inject minimal CSS for small screens
-    const css = `
-      header .hamburger{display:none;background:transparent;border:0;font-size:1.25rem;line-height:1;padding:.5rem .75rem}
-      @media (max-width: 900px){
-        header .hamburger{display:inline-flex;align-items:center;justify-content:center}
-        header nav{display:none}
-        header nav.open{display:block}
-      }
-    `;
-    const style = document.createElement('style');
-    style.appendChild(document.createTextNode(css));
-    document.head.appendChild(style);
-
-    // Insert the button next to the brand
-    const brand = header.querySelector('.brand') || header.firstElementChild;
-    const btn = document.createElement('button');
-    btn.className = 'hamburger';
-    btn.setAttribute('aria-label', 'Menu');
-    btn.setAttribute('aria-expanded', 'false');
-    btn.setAttribute('aria-controls', nav.id);
-    btn.innerHTML = '<span aria-hidden="true">☰</span>';
-    brand && brand.after(btn);
-
-    // Toggle behavior
-    btn.addEventListener('click', () => {
-      const open = nav.classList.toggle('open');
-      btn.setAttribute('aria-expanded', String(open));
-    });
-
-    // Local rename in this page’s nav in case nav.js missed it
-    nav.querySelectorAll('a,[aria-label],[title]').forEach(el => {
-      const t = (el.textContent || '').trim().toLowerCase();
-      if (t === 'sponsors') el.textContent = 'Funding';
-      if (el.getAttribute && (el.getAttribute('aria-label') || '').trim().toLowerCase() === 'sponsors') {
-        el.setAttribute('aria-label', 'Funding');
-      }
-      if (el.getAttribute && (el.getAttribute('title') || '').trim().toLowerCase() === 'sponsors') {
-        el.setAttribute('title', 'Funding');
-      }
-    });
-  })();
-</script>
+  <!-- Site nav logic -->
+  <script defer src="/assets/nav.js?v=2"></script>
+  <script>
+    // Standard hamburger toggle (matches other pages)
+    (function () {
+      const btn = document.querySelector('header .hamburger');
+      const nav = document.getElementById('site-nav');
+      if (!btn || !nav) return;
+      btn.addEventListener('click', () => {
+        const open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+      });
+    })();
+  </script>
 </body>
 </html>
