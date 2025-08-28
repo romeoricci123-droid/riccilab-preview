@@ -26,43 +26,47 @@
     });
   }
 })();
-// Rename "Sponsors" → "Funding" everywhere, including hamburger menu
-document.addEventListener('DOMContentLoaded', () => {
-  const toKey = s => (s || '').trim().toLowerCase();
 
-  const replaceTextNodes = el => {
-    el.childNodes.forEach(n => {
-      if (n.nodeType === 3 && toKey(n.nodeValue) === 'sponsors') {
-        n.nodeValue = 'Funding';
+/* Force the "Funding" label for the sponsors link on every page */
+document.addEventListener('DOMContentLoaded', function () {
+  var toKey = function (s) { return (s || '').trim().toLowerCase(); };
+
+  var relabel = function (root) {
+    var links = root.querySelectorAll('a[href$="sponsors.html"], a[href$="/sponsors.html"]');
+    links.forEach(function (a) {
+      // Update visible text while keeping any icons
+      var hadTextNode = false;
+      a.childNodes.forEach(function (n) {
+        if (n.nodeType === 3) {
+          hadTextNode = true;
+          if (toKey(n.nodeValue) !== 'funding') n.nodeValue = 'Funding';
+        }
+      });
+      if (!hadTextNode && toKey(a.textContent) === 'sponsors') {
+        // Safe fallback if the link has only text
+        a.textContent = 'Funding';
+      }
+
+      // Accessibility and tooltip
+      if (toKey(a.getAttribute('aria-label')) !== 'funding') {
+        a.setAttribute('aria-label', 'Funding');
+      }
+      if (toKey(a.getAttribute('title')) !== 'funding') {
+        a.setAttribute('title', 'Funding');
       }
     });
   };
 
-  const renameIn = root => {
-    const els = root.querySelectorAll('nav a, nav button, nav span, nav li, [aria-label], [title]');
-    els.forEach(el => {
-      const txt = (el.textContent || '').trim();
-      // Change visible text but keep icons intact
-      if (toKey(txt) === 'sponsors') replaceTextNodes(el);
-      // Attributes
-      const al = el.getAttribute && el.getAttribute('aria-label');
-      if (toKey(al) === 'sponsors') el.setAttribute('aria-label', 'Funding');
-      const title = el.getAttribute && el.getAttribute('title');
-      if (toKey(title) === 'sponsors') el.setAttribute('title', 'Funding');
-    });
-  };
-
   // Initial pass
-  renameIn(document);
+  relabel(document);
 
-  // Catch late inserts from the hamburger script
-  const mo = new MutationObserver(muts => {
-    muts.forEach(m => {
-      m.addedNodes.forEach(n => {
-        if (n.nodeType === 1) renameIn(n);
+  // Catch late inserts
+  var mo = new MutationObserver(function (muts) {
+    muts.forEach(function (m) {
+      m.addedNodes.forEach(function (n) {
+        if (n.nodeType === 1) relabel(n);
       });
     });
   });
   mo.observe(document.documentElement, { childList: true, subtree: true });
 });
-
