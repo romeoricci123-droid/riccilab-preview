@@ -1,70 +1,52 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
   <!-- Favicon / icons -->
-<link rel="icon" href="assets/favicon.png" sizes="32x32">
-<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="/news.xml">
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <link rel="icon" href="assets/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="/news.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
 
-<!-- Basic SEO -->
-<meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
+  <!-- Basic SEO -->
+  <meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
-<!-- Open Graph / Twitter -->
-<meta property="og:title" content="Ricci Lab — Sponsors">
-<meta property="og:description" content="We gratefully acknowledge support from Inserm, CNRS, ERC, and other sponsors.">
-<meta property="og:image" content="https://your-domain/assets/og-sponsors.jpg">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://your-domain/sponsors.html">
-<meta name="twitter:card" content="summary_large_image">
-
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Ricci Lab — Sponsors">
+  <meta property="og:description" content="We gratefully acknowledge support from Inserm, CNRS, ERC, and other sponsors.">
+  <meta property="og:image" content="https://romeoricci123-droid.github.io/riccilab-preview/assets/og-sponsors.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://romeoricci123-droid.github.io/riccilab-preview/sponsors.html">
+  <meta name="twitter:card" content="summary_large_image">
 
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Ricci Lab — Sponsors</title>
-  <link href="assets/style.css" rel="stylesheet" />
-  <style>
-    .sponsors-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 22px;
-      margin-top: 30px;
-    }
-    .sponsor-card {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #fff;
-      border: 1px solid #e7edf2;
-      border-radius: 14px;
-      padding: 14px;
-      transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .sponsor-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    }
-    .sponsor-card img {
-      max-height: 90px;
-      width: auto;
-      max-width: 100%;
-    }
-  </style>
+  <link href="assets/style.css?v=igbmc_fix5" rel="stylesheet" />
 </head>
 
 <body data-page="sponsors">
   <a href="#main" class="skip">Skip to content</a>
+
   <header>
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
-      <nav>
+
+      <!-- Mobile-only hamburger -->
+      <button class="hamburger" id="navToggle"
+              aria-controls="site-nav"
+              aria-expanded="false"
+              aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav id="site-nav">
         <a class="cardbox navbox" href="index.html">Home</a>
-        <a class="cardbox navbox" href="research.html">Research</a>
+        <a class="light cardbox navbox" href="research.html">Research</a>
         <a class="cardbox navbox" href="team.html">Team</a>
-        <a class="cardbox navbox" href="publications.html">Publications</a>
-        <a class="cardbox navbox" href="join.html">Join Us</a>
+        <a class="light cardbox navbox" href="publications.html">Publications</a>
+        <a class="light cardbox navbox" href="join.html">Join Us</a>
         <a class="cardbox navbox" href="news.html">News</a>
         <a class="cardbox navbox" href="sponsors.html" aria-current="page">Sponsors</a>
         <a class="cardbox navbox" href="contact.html">Contact</a>
@@ -82,34 +64,31 @@
 
     <section class="page">
       <div class="container">
-        <div class="sponsors-grid">
-          <a class="sponsor-card" href="https://erc.europa.eu" target="_blank"><img src="assets/sponsors/erc.png" alt="ERC" /></a>
-          <a class="sponsor-card" href="https://inserm.fr" target="_blank"><img src="assets/sponsors/inserm.png" alt="Inserm" /></a>
-          <a class="sponsor-card" href="https://anr.fr" target="_blank"><img src="assets/sponsors/anr.png" alt="ANR" /></a>
-          <a class="sponsor-card" href="https://www.e-cancer.fr" target="_blank"><img src="assets/sponsors/inca.png" alt="INCa" /></a>
-          <a class="sponsor-card" href="https://fondation-arc.org" target="_blank"><img src="assets/sponsors/arc.png" alt="Fondation ARC" /></a>
-          <a class="sponsor-card" href="https://frm.org" target="_blank"><img src="assets/sponsors/frm.jpg" alt="FRM" /></a>
-          <a class="sponsor-card" href="https://www.embo.org" target="_blank"><img src="assets/sponsors/embo.png" alt="EMBO" /></a>
-          <a class="sponsor-card" href="https://www.europeandiabetesfoundation.org/home/" target="_blank"><img src="assets/sponsors/efsd.png" alt="EFSD" /></a>
-          <a class="sponsor-card" href="https://www.sfdiabete.org" target="_blank"><img src="assets/sponsors/sfd.png" alt="SFD" /></a>
-          <a class="sponsor-card" href="https://www.usias.fr" target="_blank"><img src="assets/sponsors/usias.png" alt="USIAS" /></a>
-         <!-- Chaire d'Excellence France 2030 -->
-  <a class="sponsor-card" href="https://anr.fr/fr/france-2030/" target="_blank">
-    <img src="assets/sponsors/france2030.png" alt="Chaire d’Excellence France 2030" />
-  </a>
-</div>
+        <ul class="sponsor-grid" style="list-style:none; padding:0; margin:0;">
+          <li class="sponsor-card"><a href="https://erc.europa.eu" target="_blank" rel="noopener"><img src="assets/sponsors/erc.png" alt="ERC"></a></li>
+          <li class="sponsor-card"><a href="https://inserm.fr" target="_blank" rel="noopener"><img src="assets/sponsors/inserm.png" alt="Inserm"></a></li>
+          <li class="sponsor-card"><a href="https://anr.fr" target="_blank" rel="noopener"><img src="assets/sponsors/anr.png" alt="ANR"></a></li>
+          <li class="sponsor-card"><a href="https://www.e-cancer.fr" target="_blank" rel="noopener"><img src="assets/sponsors/inca.png" alt="INCa"></a></li>
+          <li class="sponsor-card"><a href="https://fondation-arc.org" target="_blank" rel="noopener"><img src="assets/sponsors/arc.png" alt="Fondation ARC"></a></li>
+          <li class="sponsor-card"><a href="https://frm.org" target="_blank" rel="noopener"><img src="assets/sponsors/frm.jpg" alt="FRM"></a></li>
+          <li class="sponsor-card"><a href="https://www.embo.org" target="_blank" rel="noopener"><img src="assets/sponsors/embo.png" alt="EMBO"></a></li>
+          <li class="sponsor-card"><a href="https://www.europeandiabetesfoundation.org/home/" target="_blank" rel="noopener"><img src="assets/sponsors/efsd.png" alt="EFSD"></a></li>
+          <li class="sponsor-card"><a href="https://www.sfdiabete.org" target="_blank" rel="noopener"><img src="assets/sponsors/sfd.png" alt="SFD"></a></li>
+          <li class="sponsor-card"><a href="https://www.usias.fr" target="_blank" rel="noopener"><img src="assets/sponsors/usias.png" alt="USIAS"></a></li>
+          <li class="sponsor-card"><a href="https://anr.fr/fr/france-2030/" target="_blank" rel="noopener"><img src="assets/sponsors/france2030.png" alt="Chaire d’Excellence France 2030"></a></li>
+        </ul>
+      </div>
     </section>
   </main>
 
   <footer>
-  ©<span id="y"></span> Ricci Lab · 
-  <a href="legal.html">Mentions légales</a> · 
-  <a href="privacy.html">Vie privée</a>
-  <script>
-    document.getElementById('y').textContent = new Date().getFullYear()
-  </script>
-</footer>
+    ©<span id="y"></span> Ricci Lab · 
+    <a href="legal.html">Mentions légales</a> · 
+    <a href="privacy.html">Vie privée</a>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
 
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  <!-- Mobile nav script -->
+  <script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
