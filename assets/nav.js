@@ -26,3 +26,22 @@
     });
   }
 })();
+// Rename "Sponsors" → "Funding" in all navs after render
+document.addEventListener('DOMContentLoaded', () => {
+  const renameNavLabels = () => {
+    const candidates = document.querySelectorAll('nav a, nav button, nav span, nav li');
+    candidates.forEach(el => {
+      const t = el.textContent && el.textContent.trim();
+      if (t === 'Sponsors') {
+        el.textContent = 'Funding';
+      }
+      if (el.getAttribute && el.getAttribute('aria-label') === 'Sponsors') {
+        el.setAttribute('aria-label', 'Funding');
+      }
+      if (el.title === 'Sponsors') {
+        el.title = 'Funding';
+      }
+    });
+  };
+  renameNavLabels();
+});
