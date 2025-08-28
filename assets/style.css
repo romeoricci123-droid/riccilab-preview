@@ -949,3 +949,20 @@ body[data-page="publications"] #pub-list .paper-card{
 }
 /* anchor offset for sticky header */
 [id]{ scroll-margin-top:84px; }
+/* Mobile nav: keep items readable without a hamburger */
+@media (max-width: 900px){
+  header .nav nav{ flex-wrap: wrap; row-gap: 8px; }
+}
+
+/* Very small screens: allow sideways scroll instead of wrapping chaos */
+@media (max-width: 380px){
+  header .nav nav{
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    white-space: nowrap;
+  }
+  header .nav nav > a{
+    flex: 0 0 auto; /* keep each link intact */
+  }
+  header .nav nav::-webkit-scrollbar{ display: none; }
+}
