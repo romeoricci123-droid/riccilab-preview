@@ -26,22 +26,43 @@
     });
   }
 })();
-// Rename "Sponsors" → "Funding" in all navs after render
+// Rename "Sponsors" → "Funding" everywhere, including hamburger menu
 document.addEventListener('DOMContentLoaded', () => {
-  const renameNavLabels = () => {
-    const candidates = document.querySelectorAll('nav a, nav button, nav span, nav li');
-    candidates.forEach(el => {
-      const t = el.textContent && el.textContent.trim();
-      if (t === 'Sponsors') {
-        el.textContent = 'Funding';
-      }
-      if (el.getAttribute && el.getAttribute('aria-label') === 'Sponsors') {
-        el.setAttribute('aria-label', 'Funding');
-      }
-      if (el.title === 'Sponsors') {
-        el.title = 'Funding';
+  const toKey = s => (s || '').trim().toLowerCase();
+
+  const replaceTextNodes = el => {
+    el.childNodes.forEach(n => {
+      if (n.nodeType === 3 && toKey(n.nodeValue) === 'sponsors') {
+        n.nodeValue = 'Funding';
       }
     });
   };
-  renameNavLabels();
+
+  const renameIn = root => {
+    const els = root.querySelectorAll('nav a, nav button, nav span, nav li, [aria-label], [title]');
+    els.forEach(el => {
+      const txt = (el.textContent || '').trim();
+      // Change visible text but keep icons intact
+      if (toKey(txt) === 'sponsors') replaceTextNodes(el);
+      // Attributes
+      const al = el.getAttribute && el.getAttribute('aria-label');
+      if (toKey(al) === 'sponsors') el.setAttribute('aria-label', 'Funding');
+      const title = el.getAttribute && el.getAttribute('title');
+      if (toKey(title) === 'sponsors') el.setAttribute('title', 'Funding');
+    });
+  };
+
+  // Initial pass
+  renameIn(document);
+
+  // Catch late inserts from the hamburger script
+  const mo = new MutationObserver(muts => {
+    muts.forEach(m => {
+      m.addedNodes.forEach(n => {
+        if (n.nodeType === 1) renameIn(n);
+      });
+    });
+  });
+  mo.observe(document.documentElement, { childList: true, subtree: true });
 });
+
