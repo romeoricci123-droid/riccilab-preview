@@ -1,18 +1,102 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+  <!-- Favicon / icons -->
+  <link rel="icon" href="assets/favicon.png" sizes="32x32">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="alternate" type="application/rss+xml" title="Ricci Lab · News" href="/news.xml">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+  <!-- Basic SEO -->
   <meta charset="utf-8">
-  <title>Mentions légales — Ricci Lab</title>
-  <link rel="stylesheet" href="assets/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Mentions légales du site du Ricci Lab. Éditeur, hébergeur, propriété intellectuelle et responsabilité.">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:title" content="Mentions légales · Ricci Lab">
+  <meta property="og:description" content="Éditeur, hébergeur, droits d'auteur et responsabilités pour le site du Ricci Lab.">
+  <meta property="og:image" content="assets/og-home.jpg">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://romeoricci123-droid.github.io/riccilab-preview/legal.html">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>Mentions légales · Ricci Lab</title>
+  <link rel="stylesheet" href="assets/style.css?v=igbmc_fix6">
 </head>
 <body data-page="legal">
-  <section class="page">
+  <a href="#main" class="skip">Aller au contenu</a>
+
+  <header>
+    <div class="container nav">
+      <div class="brand"><span class="lab">Ricci Lab</span></div>
+
+      <!-- Mobile-only hamburger -->
+      <button class="hamburger" id="navToggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
+        <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+      </button>
+
+      <nav id="site-nav">
+        <a class="cardbox navbox" href="index.html">Home</a>
+        <a class="light cardbox navbox" href="research.html">Research</a>
+        <a class="cardbox navbox" href="team.html">Team</a>
+        <a class="light cardbox navbox" href="publications.html">Publications</a>
+        <a class="light cardbox navbox" href="join.html">Join Us</a>
+        <a class="cardbox navbox" href="news.html">News</a>
+        <a class="cardbox navbox" href="sponsors.html">Sponsors</a>
+        <a class="cardbox navbox" href="contact.html">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="pagehead">
     <div class="container">
       <h1>Mentions légales</h1>
-      <p>Site édité par le laboratoire de Roméo Ricci, IGBMC.</p>
-      <p>Responsable de la publication : Roméo Ricci.</p>
-      <p>Hébergement : IGBMC / CNRS / Inserm.</p>
+      <p class="muted">Dernière mise à jour : <time datetime="2025-01-01">1 janvier 2025</time></p>
     </div>
   </section>
+
+  <main id="main">
+    <section class="page">
+      <div class="container two-col">
+        <div>
+          <h2 id="editeur">Éditeur du site</h2>
+          <p><strong>Ricci Lab</strong><br>
+             Institut de Génétique et de Biologie Moléculaire et Cellulaire (IGBMC)<br>
+             1 Rue Laurent Fries, 67404 Illkirch, France</p>
+          <p>Responsable de la publication : <strong>Romeo Ricci</strong></p>
+          <p>Contact : <a href="mailto:ricci@igbmc.fr">ricci@igbmc.fr</a></p>
+
+          <h2 id="hebergeur">Hébergeur</h2>
+          <p>Ce site est hébergé par <strong>GitHub Pages</strong>, GitHub, Inc., 88 Colin P Kelly Jr St, San Francisco, CA 94107, USA.</p>
+
+          <h2 id="finalite">Finalité du site</h2>
+          <p>Présenter les activités de recherche, les publications, les actualités et les opportunités du Ricci Lab.</p>
+        </div>
+
+        <div>
+          <h2 id="propriete">Propriété intellectuelle</h2>
+          <p>Sauf mention contraire, les contenus de ce site y compris textes, images et mise en page sont la propriété du Ricci Lab ou utilisés avec autorisation. Toute reproduction ou réutilisation nécessite une autorisation écrite préalable.</p>
+
+          <h2 id="liens">Liens externes</h2>
+          <p>Le site peut contenir des liens vers des sites externes. Le Ricci Lab n'est pas responsable de leur contenu ni de leur disponibilité.</p>
+
+          <h2 id="responsabilite">Responsabilité</h2>
+          <p>Nous nous efforçons de fournir des informations exactes et à jour. Des erreurs ou omissions peuvent cependant se produire. Le Ricci Lab ne saurait être tenu responsable de dommages directs ou indirects résultant de l'usage du site.</p>
+
+          <h2 id="donnees">Données personnelles et cookies</h2>
+          <p>Consultez la page <a href="privacy.html">Vie privée</a> pour en savoir plus sur la gestion des données personnelles et l'usage des cookies.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    ©<span id="y"></span> Ricci Lab ·
+    <a href="legal.html" aria-current="page">Mentions légales</a> ·
+    <a href="privacy.html">Vie privée</a>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
+
+  <script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
