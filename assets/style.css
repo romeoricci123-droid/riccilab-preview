@@ -1049,32 +1049,20 @@ body[data-page="publications"] #pub-list .paper-card{
     height: auto !important;
   }
 }
-/* === Mobile: center News cards on the home page (final) === */
-@media (max-width: 640px){
-  .news-list{
+/* Home page — center News cards on phones */
+@media (max-width: 680px){
+  body[data-page="home"] .news-list.clean{
+    margin: 0;                 /* remove UL's 18px left margin from ul.clean */
+    padding: 0;                /* remove any padding */
     display: grid;
-    grid-template-columns: minmax(0, 560px); /* 1 centered column of max 560px */
-    justify-content: center;                 /* center the column within the container */
+    grid-template-columns: minmax(0, 560px); /* single centered column */
+    justify-content: center;   /* center the column */
     gap: 16px;
   }
-  .news-list > li{ list-style: none; }      /* safety, removes bullets if any */
-  .news-list .news-item{
-    width: 100%;
-    border-radius: 12px;
+  body[data-page="home"] .news-list.clean > li{
+    list-style: none;
+    margin: 0;                 /* no extra offsets on items */
   }
 }
-/* === Mobile: center News cards on the home page (final override) === */
-@media (max-width: 768px){
-  .page .news-list{
-    display: grid;
-    grid-template-columns: minmax(0, 560px) !important; /* 1 centered column */
-    justify-content: center !important;                 /* center the column */
-    gap: 16px;
-  }
-  .page .news-list > li{ list-style: none; }
-  .page .news-list .news-item{
-    width: 100%;
-    border-radius: 12px;
-  }
-}
+
 
