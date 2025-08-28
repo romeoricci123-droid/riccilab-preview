@@ -1,0 +1,12 @@
+{
+  "name": "Ricci Lab",
+  "short_name": "Ricci Lab",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#0d1220",
+  "theme_color": "#0d1220",
+  "icons": [
+    { "src": "assets/favicon.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "assets/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
