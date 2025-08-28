@@ -6,8 +6,6 @@
 
   <!-- Favicon / icons -->
   <link rel="icon" href="assets/favicon.png" sizes="32x32">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="theme-color" content="#0d1220">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
   <link rel="alternate" type="application/rss+xml" title="Ricci Lab — News" href="news.xml">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
@@ -16,14 +14,14 @@
   <meta name="description" content="Ricci Lab — Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
   <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="Ricci Lab · News">
+  <meta property="og:title" content="Ricci Lab — News">
   <meta property="og:description" content="Latest updates, awards, and events from the Ricci Lab.">
   <meta property="og:image" content="https://romeoricci123-droid.github.io/riccilab-preview/assets/og-news.jpg">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://romeoricci123-droid.github.io/riccilab-preview/news.html">
   <meta name="twitter:card" content="summary_large_image">
 
-  <title>News · Ricci Lab</title>
+  <title>News — Ricci Lab</title>
   <link href="assets/style.css?v=igbmc_fix8" rel="stylesheet"/>
 </head>
 <body data-page="news">
@@ -32,18 +30,7 @@
   <header>
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
-
-      <!-- Mobile-only hamburger -->
-      <button class="hamburger" id="navToggle"
-              aria-controls="site-nav"
-              aria-expanded="false"
-              aria-label="Menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-
-      <nav id="site-nav">
+      <nav>
         <a class="cardbox navbox" href="index.html">Home</a>
         <a class="light cardbox navbox" href="research.html">Research</a>
         <a class="cardbox navbox" href="team.html">Team</a>
@@ -64,7 +51,7 @@
     </div>
   </section>
 
-  <main id="main" role="main">
+  <main id="main">
     <section class="page">
       <div class="container">
 
@@ -75,14 +62,19 @@
           <p>After receiving a CRCN position at Inserm, Karl will defend his habilitation in autumn of this year.</p>
         </article>
 
-        <!-- Same date, no duplicate id -->
-        <article class="news-entry">
+        <!-- Matches index.html#2025-09-30 -->
+        <article class="news-entry" id="2025-09-30">
           <div class="meta">30 Sep 2025</div>
           <h3>Minisymposium at IGBMC</h3>
           <p>On the day of Karl's HDR defense, we organize a minisymposium with committee members at the IGBMC.</p>
-          <p>We have invited the following scientists:</p>
-          <p>Gilles Mitthieux, Université Claude Bernard Lyon 1, INSERM</p>
-          <p>Amélie Bonnefond</p>
+
+          <h4>Invited scientists</h4>
+          <ul class="clean">
+            <li>Gilles Mitthieux, INSERM U1213 Nutrition, Diabète et Cerveau, Université Claude Bernard Lyon 1</li>
+            <li>Amélie Bonnefond, EGID, CHU de Lille, Inserm UMR1283, CNRS UMR8199</li>
+            <li>Daniela Cota, Université de Bordeaux, INSERM, Neurocentre Magendie, U1215</li>
+            <li>Etienne Challet, Institut des Neurosciences Cellulaires et Intégratives, UPR 3212, Université de Strasbourg</li>
+          </ul>
         </article>
 
         <!-- Matches index.html#2024-01-23 -->
@@ -104,11 +96,11 @@
               <a class="funding-link"
                  href="https://anr.fr/en/latest-news/read/news/attractivite-de-la-recherche-francaise-le-gouvernement-devoile-le-nom-des-22-chercheurs-distingues/"
                  rel="noopener" target="_blank"
-                 title="France 2030 · ANR · Chaire d’excellence (first 22 laureates)">
-                <img alt="France 2030 · Chaire d’excellence" class="logo-fr2030" decoding="async" loading="lazy" src="assets/france2030.webp">
+                 title="France 2030 / ANR — Chaire d’excellence (first 22 laureates)">
+                <img alt="France 2030 — Chaire d’excellence" class="logo-fr2030" decoding="async" loading="lazy" src="assets/france2030.webp">
                 <div class="txt">
                   <div>
-                    <strong>Funded by the France 2030 · Chaire d’excellence initiative</strong>
+                    <strong>Funded by the France 2030 — <em>Chaire d’excellence</em> initiative</strong>
                     <div class="kicker">Click anywhere on this box to view the first 22 laureates</div>
                   </div>
                 </div>
@@ -129,8 +121,5 @@
       document.getElementById('y').textContent = new Date().getFullYear()
     </script>
   </footer>
-
-  <!-- Mobile nav script -->
-  <script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
