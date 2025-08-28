@@ -1049,4 +1049,16 @@ body[data-page="publications"] #pub-list .paper-card{
     height: auto !important;
   }
 }
+/* === Mobile: center News cards on the home page === */
+@media (max-width: 640px){
+  .news-list{
+    grid-template-columns: 1fr;   /* single column */
+    justify-items: center;        /* center the item in the grid cell */
+  }
+  .news-list .news-item{
+    width: 100%;
+    max-width: 560px;             /* prevents edge-to-edge on wide phones */
+    border-radius: 12px;          /* keeps the nice card look */
+  }
+}
 
