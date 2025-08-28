@@ -22,6 +22,16 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Join us — Ricci Lab</title>
   <link href="assets/style.css?v=igbmc_fix6" rel="stylesheet" />
+<style>
+  /* iPhone/phones: pan the hero image so bands are visible */
+  @media (max-width: 680px){
+    body[data-page="join"] .subhero{
+      background-position: 50% 22% !important;  /* tweak 15–35% to taste */
+      background-size: cover !important;
+      background-repeat: no-repeat !important;
+    }
+  }
+</style>
 </head>
 
 <body data-page="join">
@@ -54,7 +64,8 @@
     </div>
   </header>
 
-  <section class="subhero" style="background-image: url('assets/JoinUs.jpg')">
+  <section class="subhero"
+  style="background-image:url('assets/JoinUs.jpg'); background-size:cover; background-position:50% 35%; background-repeat:no-repeat;">
     <div class="container inner">
       <h1>Join us</h1>
       <p class="lead">We welcome motivated scientists to work on lipid and membrane biology in innate immunity, β cell biology, and neuronal energy homeostasis.</p>
