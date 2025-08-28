@@ -31,7 +31,18 @@
   <header>
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
-      <nav>
+
+      <!-- Mobile-only hamburger -->
+      <button class="hamburger" id="navToggle"
+              aria-controls="site-nav"
+              aria-expanded="false"
+              aria-label="Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <nav id="site-nav">
         <a class="cardbox navbox" href="index.html">Home</a>
         <a class="light cardbox navbox" href="research.html">Research</a>
         <a class="cardbox navbox" href="team.html">Team</a>
@@ -55,7 +66,7 @@
     <section class="page">
       <div class="container">
         <p><strong>Institute:</strong> IGBMC</p>
-        <p><strong>Email:</strong> ricci@igbmc.fr</p>
+        <p><strong>Email:</strong> <a href="mailto:ricci@igbmc.fr">ricci@igbmc.fr</a></p>
 
         <h3>Get in touch</h3>
 
@@ -63,7 +74,7 @@
         <p id="msg" class="meta" aria-live="polite" hidden
            style="margin:8px 0 12px 0; padding:10px 12px; border-radius:10px; border:1px solid #e7edf2; background:#f7fafc;"></p>
 
-        <!-- Replace action URL with your Formspree endpoint -->
+        <!-- Formspree endpoint -->
         <form id="contactForm" action="https://formspree.io/f/xwpnkrzk" method="POST"
               style="max-width:560px;display:grid;gap:10px">
 
@@ -131,7 +142,7 @@
           if (res.ok) {
             form.reset();
             msg.hidden = false;
-            msg.textContent = 'Thanks — your message was sent.';
+            msg.textContent = 'Thanks, your message was sent.';
             msg.style.borderColor = '#10b981';
             msg.style.background  = '#ecfdf5';
             msg.style.color       = '#065f46';
@@ -146,5 +157,8 @@
       });
     })();
   </script>
+
+  <!-- Mobile nav script -->
+  <script src="assets/nav.js?v=1" defer></script>
 </body>
 </html>
