@@ -1064,5 +1064,11 @@ body[data-page="publications"] #pub-list .paper-card{
     margin: 0;                 /* no extra offsets on items */
   }
 }
+/* Phones: reframe the Join hero so the bands are visible */
+@media (max-width: 680px){
+  body[data-page="join"] .subhero{
+    background-position: center 35% !important; /* try 25–45% if you need to nudge */
+  }
+}
 
 
