@@ -22,16 +22,23 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Join us — Ricci Lab</title>
   <link href="assets/style.css?v=igbmc_fix6" rel="stylesheet" />
-<style>
-  /* iPhone/phones: pan the hero image so bands are visible */
-  @media (max-width: 680px){
-    body[data-page="join"] .subhero{
-      background-position: 50% 22% !important;  /* tweak 15–35% to taste */
-      background-size: cover !important;
-      background-repeat: no-repeat !important;
+
+  <style>
+    /* Page-scoped hero tweaks for JOIN only */
+    .join-hero{
+      background-size: cover;
+      background-position: 50% 35%;   /* desktop/tablet: show bands area */
+      background-repeat: no-repeat;
+      min-height: 60vh;
     }
-  }
-</style>
+    /* iPhone/phones: swap to a cropped image that clearly shows the bands */
+    @media (max-width: 740px){
+      .join-hero{
+        background-image: url('assets/join-hero-mobile.jpg') !important;
+        background-position: center 35% !important; /* fine-tune if needed */
+      }
+    }
+  </style>
 </head>
 
 <body data-page="join">
@@ -64,8 +71,9 @@
     </div>
   </header>
 
-  <section class="subhero"
-  style="background-image:url('assets/JoinUs.jpg'); background-size:cover; background-position:50% 35%; background-repeat:no-repeat;">
+  <!-- Desktop image set inline; mobile image swapped via CSS above -->
+  <section class="subhero join-hero"
+           style="background-image:url('assets/JoinUs.jpg')">
     <div class="container inner">
       <h1>Join us</h1>
       <p class="lead">We welcome motivated scientists to work on lipid and membrane biology in innate immunity, β cell biology, and neuronal energy homeostasis.</p>
@@ -92,7 +100,7 @@
         <h2>How to apply</h2>
         <p>Please email us a single PDF including:</p>
         <ul class="clean">
-          <li>Short cover letter (what you’d like to work on and why).</li>
+          <li>Short cover letter (what you would like to work on and why).</li>
           <li>CV (with publications).</li>
           <li>Contact details for 2 referees.</li>
         </ul>
