@@ -966,3 +966,54 @@ body[data-page="publications"] #pub-list .paper-card{
   }
   header .nav nav::-webkit-scrollbar{ display: none; }
 }
+/* --- Mobile-only hamburger (leaves desktop unchanged) --- */
+.hamburger { display: none; }
+
+@media (max-width: 760px) {
+  header .nav { position: relative; }
+
+  /* Show the hamburger on phones */
+  .hamburger {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.12);
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  .hamburger .bar {
+    width: 20px;
+    height: 2px;
+    background: #111;
+    display: block;
+  }
+
+  /* Collapse the nav into a panel below the header */
+  header .nav nav {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+    display: none !important;          /* override desktop flex */
+    flex-direction: column;
+    padding: 8px 12px;
+    z-index: 25;
+  }
+  header .nav nav.open { display: flex !important; }
+
+  /* Full-width, comfy tap targets */
+  header .nav nav a {
+    width: 100%;
+    margin: 4px 0 !important;
+    padding: 12px 12px;
+    justify-content: flex-start;
+    border-radius: 10px;
+  }
+}
