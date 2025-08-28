@@ -1063,4 +1063,18 @@ body[data-page="publications"] #pub-list .paper-card{
     border-radius: 12px;
   }
 }
+/* === Mobile: center News cards on the home page (final override) === */
+@media (max-width: 768px){
+  .page .news-list{
+    display: grid;
+    grid-template-columns: minmax(0, 560px) !important; /* 1 centered column */
+    justify-content: center !important;                 /* center the column */
+    gap: 16px;
+  }
+  .page .news-list > li{ list-style: none; }
+  .page .news-list .news-item{
+    width: 100%;
+    border-radius: 12px;
+  }
+}
 
