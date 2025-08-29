@@ -23,7 +23,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Ricci Lab</title>
 
-  <!-- Global stylesheet (unchanged) -->
+  <!-- Global stylesheet -->
   <link href="assets/style.css?v=igbmc_fix7" rel="stylesheet" />
   <link rel="canonical" href="https://riccilab.org/">
 
@@ -53,12 +53,12 @@
 
   <!-- Page-local overrides (scoped to home) -->
   <style>
-    /* Layout helpers just for the orbit area */
+    /* Layout helpers */
     .container.wide{ max-width: 1600px; }
     .section{ padding:32px 0 }
     .section.orbit-landing{ padding-bottom: 0; }
 
-    /* === 1) NAV: black, animated; clear current marker (home only) === */
+    /* NAV (home): black, animated; clear current marker */
     body[data-page="home"] header .nav nav > a{
       background:#000 !important;
       color:#fff !important;
@@ -76,7 +76,6 @@
       transform: translateY(0);
       box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
     }
-    /* Current page marker: white inset ring + underline (no layout shift) */
     body[data-page="home"] header .nav nav > a[aria-current="page"]{
       position: relative;
       box-shadow: inset 0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.18) !important;
@@ -88,7 +87,7 @@
       background:#fff; border-radius:2px;
     }
 
-    /* === 2) ORBIT GRID (keeps side whitespace minimal) === */
+    /* Orbit grid */
     .orbit{
       display:grid;
       grid-template-columns: minmax(260px,1fr) 520px minmax(260px,1fr);
@@ -101,41 +100,43 @@
     .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; text-align:center; }
     .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; text-align:center; }
 
-    /* === 3) KILL TILE BOXES: no borders/backgrounds/shadows === */
-    body[data-page="home"] .tile{
-      border: none !important;
-      background: transparent !important;
-      box-shadow: none !important;
-    }
+    /* Kill tile boxes */
+    body[data-page="home"] .tile,
     body[data-page="home"] .tile .body{
       border: none !important;
       background: transparent !important;
       box-shadow: none !important;
-      padding: 8px 6px;
     }
+    .tile .body{ padding:8px 6px; }
 
-    /* Tagline correction */
+    /* Tagline */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
 
-    /* === 4) ROUND CLICKABLES: emblem + circles (no boxes; halo + lift) === */
-    /* Shared class applied via markup below */
+    /* ROUND CLICKABLES (emblem + circles) */
     .round-link{
       display:block; margin:0 auto 10px;
       border-radius:50%; overflow:hidden;
       background:#000 !important;
-      border:none !important;
-      outline:none !important;
-      box-shadow:none !important;
-      text-decoration:none !important;
+      border:none !important; outline:none !important;
+      box-shadow:none !important; text-decoration:none !important;
       -webkit-tap-highlight-color:transparent;
       position: relative; isolation: isolate;
       transition: transform .15s ease, box-shadow .15s ease, filter .15s ease !important;
       cursor:pointer;
+      line-height:0 !important;       /* <- kills underline geometry */
+      padding:0 !important;           /* <- no extra box height for underline */
     }
-    /* Subtle hint (halo) on hover/focus */
+    /* Never allow underline on these links */
+    .round-link:hover,
+    .round-link:focus,
+    .round-link:focus-visible,
+    .round-link:active{ text-decoration:none !important; }
+
+    /* Halo (clean, transparent) */
     .round-link::after{
       content:""; position:absolute; inset:-6px; border-radius:50%;
+      background: transparent !important;     /* <- ensure no fill */
       box-shadow: 0 0 0 0 rgba(255,255,255,0);
       opacity:0; pointer-events:none;
       transition: box-shadow .15s ease, opacity .15s ease;
@@ -159,24 +160,17 @@
       box-shadow: 0 10px 26px rgba(0,0,0,.26) !important;
     }
 
-    /* Emblem sizing and inner-fit (no cropping) */
+    /* Emblem sizing (no cropping) */
     a.emblem-link{ width:420px; height:420px; display:grid; place-items:center; }
     a.emblem-link img{
       width:auto; height:auto; max-width:78%; max-height:78%;
       object-fit:contain; display:block;
     }
-
     /* Circles sizing and fill */
     a.circle-card{ width:240px; height:240px; }
     a.circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* If any global .cardbox styles sneak in, neutralize them on the circles */
-    body[data-page="home"] a.circle-card.cardbox{
-      background:#000 !important; border:none !important; box-shadow:none !important;
-      padding:0 !important;
-    }
-
-    /* === 5) “Open positions” banner: make it move === */
+    /* Open positions banner (animated) */
     .hiring{
       display:block; text-decoration:none; color:inherit;
       background:linear-gradient(135deg,#fff7e6,#ffffff);
@@ -195,7 +189,7 @@
     .hiring .dot{ width:14px; height:14px; border-radius:999px; background:#f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); }
     .hiring .copy{ font-size:1.45rem; font-weight:700; }
 
-    /* Publications row (structure unchanged) */
+    /* Publications band */
     .pub-grid{
       display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
@@ -206,7 +200,7 @@
     .pub-title{ margin:0 0 6px; font-size:1.05rem; }
     .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    /* News grid (unchanged) */
+    /* News (unchanged) */
     .news-list.clean{
       display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
@@ -214,7 +208,7 @@
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
 
-    /* Mobile tweaks */
+    /* Mobile */
     @media (max-width: 900px){
       .container.wide{ max-width: 100%; }
       a.emblem-link{ width:260px; height:260px; }
@@ -262,7 +256,7 @@
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">
-            <!-- Emblem: round clickable, no cropping, halo + lift -->
+            <!-- Emblem: round clickable -->
             <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
               <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp?v=7" width="420" height="420">
             </a>
@@ -304,7 +298,7 @@
           </article>
         </div>
 
-        <!-- Hiring banner (now animated) -->
+        <!-- Hiring banner (animated) -->
         <a class="hiring" href="join.html" aria-label="Open positions">
           <div class="row">
             <span class="dot" aria-hidden="true"></span>
