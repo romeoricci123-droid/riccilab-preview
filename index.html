@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 
-  <!-- Favicon and icons -->
+  <!-- Favicons and meta -->
   <link rel="icon" href="assets/favicon.png" sizes="32x32">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0d1220">
@@ -11,15 +11,14 @@
   <link rel="alternate" type="application/rss+xml" title="Ricci Lab · News" href="news.xml">
   <link rel="sitemap" type="application/xml" title="Sitemap" href="sitemap.xml">
 
-  <!-- Basic SEO -->
+  <!-- SEO -->
   <meta name="description" content="Ricci Lab · Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
-  <!-- Open Graph and Twitter -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Ricci Lab">
   <meta property="og:description" content="Metabolism and innate immunity through the lens of lipids and membranes.">
   <meta property="og:image" content="https://riccilab.org/assets/og-hero.jpg">
   <meta property="og:type" content="website">
-  <meta name="twitter:card" content="summary_large_image">
 
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Ricci Lab</title>
@@ -56,110 +55,87 @@
     main { flex: 1 0 auto; }
     footer { flex-shrink: 0; }
 
-    /* Wider containers on home */
+    /* Wide container on home */
     .container.wide{ max-width: 1600px; }
 
-    /* Header buttons black theme on this page */
+    /* Header buttons black on this page, current highlighted */
     header #site-nav .navbox{
-      background:#000; color:#fff; border-color:#000;
+      background:#000 !important; color:#fff !important; border-color:#000 !important;
     }
     header #site-nav .navbox:hover,
-    header #site-nav .navbox:focus-visible{
-      filter: brightness(1.08);
-    }
+    header #site-nav .navbox:focus-visible{ filter:brightness(1.08); }
+    header #site-nav .navbox[aria-current="page"]{ box-shadow:0 0 0 2px #fff inset; }
 
-    /* Emblem */
-    .emblem-circle{
-      width: 420px;
-      aspect-ratio: 1 / 1;
-      border-radius: 50%;
-      overflow: hidden;
-      display: inline-grid;
-      place-items: center;
-      background:#000;
-    }
-    .emblem-circle img{
-      max-width: 78%;
-      height:auto; object-fit:contain; display:block;
-    }
-    .emblem-link{ display:inline-block; border:0; outline:0; }
-
-    /* Orbit layout removes side emptiness */
+    /* Orbit layout left and right to edges */
     .orbit{
       display:grid;
       grid-template-columns: minmax(260px,1fr) 520px minmax(260px,1fr);
       grid-template-rows: auto auto;
-      gap: 24px 40px;
+      gap:24px 40px;
       align-items:center;
     }
     .orbit-center{ grid-column:2; grid-row:1 / span 2; text-align:center; }
-    .orbit-left{   grid-column:1; grid-row:1 / span 2; justify-self:start; }
-    .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; }
-    .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; }
+    .orbit-left{   grid-column:1; grid-row:1 / span 2; justify-self:start; text-align:center; }
+    .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; text-align:center; }
+    .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; text-align:center; }
 
-    /* Circles only clickable. No frames. No boxes on click. Subtle hint */
+    /* Round clickable emblem */
+    a.emblem-link{
+      display:inline-grid; place-items:center;
+      width:420px; height:420px; border-radius:50%;
+      overflow:hidden; background:#000 !important;
+      text-decoration:none !important; border:none !important; box-shadow:none !important; outline:none;
+      -webkit-tap-highlight-color:transparent;
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    }
+    a.emblem-link img{ max-width:78%; height:auto; object-fit:contain; display:block; }
+    a.emblem-link:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,.30); filter:brightness(1.02); }
+    a.emblem-link:focus-visible{ box-shadow:0 0 0 4px rgba(255,255,255,.35), 0 18px 42px rgba(0,0,0,.34); }
+    a.emblem-link:active{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.28); }
+
+    /* Circle cards only clickable, centered, no boxes ever */
     .tile{ background:transparent; border:none; box-shadow:none; }
     .tile .circle-card{
-      width: 240px; height: 240px;            /* smaller circles */
-      border-radius: 50%;
-      overflow: hidden;
-      background: #000;
-      display: grid; place-items: center;
-      margin: 0 0 10px 0;
-      border: none !important;
-      box-shadow: none !important;
-      position: relative; isolation: isolate;
-      cursor: pointer;
-      transition: transform .14s ease, outline-color .14s ease, outline-width .14s ease, filter .14s ease;
-      outline: 0 solid rgba(255,255,255,0);
-      outline-offset: 0;
-      -webkit-tap-highlight-color: transparent;
+      display:block; margin:0 auto 10px;
+      width:240px; height:240px; border-radius:50%;
+      overflow:hidden; background:#000 !important;
+      text-decoration:none !important; border:none !important; box-shadow:none !important; outline:none;
+      -webkit-tap-highlight-color:transparent;
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      cursor:pointer;
     }
     .tile .circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .tile .circle-card:hover{
-      transform: translateY(-2px);
-      outline: 6px solid rgba(255,255,255,.14);
-      outline-offset: 6px;
-      filter: brightness(1.02);
-    }
-    .tile .circle-card:focus,
-    .tile .circle-card:focus-visible,
-    .tile .circle-card:active{
-      outline: 6px solid rgba(255,255,255,.16);
-      outline-offset: 6px;
-      box-shadow: none !important;
-      background: #000 !important;
-    }
-    .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; background:transparent; box-shadow:none; }
-    .orbit .tile .body h3{ margin: 0 0 6px; }
-    .orbit .tile .body p{ margin: 0; }
+    .tile .circle-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.28); filter:brightness(1.02); }
+    .tile .circle-card:focus-visible{ box-shadow:0 0 0 4px rgba(255,255,255,.35), 0 14px 36px rgba(0,0,0,.32); }
+    .tile .circle-card:active{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.26); }
+    /* Nuke any inherited card styles just in case */
+    a.circle-card.cardbox{ background:transparent !important; box-shadow:none !important; border:none !important; }
+
+    .orbit .tile .body{ padding:8px 6px; border:none; background:transparent; box-shadow:none; }
+    .orbit .tile .body h3{ margin:0 0 6px; }
+    .orbit .tile .body p{ margin:0; }
 
     /* Tagline */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
 
-    /* Hiring banner. Bigger text. Whole banner is the link. No black CTA. */
+    /* Hiring band, bigger text, whole banner is link */
     .hiring{
-      display:block;
-      text-decoration:none;
-      color:inherit;
-      background: linear-gradient(135deg, #fff7e6, #ffffff);
-      border: 1px solid rgba(0,0,0,.06);
-      box-shadow: 0 10px 30px rgba(0,0,0,.08);
-      border-radius: 18px;
-      padding: 22px 22px;
-      margin: 22px 0 10px;
-      position: relative;
+      display:block; text-decoration:none; color:inherit;
+      background:linear-gradient(135deg,#fff7e6,#ffffff);
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow:0 10px 30px rgba(0,0,0,.08);
+      border-radius:18px; padding:24px 22px; margin:22px 0 10px;
     }
     .hiring .row{ display:flex; align-items:center; gap:16px; }
-    .hiring .dot { width: 14px; height: 14px; border-radius: 999px; background: #f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); flex:0 0 auto; }
-    .hiring .copy{ font-size: 1.35rem; font-weight: 600; }
-    .hiring:hover{ filter: brightness(1.02); }
+    .hiring .dot{ width:14px; height:14px; border-radius:999px; background:#f59e0b; box-shadow:0 0 0 6px rgba(245,158,11,.18); }
+    .hiring .copy{ font-size:1.45rem; font-weight:700; }
+    .hiring:hover{ filter:brightness(1.02); }
 
-    /* Publications band with real data injection */
-    .section.pubs{ padding-top: 8px; padding-bottom: 8px; }
+    /* Publications band */
+    .section.pubs{ padding-top:8px; padding-bottom:8px; }
     .pub-grid{
-      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
     }
     .pub-item{ display:block; text-decoration:none; }
@@ -168,21 +144,18 @@
     .pub-title{ margin:0 0 6px; font-size:1.05rem; }
     .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    /* News grid */
+    /* News */
     .news-list.clean{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      gap: 16px;
+      display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
     }
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
 
-    /* Spacing tweaks */
-    .section.orbit-landing{ padding-bottom: 0; }
-    .page:last-of-type{ padding-bottom: 8px; }
+    .section.orbit-landing{ padding-bottom:0; }
+    .page:last-of-type{ padding-bottom:8px; }
 
-    /* Footer partner card */
+    /* Footer partner */
     footer .foot-partners{ margin:14px 0 0; display:flex; justify-content:center; }
     footer .partner-card{
       display:inline-flex; align-items:center; justify-content:center;
@@ -191,22 +164,19 @@
       transition:transform .12s ease, box-shadow .12s ease;
     }
     footer .partner-card:hover,
-    footer .partner-card:focus-visible{
-      transform: translateY(-1px);
-      box-shadow:0 10px 28px rgba(0,0,0,.12);
-    }
+    footer .partner-card:focus-visible{ transform:translateY(-1px); box-shadow:0 10px 28px rgba(0,0,0,.12); }
     footer .partner-card img{ height:50px; width:auto; display:block; }
 
     /* Mobile */
-    @media (max-width: 900px){
-      .container.wide{ max-width: 100%; }
-      .emblem-circle{ width: 260px; }
+    @media (max-width:900px){
+      .container.wide{ max-width:100%; }
+      a.emblem-link{ width:260px; height:260px; }
       .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
-      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; justify-self:center; }
-      .tile .circle-card{ width: 220px; height: 220px; }
+      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; justify-self:center; text-align:center; }
+      .tile .circle-card{ width:220px; height:220px; }
       .pub-grid{ grid-template-columns:1fr; }
       .news-list.clean{ grid-template-columns:1fr; }
-      .hiring .row{ flex-direction: column; align-items: start; }
+      .hiring .row{ flex-direction:column; align-items:start; }
     }
   </style>
 </head>
@@ -241,11 +211,9 @@
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">
+            <!-- Emblem is a round clickable button -->
             <a class="emblem-link" href="research.html" aria-label="Go to Research">
-              <div class="emblem-circle">
-                <img alt="Ricci Lab emblem" decoding="async" loading="lazy"
-                     src="assets/emblem.webp?v=7" width="420" height="420">
-              </div>
+              <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp?v=7" width="420" height="420">
             </a>
             <h1 class="tagline">Organelle crosstalk in disease</h1>
             <p class="tagline-sub">Metabolism and innate immunity through the lens of lipids and membranes.</p>
@@ -262,7 +230,7 @@
             </div>
           </article>
 
-          <!-- Top right: Hypothalamic neuron -->
+          <!-- Top-right: Hypothalamic neuron -->
           <article class="tile orbit-rt">
             <a aria-label="Hypothalamic neuron" class="circle-card" href="brain.html">
               <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
@@ -273,7 +241,7 @@
             </div>
           </article>
 
-          <!-- Bottom right: Pancreatic β cell -->
+          <!-- Bottom-right: Pancreatic β cell -->
           <article class="tile orbit-rb">
             <a aria-label="Pancreatic β cell" class="circle-card" href="insulin.html">
               <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
@@ -285,7 +253,7 @@
           </article>
         </div>
 
-        <!-- Hiring banner. Bigger, no black button. Whole banner clickable -->
+        <!-- Hiring band -->
         <a class="hiring" href="join.html" aria-label="Open positions">
           <div class="row">
             <span class="dot" aria-hidden="true"></span>
@@ -295,13 +263,13 @@
       </div>
     </section>
 
-    <!-- Latest publications band. Real titles injected from publications.js -->
+    <!-- Latest publications band with direct DOI links -->
     <section class="section pubs">
       <div class="container wide">
         <h2>Latest publications</h2>
         <ul class="pub-grid">
           <li>
-            <a class="cardbox pub-item" href="publications.html#science-immunology">
+            <a id="pub-si-link" class="cardbox pub-item" href="#" target="_blank" rel="noopener">
               <div class="pub-card">
                 <div class="pub-venue">Science Immunology</div>
                 <h3 class="pub-title" id="pub-si-title">Loading…</h3>
@@ -310,7 +278,7 @@
             </a>
           </li>
           <li>
-            <a class="cardbox pub-item" href="publications.html#nature-immunology">
+            <a id="pub-ni-link" class="cardbox pub-item" href="#" target="_blank" rel="noopener">
               <div class="pub-card">
                 <div class="pub-venue">Nature Immunology</div>
                 <h3 class="pub-title" id="pub-ni-title">Loading…</h3>
@@ -319,9 +287,9 @@
             </a>
           </li>
           <li>
-            <a class="cardbox pub-item" href="publications.html#nature-metabolism">
-              <div class="pub-venue">Nature Metabolism</div>
+            <a id="pub-nm-link" class="cardbox pub-item" href="#" target="_blank" rel="noopener">
               <div class="pub-card">
+                <div class="pub-venue">Nature Metabolism</div>
                 <h3 class="pub-title" id="pub-nm-title">Loading…</h3>
                 <div class="pub-meta" id="pub-nm-meta"></div>
               </div>
@@ -380,37 +348,62 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
   </footer>
 
-  <!-- Load publications data and inject real titles into the home cards -->
+  <!-- Inject real publication links and text from publications.js -->
   <script src="assets/publications.js?v=7"></script>
   <script>
     (function () {
-      function fill(venue, titleId, metaId) {
-        var list = (window.PUBLICATIONS || []);
-        var match = list.find(function(p){ return (p.venue||'').toLowerCase().indexOf(venue) !== -1; });
+      var DATA = (window.PUBLICATIONS && window.PUBLICATIONS.length) ? window.PUBLICATIONS : [];
+
+      function setCard(venueMatch, linkId, titleId, metaId) {
+        var a = document.getElementById(linkId);
         var t = document.getElementById(titleId);
         var m = document.getElementById(metaId);
-        if (!t || !m) return;
-        if (match) {
-          t.textContent = match.title || 'Untitled';
+        if (!a || !t || !m) return;
+
+        var p = DATA.find(function(x){
+          return (x.venue || '').toLowerCase().indexOf(venueMatch) !== -1;
+        });
+
+        if (p) {
+          t.textContent = p.title || 'Untitled';
           var meta = [];
-          if (match.year) meta.push(match.year);
-          if (match.authors) meta.push(match.authors);
+          if (p.year) meta.push(p.year);
+          if (p.authors) meta.push(p.authors);
           m.textContent = meta.join(' · ');
+
+          if (p.doi) {
+            a.href = 'https://doi.org/' + p.doi;
+            a.target = '_blank';
+            a.rel = 'noopener';
+          } else if (p.url) {
+            a.href = p.url;
+            a.target = '_blank';
+            a.rel = 'noopener';
+          } else {
+            a.href = 'publications.html';
+            a.removeAttribute('target');
+            a.removeAttribute('rel');
+          }
         } else {
           t.textContent = 'Recent work from the lab';
           m.textContent = '';
+          a.href = 'publications.html';
+          a.removeAttribute('target');
+          a.removeAttribute('rel');
         }
       }
-      fill('science immunology', 'pub-si-title', 'pub-si-meta');
-      fill('nature immunology',  'pub-ni-title', 'pub-ni-meta');
-      fill('nature metabolism',  'pub-nm-title', 'pub-nm-meta');
+
+      setCard('science immunology', 'pub-si-link', 'pub-si-title', 'pub-si-meta');
+      setCard('nature immunology',  'pub-ni-link', 'pub-ni-title', 'pub-ni-meta');
+      setCard('nature metabolism',  'pub-nm-link', 'pub-nm-title', 'pub-nm-meta');
     })();
   </script>
 
-  <!-- Mobile nav script -->
+  <!-- Mobile nav -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
 </html>
+
 
 
 
