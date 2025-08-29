@@ -58,13 +58,32 @@
     /* Wide container on home */
     .container.wide{ max-width: 1600px; }
 
-    /* Header buttons black on this page, current highlighted */
+    /* Header buttons: black, animated. Clear current marker */
     header #site-nav .navbox{
       background:#000 !important; color:#fff !important; border-color:#000 !important;
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+      box-shadow: 0 6px 16px rgba(0,0,0,.18);
     }
     header #site-nav .navbox:hover,
-    header #site-nav .navbox:focus-visible{ filter:brightness(1.08); }
-    header #site-nav .navbox[aria-current="page"]{ box-shadow:0 0 0 2px #fff inset; }
+    header #site-nav .navbox:focus-visible{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(0,0,0,.24);
+      filter: brightness(1.06);
+    }
+    header #site-nav .navbox:active{
+      transform: translateY(0);
+      box-shadow: 0 6px 16px rgba(0,0,0,.18);
+    }
+    /* Current page: thin white underline bar and inset ring */
+    header #site-nav .navbox[aria-current="page"]{
+      position: relative;
+      box-shadow: 0 0 0 2px rgba(255,255,255,.9) inset, 0 6px 16px rgba(0,0,0,.18);
+    }
+    header #site-nav .navbox[aria-current="page"]::after{
+      content:"";
+      position:absolute; left:12px; right:12px; bottom:6px; height:2px;
+      background: rgba(255,255,255,.9); border-radius:2px;
+    }
 
     /* Orbit layout left and right to edges */
     .orbit{
@@ -79,38 +98,70 @@
     .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; text-align:center; }
     .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; text-align:center; }
 
-    /* Round clickable emblem */
-    a.emblem-link{
-      display:inline-grid; place-items:center;
-      width:420px; height:420px; border-radius:50%;
-      overflow:hidden; background:#000 !important;
-      text-decoration:none !important; border:none !important; box-shadow:none !important; outline:none;
-      -webkit-tap-highlight-color:transparent;
-      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
-    }
-    a.emblem-link img{ max-width:78%; height:auto; object-fit:contain; display:block; }
-    a.emblem-link:hover{ transform:translateY(-3px); box-shadow:0 16px 36px rgba(0,0,0,.30); filter:brightness(1.02); }
-    a.emblem-link:focus-visible{ box-shadow:0 0 0 4px rgba(255,255,255,.35), 0 18px 42px rgba(0,0,0,.34); }
-    a.emblem-link:active{ transform:translateY(-1px); box-shadow:0 10px 26px rgba(0,0,0,.28); }
-
-    /* Circle cards only clickable, centered, no boxes ever */
-    .tile{ background:transparent; border:none; box-shadow:none; }
-    .tile .circle-card{
+    /* Shared round link behavior for emblem and circles */
+    .round-link{
       display:block; margin:0 auto 10px;
-      width:240px; height:240px; border-radius:50%;
-      overflow:hidden; background:#000 !important;
-      text-decoration:none !important; border:none !important; box-shadow:none !important; outline:none;
+      border-radius:50%; overflow:hidden;
+      background:#000 !important;
+      text-decoration:none !important; border:none !important; outline:none !important;
+      box-shadow:none !important;
       -webkit-tap-highlight-color:transparent;
-      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+      position: relative; isolation: isolate;
+      transition: transform .15s ease, box-shadow .15s ease, filter .15s ease, opacity .15s ease;
       cursor:pointer;
     }
-    .tile .circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .tile .circle-card:hover{ transform:translateY(-3px); box-shadow:0 12px 30px rgba(0,0,0,.28); filter:brightness(1.02); }
-    .tile .circle-card:focus-visible{ box-shadow:0 0 0 4px rgba(255,255,255,.35), 0 14px 36px rgba(0,0,0,.32); }
-    .tile .circle-card:active{ transform:translateY(-1px); box-shadow:0 8px 22px rgba(0,0,0,.26); }
-    /* Nuke any inherited card styles just in case */
-    a.circle-card.cardbox{ background:transparent !important; box-shadow:none !important; border:none !important; }
+    .round-link img{ width:100%; height:100%; display:block; object-fit:cover; }
 
+    /* Discrete halo hint: appears on hover and focus only */
+    .round-link::after{
+      content:"";
+      position:absolute; inset:-6px; border-radius:50%;
+      box-shadow: 0 0 0 0 rgba(255,255,255,0);
+      transition: box-shadow .15s ease, opacity .15s ease;
+      pointer-events:none;
+      opacity:0;
+    }
+    .round-link:hover::after,
+    .round-link:focus-visible::after{
+      box-shadow: 0 0 0 4px rgba(255,255,255,.25);
+      opacity:1;
+    }
+
+    /* Lift and soft round shadow on interaction */
+    .round-link:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 14px 34px rgba(0,0,0,.28);
+      filter: brightness(1.02);
+    }
+    .round-link:focus-visible{
+      box-shadow: 0 0 0 4px rgba(255,255,255,.28), 0 18px 42px rgba(0,0,0,.34);
+    }
+    .round-link:active{
+      transform: translateY(-1px);
+      box-shadow: 0 10px 26px rgba(0,0,0,.26);
+    }
+
+    /* Emblem size */
+    a.emblem-link{ width:420px; height:420px; }
+    a.emblem-link img{ max-width:78%; height:auto; object-fit:contain; }
+
+    /* Circle cards size and hard reset to kill any global box styles on click */
+    a.circle-card{ width:240px; height:240px; }
+    a.circle-card,
+    a.circle-card:hover,
+    a.circle-card:focus,
+    a.circle-card:focus-visible,
+    a.circle-card:active{
+      background:#000 !important;
+      border:none !important;
+      box-shadow:none !important;
+      outline:none !important;
+    }
+    /* Nuke any accidental .cardbox inheritance */
+    a.circle-card.cardbox{ background:transparent !important; border:none !important; box-shadow:none !important; }
+
+    /* Orbit tile copy with no frames */
+    .tile{ background:transparent; border:none; box-shadow:none; }
     .orbit .tile .body{ padding:8px 6px; border:none; background:transparent; box-shadow:none; }
     .orbit .tile .body h3{ margin:0 0 6px; }
     .orbit .tile .body p{ margin:0; }
@@ -119,7 +170,7 @@
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
 
-    /* Hiring band, bigger text, whole banner is link */
+    /* Hiring band */
     .hiring{
       display:block; text-decoration:none; color:inherit;
       background:linear-gradient(135deg,#fff7e6,#ffffff);
@@ -173,7 +224,7 @@
       a.emblem-link{ width:260px; height:260px; }
       .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
       .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; justify-self:center; text-align:center; }
-      .tile .circle-card{ width:220px; height:220px; }
+      a.circle-card{ width:220px; height:220px; }
       .pub-grid{ grid-template-columns:1fr; }
       .news-list.clean{ grid-template-columns:1fr; }
       .hiring .row{ flex-direction:column; align-items:start; }
@@ -212,7 +263,7 @@
         <div class="orbit">
           <div class="orbit-center">
             <!-- Emblem is a round clickable button -->
-            <a class="emblem-link" href="research.html" aria-label="Go to Research">
+            <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
               <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp?v=7" width="420" height="420">
             </a>
             <h1 class="tagline">Organelle crosstalk in disease</h1>
@@ -221,7 +272,7 @@
 
           <!-- Left: Macrophage -->
           <article class="tile orbit-left">
-            <a aria-label="Macrophage" class="circle-card" href="nlrp3.html">
+            <a aria-label="Macrophage" class="round-link circle-card" href="nlrp3.html">
               <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
             </a>
             <div class="body">
@@ -232,7 +283,7 @@
 
           <!-- Top-right: Hypothalamic neuron -->
           <article class="tile orbit-rt">
-            <a aria-label="Hypothalamic neuron" class="circle-card" href="brain.html">
+            <a aria-label="Hypothalamic neuron" class="round-link circle-card" href="brain.html">
               <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
             </a>
             <div class="body">
@@ -243,7 +294,7 @@
 
           <!-- Bottom-right: Pancreatic β cell -->
           <article class="tile orbit-rb">
-            <a aria-label="Pancreatic β cell" class="circle-card" href="insulin.html">
+            <a aria-label="Pancreatic β cell" class="round-link circle-card" href="insulin.html">
               <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
             </a>
             <div class="body">
@@ -403,6 +454,7 @@
   <script src="assets/nav.js?v=2" defer></script>
 </body>
 </html>
+
 
 
 
