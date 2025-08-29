@@ -87,3 +87,11 @@ document.addEventListener('DOMContentLoaded', function () {
     } catch (e) { /* ignore invalid URLs */ }
   });
 });
+/* Mark current page in the nav */
+document.addEventListener('DOMContentLoaded', function () {
+  var file = location.pathname.split('/').pop() || 'index.html';
+  var link = document.querySelector('nav a[href$="' + file + '"]');
+  if (link && !link.hasAttribute('aria-current')) {
+    link.setAttribute('aria-current', 'page');
+  }
+});
