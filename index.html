@@ -59,6 +59,15 @@
     /* Wider containers on home */
     .container.wide{ max-width: 1600px; }
 
+    /* Header buttons black theme on this page */
+    header #site-nav .navbox{
+      background:#000; color:#fff; border-color:#000;
+    }
+    header #site-nav .navbox:hover,
+    header #site-nav .navbox:focus-visible{
+      filter: brightness(1.08);
+    }
+
     /* Emblem */
     .emblem-circle{
       width: 420px;
@@ -73,8 +82,9 @@
       max-width: 78%;
       height:auto; object-fit:contain; display:block;
     }
+    .emblem-link{ display:inline-block; border:0; outline:0; }
 
-    /* Orbit layout removes empty white space on sides */
+    /* Orbit layout removes side emptiness */
     .orbit{
       display:grid;
       grid-template-columns: minmax(260px,1fr) 520px minmax(260px,1fr);
@@ -87,28 +97,38 @@
     .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; }
     .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; }
 
-    /* Circles only clickable. No frames. No grey boxes. */
+    /* Circles only clickable. No frames. No boxes on click. Subtle hint */
     .tile{ background:transparent; border:none; box-shadow:none; }
     .tile .circle-card{
-      width: 300px; height: 300px;
+      width: 240px; height: 240px;            /* smaller circles */
       border-radius: 50%;
       overflow: hidden;
       background: #000;
       display: grid; place-items: center;
       margin: 0 0 10px 0;
-      border: none;
-      box-shadow: none;
+      border: none !important;
+      box-shadow: none !important;
       position: relative; isolation: isolate;
-      transition: transform .14s ease, outline-color .14s ease, outline-width .14s ease;
+      cursor: pointer;
+      transition: transform .14s ease, outline-color .14s ease, outline-width .14s ease, filter .14s ease;
       outline: 0 solid rgba(255,255,255,0);
       outline-offset: 0;
+      -webkit-tap-highlight-color: transparent;
     }
     .tile .circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .tile .circle-card:hover,
-    .tile .circle-card:focus-visible{
+    .tile .circle-card:hover{
       transform: translateY(-2px);
       outline: 6px solid rgba(255,255,255,.14);
       outline-offset: 6px;
+      filter: brightness(1.02);
+    }
+    .tile .circle-card:focus,
+    .tile .circle-card:focus-visible,
+    .tile .circle-card:active{
+      outline: 6px solid rgba(255,255,255,.16);
+      outline-offset: 6px;
+      box-shadow: none !important;
+      background: #000 !important;
     }
     .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; background:transparent; box-shadow:none; }
     .orbit .tile .body h3{ margin: 0 0 6px; }
@@ -116,30 +136,27 @@
 
     /* Tagline */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
-    .tagline-sub{ margin:0; opacity:.85; line-height:1.25; }
+    .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
 
-    /* Hiring callout high visibility */
-    .hiring {
+    /* Hiring banner. Bigger text. Whole banner is the link. No black CTA. */
+    .hiring{
+      display:block;
+      text-decoration:none;
+      color:inherit;
       background: linear-gradient(135deg, #fff7e6, #ffffff);
       border: 1px solid rgba(0,0,0,.06);
       box-shadow: 0 10px 30px rgba(0,0,0,.08);
       border-radius: 18px;
-      padding: 18px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      padding: 22px 22px;
       margin: 22px 0 10px;
+      position: relative;
     }
-    .hiring .dot { width: 14px; height: 14px; border-radius: 999px; background: #f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); }
-    .hiring .copy { flex: 1 1 auto; font-size: 1.1rem; }
-    .hiring .cta {
-      flex: 0 0 auto; display: inline-block; padding: 10px 14px; border-radius: 12px;
-      font-weight: 600; text-decoration: none; background: #111; color: #fff;
-      box-shadow: 0 6px 18px rgba(0,0,0,.18); transition: transform .12s ease, box-shadow .12s ease;
-    }
-    .hiring .cta:hover, .hiring .cta:focus-visible{ transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,.22); }
+    .hiring .row{ display:flex; align-items:center; gap:16px; }
+    .hiring .dot { width: 14px; height: 14px; border-radius: 999px; background: #f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); flex:0 0 auto; }
+    .hiring .copy{ font-size: 1.35rem; font-weight: 600; }
+    .hiring:hover{ filter: brightness(1.02); }
 
-    /* Publications band with agreed anchors */
+    /* Publications band with real data injection */
     .section.pubs{ padding-top: 8px; padding-bottom: 8px; }
     .pub-grid{
       display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
@@ -186,11 +203,10 @@
       .emblem-circle{ width: 260px; }
       .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
       .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; justify-self:center; }
-      .tile .circle-card{ width: 260px; height: 260px; }
+      .tile .circle-card{ width: 220px; height: 220px; }
       .pub-grid{ grid-template-columns:1fr; }
       .news-list.clean{ grid-template-columns:1fr; }
-      .hiring{ flex-direction: column; align-items: start; }
-      .hiring .cta{ width: 100%; text-align: center; }
+      .hiring .row{ flex-direction: column; align-items: start; }
     }
   </style>
 </head>
@@ -225,12 +241,14 @@
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">
-            <div class="emblem-circle">
-              <img alt="Ricci Lab emblem" decoding="async" loading="lazy"
-                   src="assets/emblem.webp?v=7" width="420" height="420">
-            </div>
+            <a class="emblem-link" href="research.html" aria-label="Go to Research">
+              <div class="emblem-circle">
+                <img alt="Ricci Lab emblem" decoding="async" loading="lazy"
+                     src="assets/emblem.webp?v=7" width="420" height="420">
+              </div>
+            </a>
             <h1 class="tagline">Organelle crosstalk in disease</h1>
-            <p class="tagline-sub">Metabolism and innate immunity through lipids and membranes</p>
+            <p class="tagline-sub">Metabolism and innate immunity through the lens of lipids and membranes.</p>
           </div>
 
           <!-- Left: Macrophage -->
@@ -262,21 +280,22 @@
             </a>
             <div class="body">
               <h3>Pancreatic β cell</h3>
-              <p>Insulin granule turnover and β cell function.</p>
+              <p>Insulin granule turnover and β-cell function.</p>
             </div>
           </article>
         </div>
 
-        <!-- Hiring callout -->
-        <div class="hiring" role="region" aria-label="Open positions">
-          <span class="dot" aria-hidden="true"></span>
-          <div class="copy">We currently have open positions available</div>
-          <a class="cta" href="join.html">See roles</a>
-        </div>
+        <!-- Hiring banner. Bigger, no black button. Whole banner clickable -->
+        <a class="hiring" href="join.html" aria-label="Open positions">
+          <div class="row">
+            <span class="dot" aria-hidden="true"></span>
+            <div class="copy">We currently have open positions available</div>
+          </div>
+        </a>
       </div>
     </section>
 
-    <!-- Latest publications band with agreed anchors -->
+    <!-- Latest publications band. Real titles injected from publications.js -->
     <section class="section pubs">
       <div class="container wide">
         <h2>Latest publications</h2>
@@ -285,8 +304,8 @@
             <a class="cardbox pub-item" href="publications.html#science-immunology">
               <div class="pub-card">
                 <div class="pub-venue">Science Immunology</div>
-                <h3 class="pub-title">Replace with real title</h3>
-                <div class="pub-meta">Year · Authors</div>
+                <h3 class="pub-title" id="pub-si-title">Loading…</h3>
+                <div class="pub-meta" id="pub-si-meta"></div>
               </div>
             </a>
           </li>
@@ -294,17 +313,17 @@
             <a class="cardbox pub-item" href="publications.html#nature-immunology">
               <div class="pub-card">
                 <div class="pub-venue">Nature Immunology</div>
-                <h3 class="pub-title">Replace with real title</h3>
-                <div class="pub-meta">Year · Authors</div>
+                <h3 class="pub-title" id="pub-ni-title">Loading…</h3>
+                <div class="pub-meta" id="pub-ni-meta"></div>
               </div>
             </a>
           </li>
           <li>
             <a class="cardbox pub-item" href="publications.html#nature-metabolism">
+              <div class="pub-venue">Nature Metabolism</div>
               <div class="pub-card">
-                <div class="pub-venue">Nature Metabolism</div>
-                <h3 class="pub-title">Replace with real title</h3>
-                <div class="pub-meta">Year · Authors</div>
+                <h3 class="pub-title" id="pub-nm-title">Loading…</h3>
+                <div class="pub-meta" id="pub-nm-meta"></div>
               </div>
             </a>
           </li>
@@ -361,8 +380,37 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
   </footer>
 
+  <!-- Load publications data and inject real titles into the home cards -->
+  <script src="assets/publications.js?v=7"></script>
+  <script>
+    (function () {
+      function fill(venue, titleId, metaId) {
+        var list = (window.PUBLICATIONS || []);
+        var match = list.find(function(p){ return (p.venue||'').toLowerCase().indexOf(venue) !== -1; });
+        var t = document.getElementById(titleId);
+        var m = document.getElementById(metaId);
+        if (!t || !m) return;
+        if (match) {
+          t.textContent = match.title || 'Untitled';
+          var meta = [];
+          if (match.year) meta.push(match.year);
+          if (match.authors) meta.push(match.authors);
+          m.textContent = meta.join(' · ');
+        } else {
+          t.textContent = 'Recent work from the lab';
+          m.textContent = '';
+        }
+      }
+      fill('science immunology', 'pub-si-title', 'pub-si-meta');
+      fill('nature immunology',  'pub-ni-title', 'pub-ni-meta');
+      fill('nature metabolism',  'pub-nm-title', 'pub-nm-meta');
+    })();
+  </script>
+
+  <!-- Mobile nav script -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
 </html>
+
 
 
