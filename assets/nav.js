@@ -95,3 +95,38 @@ document.addEventListener('DOMContentLoaded', function () {
     link.setAttribute('aria-current', 'page');
   }
 });
+/* Highlight hash target (e.g., news.html#2025-09-30-a) */
+document.addEventListener('DOMContentLoaded', function () {
+  // inject minimal CSS once
+  (function () {
+    var style = document.createElement('style');
+    style.textContent =
+      '.hash-highlight{outline:3px solid rgba(0,0,0,.25);box-shadow:0 0 0 6px rgba(0,0,0,.06);transition:outline-color .4s ease}';
+    document.head.appendChild(style);
+  })();
+
+  function highlightTarget() {
+    var id = decodeURIComponent(location.hash.replace('#', ''));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+
+    // reset then apply highlight
+    el.classList.remove('hash-highlight');
+    void el.offsetWidth; // reflow to restart animation
+    el.classList.add('hash-highlight');
+
+    // focus for accessibility, but do not jump twice
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+
+    // smooth scroll to top of the entry
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    // fade the outline after a few seconds
+    setTimeout(function () { el.classList.remove('hash-highlight'); }, 4000);
+  }
+
+  if (location.hash) highlightTarget();
+  window.addEventListener('hashchange', highlightTarget);
+});
