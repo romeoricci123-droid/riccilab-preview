@@ -1072,6 +1072,43 @@ body[data-page="publications"] #pub-list .paper-card{
     background-repeat: no-repeat !important;
   }
 }
+/* News: list cards + entry readability */
+.news-list .news-item {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  padding: 14px 16px;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.news-list .news-item:hover,
+.news-list .news-item:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+.news-list .news-item .meta {
+  font-size: .9rem;
+  opacity: .8;
+}
+
+/* On news.html: tidy entries and make anchor jumps pleasant */
+.news-entry {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 18px 0;
+  scroll-margin-top: 84px; /* avoids hiding under header on hash jump */
+}
+.news-entry .meta {
+  font-size: .9rem;
+  opacity: .8;
+  margin-bottom: 6px;
+}
+
+/* Small screens: a touch more breathing room */
+@media (max-width: 760px) {
+  .news-entry { padding: 14px 14px; }
+}
 
 
 
