@@ -196,3 +196,38 @@ document.addEventListener('DOMContentLoaded', function () {
     if (a) closeNav();
   });
 });
+/* Highlight hash target (e.g., news.html#2025-09-30-a) with reduced-motion support */
+document.addEventListener('DOMContentLoaded', function () {
+  // inject minimal CSS once
+  (function () {
+    var style = document.createElement('style');
+    style.textContent =
+      '.hash-highlight{outline:3px solid rgba(0,0,0,.25);box-shadow:0 0 0 6px rgba(0,0,0,.06);transition:outline-color .4s ease}';
+    document.head.appendChild(style);
+  })();
+
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function highlightTarget() {
+    var id = decodeURIComponent(location.hash.replace('#', ''));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+
+    el.classList.remove('hash-highlight');
+    void el.offsetWidth;
+    el.classList.add('hash-highlight');
+
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+
+    // Smooth scroll only if the user did not request reduced motion
+    if (prefersReduced) el.scrollIntoView({ block: 'start' });
+    else el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+    setTimeout(function () { el.classList.remove('hash-highlight'); }, 4000);
+  }
+
+  if (location.hash) highlightTarget();
+  window.addEventListener('hashchange', highlightTarget);
+});
