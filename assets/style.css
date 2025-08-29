@@ -1121,5 +1121,130 @@ body[data-page="publications"] #pub-list .paper-card{
 .emblem-circle img{ max-width:92%; height:auto; object-fit:contain; display:block; }
 @media (max-width:760px){ .emblem-circle{ width:128px; } }
 
+/* =========================
+   HOME OVERRIDES (final)
+   Paste at the end of assets/style.css
+   ========================= */
+
+/* 1) Kill tile frames on the home orbit so no boxes ever wrap the circles */
+body[data-page="home"] .tile{
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+body[data-page="home"] .tile .body{
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* 2) Round links (emblem + circles): no boxes, add subtle halo & lift */
+body[data-page="home"] a.emblem-link,
+body[data-page="home"] a.circle-card{
+  display: block !important;
+  margin: 0 auto 10px !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  background: #000 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+  text-decoration: none !important;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  isolation: isolate;
+  transition: transform .15s ease, box-shadow .15s ease, filter .15s ease !important;
+}
+body[data-page="home"] a.emblem-link img,
+body[data-page="home"] a.circle-card img{ display:block; width:100%; height:100%; object-fit:cover; }
+
+/* Halo hint (only on hover/focus) */
+body[data-page="home"] a.emblem-link::after,
+body[data-page="home"] a.circle-card::after{
+  content:"";
+  position:absolute; inset:-6px; border-radius:50%;
+  box-shadow: 0 0 0 0 rgba(255,255,255,0);
+  opacity:0; pointer-events:none;
+  transition: box-shadow .15s ease, opacity .15s ease;
+}
+body[data-page="home"] a.emblem-link:hover::after,
+body[data-page="home"] a.emblem-link:focus-visible::after,
+body[data-page="home"] a.circle-card:hover::after,
+body[data-page="home"] a.circle-card:focus-visible::after{
+  box-shadow: 0 0 0 4px rgba(255,255,255,.25);
+  opacity:1;
+}
+
+/* Lift + round shadow */
+body[data-page="home"] a.emblem-link:hover,
+body[data-page="home"] a.circle-card:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px rgba(0,0,0,.28) !important;
+  filter: brightness(1.02);
+}
+body[data-page="home"] a.emblem-link:focus-visible,
+body[data-page="home"] a.circle-card:focus-visible{
+  box-shadow: 0 0 0 4px rgba(255,255,255,.28), 0 18px 42px rgba(0,0,0,.34) !important;
+}
+body[data-page="home"] a.emblem-link:active,
+body[data-page="home"] a.circle-card:active{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(0,0,0,.26) !important;
+}
+
+/* Nuke any inherited “cardbox” look if those classes land on the circles by mistake */
+body[data-page="home"] a.circle-card.cardbox{
+  background: #000 !important; border: none !important; box-shadow: none !important;
+}
+
+/* 3) Header nav on home: black buttons, animated; clear current marker */
+body[data-page="home"] header .nav nav > a{
+  background: #000 !important;
+  color: #fff !important;
+  border: 1px solid #000 !important;
+  box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] header .nav nav > a:hover,
+body[data-page="home"] header .nav nav > a:focus-visible{
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(0,0,0,.24) !important;
+  filter: brightness(1.06);
+}
+body[data-page="home"] header .nav nav > a:active{
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
+}
+
+/* Current page: crisp white inset ring + subtle underline that doesn't shift layout */
+body[data-page="home"] header .nav nav > a[aria-current="page"]{
+  position: relative;
+  box-shadow: inset 0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.18) !important;
+  outline: none !important;
+  border-color: #000 !important;
+}
+body[data-page="home"] header .nav nav > a[aria-current="page"]::after{
+  content:"";
+  position:absolute; left:12px; right:12px; bottom:6px; height:2px;
+  background:#fff; border-radius:2px;
+}
+
+/* 4) Hiring banner: make it move like the others */
+body[data-page="home"] a.hiring{
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] a.hiring:hover,
+body[data-page="home"] a.hiring:focus-visible{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.14);
+  filter: brightness(1.02);
+}
+
+/* 5) Ensure circle sizes (in case other rules shrink them) */
+body[data-page="home"] a.circle-card{ width: 240px !important; height: 240px !important; }
+body[data-page="home"] a.emblem-link{ width: 420px !important; height: 420px !important; }
+
+/* 6) Center captions under circles */
+body[data-page="home"] .orbit .tile{ text-align: center !important; }
 
 
