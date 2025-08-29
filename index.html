@@ -58,17 +58,15 @@
     .section{ padding:32px 0 }
     .section.orbit-landing{ padding-bottom: 0; }
 
-    /* ========= HEADER NAV (fix transform reset, add motion & current marker) ========= */
-    /* Base look */
+    /* HEADER NAV (home): black, animated; clear current marker */
     body[data-page="home"] header .nav nav > a.navbox{
       background:#000 !important;
       color:#fff !important;
       border:1px solid #000 !important;
       box-shadow:0 6px 16px rgba(0,0,0,.18) !important;
       transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
-      transform: translateY(0) !important; /* defeats global transform:none !important */
+      transform: translateY(0) !important;
     }
-    /* Motion (force precedence over global !important resets) */
     body[data-page="home"] header .nav nav > a.navbox:hover,
     body[data-page="home"] header .nav nav > a.navbox:focus-visible{
       transform: translateY(-1px) !important;
@@ -79,7 +77,6 @@
       transform: translateY(0) !important;
       box-shadow: 0 6px 16px rgba(0,0,0,.18) !important;
     }
-    /* Clear current page (white inset ring + underline, no layout shift) */
     body[data-page="home"] header .nav nav > a.navbox[aria-current="page"]{
       position: relative;
       box-shadow: inset 0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.18) !important;
@@ -91,7 +88,7 @@
       background:#fff; border-radius:2px;
     }
 
-    /* ========= ORBIT GRID ========= */
+    /* Orbit grid */
     .orbit{
       display:grid;
       grid-template-columns: minmax(260px,1fr) 520px minmax(260px,1fr);
@@ -117,11 +114,12 @@
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
 
-    /* ========= ROUND CLICKABLES (emblem + circles) ========= */
+    /* ROUND CLICKABLES (emblem + circles) — two-layer approach */
     .round-link{
       display:block; margin:0 auto 10px;
-      border-radius:50%; overflow:hidden;
-      background:#000 !important;
+      border-radius:50%;
+      /* IMPORTANT: allow halo/shadow to extend beyond mask without clipping */
+      overflow: visible !important;
       border:none !important; outline:none !important;
       box-shadow:none !important; text-decoration:none !important;
       -webkit-tap-highlight-color:transparent;
@@ -135,20 +133,26 @@
       text-decoration-thickness:0 !important;
       -webkit-text-decoration-skip: none !important;
       text-decoration-skip-ink: none !important;
-      border-bottom: 0 !important;
+      background: transparent !important; /* background moves to mask */
     }
-    .round-link::before{
-      content:""; display:block; height:0 !important; line-height:0 !important;
-      border-bottom:0 !important; background:transparent !important;
-    }
-    .round-link *,
-    .round-link:hover *,
-    .round-link:focus *,
-    .round-link:active *{
+    /* Keep links and descendants decoration-free */
+    .round-link:hover,
+    .round-link:focus,
+    .round-link:focus-visible,
+    .round-link:active,
+    .round-link *{
       text-decoration:none !important;
       border-bottom:0 !important;
     }
-    /* Halo */
+
+    /* Inner circular mask that actually clips the image */
+    .round-mask{
+      display:block; width:100%; height:100%;
+      border-radius:50%; overflow:hidden;
+      background:#000;              /* black disc behind the image */
+    }
+
+    /* Halo (sits on the LINK, not the mask) */
     .round-link::after{
       content:""; position:absolute; inset:-6px; border-radius:50%;
       background: transparent !important;
@@ -177,15 +181,17 @@
 
     /* Emblem sizing (no cropping) */
     a.emblem-link{ width:420px; height:420px; display:grid; place-items:center; }
+    a.emblem-link .round-mask{ display:grid; place-items:center; }
     a.emblem-link img{
       width:auto; height:auto; max-width:78%; max-height:78%;
       object-fit:contain; display:block;
     }
+
     /* Circles sizing and fill */
     a.circle-card{ width:240px; height:240px; }
     a.circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    /* ========= Hiring banner (animated) ========= */
+    /* Hiring banner (animated) */
     .hiring{
       display:block; text-decoration:none; color:inherit;
       background:linear-gradient(135deg,#fff7e6,#ffffff);
@@ -215,7 +221,7 @@
     .pub-title{ margin:0 0 6px; font-size:1.05rem; }
     .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    /* News (unchanged) */
+    /* News */
     .news-list.clean{
       display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
@@ -244,7 +250,7 @@
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
 
-      <!-- Mobile hamburger (wired up by assets/nav.js) -->
+      <!-- Mobile hamburger -->
       <button class="hamburger" id="navToggle"
               aria-controls="site-nav"
               aria-expanded="false"
@@ -271,9 +277,11 @@
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">
-            <!-- Emblem: round clickable -->
+            <!-- Emblem: round clickable + mask -->
             <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
-              <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp?v=7" width="420" height="420">
+              <span class="round-mask">
+                <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp?v=7" width="420" height="420">
+              </span>
             </a>
             <h1 class="tagline">Organelle crosstalk in disease</h1>
             <p class="tagline-sub">Metabolism and innate immunity through the lens of lipids and membranes.</p>
@@ -282,7 +290,9 @@
           <!-- Left: Macrophage -->
           <article class="tile orbit-left">
             <a aria-label="Macrophage" class="round-link circle-card" href="nlrp3.html">
-              <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
+              <span class="round-mask">
+                <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
+              </span>
             </a>
             <div class="body">
               <h3>Macrophage</h3>
@@ -293,7 +303,9 @@
           <!-- Top-right: Hypothalamic neuron -->
           <article class="tile orbit-rt">
             <a aria-label="Hypothalamic neuron" class="round-link circle-card" href="brain.html">
-              <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
+              <span class="round-mask">
+                <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
+              </span>
             </a>
             <div class="body">
               <h3>Hypothalamic neuron</h3>
@@ -304,7 +316,9 @@
           <!-- Bottom-right: Pancreatic β cell -->
           <article class="tile orbit-rb">
             <a aria-label="Pancreatic β cell" class="round-link circle-card" href="insulin.html">
-              <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
+              <span class="round-mask">
+                <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
+              </span>
             </a>
             <div class="body">
               <h3>Pancreatic β cell</h3>
@@ -461,4 +475,5 @@
   <script src="assets/nav.js?v=2" defer></script>
 </body>
 </html>
+
 
