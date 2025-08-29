@@ -130,3 +130,23 @@ document.addEventListener('DOMContentLoaded', function () {
   if (location.hash) highlightTarget();
   window.addEventListener('hashchange', highlightTarget);
 });
+/* Replace visible em dashes with a middle dot for consistency */
+document.addEventListener('DOMContentLoaded', function () {
+  var skipTags = new Set(['SCRIPT','STYLE','CODE','PRE','NOSCRIPT','TEXTAREA','SVG']);
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (n) {
+      if (!n.nodeValue || n.nodeValue.indexOf('—') === -1) return NodeFilter.FILTER_REJECT;
+      var p = n.parentNode;
+      if (!p || skipTags.has(p.nodeName)) return NodeFilter.FILTER_REJECT;
+      // avoid changing aria-live regions or hidden elements
+      var s = window.getComputedStyle(p);
+      if (s && (s.visibility === 'hidden' || s.display === 'none')) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  var nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(function (t) {
+    t.nodeValue = t.nodeValue.replace(/ *— */g, ' · ');
+  });
+});
