@@ -1109,6 +1109,17 @@ body[data-page="publications"] #pub-list .paper-card{
 @media (max-width: 760px) {
   .news-entry { padding: 14px 14px; }
 }
+/* Circular emblem container */
+.emblem-circle{
+  width:160px; aspect-ratio:1 / 1;
+  border-radius:50%;
+  overflow:hidden;
+  display:inline-grid; place-items:center;
+  background:#000; /* keeps the black circle you want */
+}
+/* Make the art fit fully inside the circle */
+.emblem-circle img{ max-width:92%; height:auto; object-fit:contain; display:block; }
+@media (max-width:760px){ .emblem-circle{ width:128px; } }
 
 
 
