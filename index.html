@@ -49,18 +49,18 @@
   }
   </script>
 
-  <!-- Page-local styles for orbit landing, circular-only links, wider layout, sticky footer -->
+  <!-- Page-local styles: wider layout, circular-only links, pubs band, sticky footer -->
   <style>
-    /* Sticky footer layout (footer stays at bottom on short pages) */
+    /* Sticky footer layout */
     html, body { height: 100%; }
     body { min-height: 100vh; display: flex; flex-direction: column; }
     main { flex: 1 0 auto; }
     footer { flex-shrink: 0; }
 
     /* Wider containers only on this page */
-    .container.wide{ max-width: 1500px; }
+    .container.wide{ max-width: 1600px; }
 
-    /* Emblem: big, circular, with inner padding so nothing clips */
+    /* Emblem: big circle with inner safe padding */
     .emblem-circle{
       width: 420px;
       aspect-ratio: 1 / 1;
@@ -71,16 +71,16 @@
       background:#000;
     }
     .emblem-circle img{
-      max-width: 80%;  /* inner safe area */
+      max-width: 78%;  /* safe area so no label gets clipped */
       height:auto; object-fit:contain; display:block;
     }
 
-    /* Orbit layout: emblem center, three panels around */
+    /* Orbit layout (emblem centered, three circular panels around) */
     .orbit{
       display:grid;
-      grid-template-columns: 1fr 460px 1fr; /* widened center for emblem */
+      grid-template-columns: 1fr 480px 1fr;
       grid-template-rows: auto auto;
-      gap: 20px 36px;
+      gap: 20px 40px;
       align-items:center;
     }
     .orbit-center{ grid-column:2; grid-row:1 / span 2; text-align:center; }
@@ -88,77 +88,66 @@
     .orbit-rt{     grid-column:3; grid-row:1; }
     .orbit-rb{     grid-column:3; grid-row:2; }
 
-    /* Circular featured tiles: only the circle is clickable */
+    /* Circular featured panels — only the circle is clickable, no frames/borders */
     .tile .circle-card{
-      width: 220px; height: 220px;
+      width: 240px; height: 240px;
       border-radius: 50%;
       overflow: hidden;
-      background: #000; display: grid; place-items: center;
+      background: #000;
+      display: grid; place-items: center;
       margin: 0 auto 10px;
-      box-shadow: 0 6px 20px rgba(0,0,0,.08);
-      border: none; /* no gray lines */
+      border: none;           /* no border */
+      box-shadow: none;       /* no frame */
       position: relative; isolation: isolate;
-      transition: transform .12s ease, box-shadow .12s ease;
+      transition: transform .14s ease, outline-color .14s ease, outline-width .14s ease;
+      outline: 0 solid rgba(255,255,255,0);
+      outline-offset: 0;
     }
-    .tile .circle-card img{
-      width:100%; height:100%; object-fit: cover; display:block;
-    }
-    /* Clickable hint: subtle halo + arrow appears on hover/focus */
-    .tile .circle-card::after{
-      content: "Explore ↗";
-      position: absolute; inset: auto 0 10px 0;
-      margin: 0 auto; width: max-content; padding: 4px 8px;
-      font-size: .85rem; color: #fff; background: rgba(0,0,0,.45);
-      border-radius: 999px; opacity: 0; transform: translateY(4px);
-      transition: opacity .12s ease, transform .12s ease;
-    }
+    .tile .circle-card img{ width:100%; height:100%; object-fit: cover; display:block; }
+    /* Subtle hint on hover/focus to show they are interactive */
     .tile .circle-card:hover,
     .tile .circle-card:focus-visible{
       transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(0,0,0,.12);
+      outline: 6px solid rgba(255,255,255,.14);
+      outline-offset: 6px;
     }
-    .tile .circle-card:hover::after,
-    .tile .circle-card:focus-visible::after{ opacity: 1; transform: translateY(0); }
-
-    /* Titles and copy (not links), no borders/lines */
     .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; }
     .orbit .tile .body h3{ margin: 0 0 6px; }
     .orbit .tile .body p{ margin: 0; }
 
-    /* Stacked tagline under emblem */
+    /* Tagline under emblem */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.85; line-height:1.25; }
 
-    /* Use vertical space efficiently */
-    .section.orbit-landing{ padding-bottom: 0; }
-    .page:last-of-type{ padding-bottom: 8px; }
-
-    /* Micro-highlights band (Open positions / Latest publications) */
-    .highlights{ padding-top: 8px; padding-bottom: 8px; }
-    .highlights .quick-grid{
-      display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;
+    /* Latest publications band (three cards) */
+    .pubs{ padding-top: 8px; padding-bottom: 8px; }
+    .pub-grid{
+      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
+      list-style:none; margin:0; padding:0;
     }
-    .highlights .quick-grid .navbox{ text-align:center; }
+    .pub-item{
+      display:block; text-decoration:none;
+    }
+    .pub-card{ padding:14px 16px; border-radius:14px; }
+    .pub-venue{ font-weight:600; margin-bottom:6px; }
+    .pub-title{ margin:0 0 6px; font-size:1.05rem; }
+    .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    /* News: wider & 3 columns */
+    /* News: 3 columns inside the same wide container so left/right align */
     .news-list.clean{
       display:grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
       gap: 16px;
+      list-style:none; margin:0; padding:0;
     }
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
 
-    @media (max-width: 900px){
-      .emblem-circle{ width: 260px; }
-      .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
-      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
+    /* Reduce extra white space at bottom of main content */
+    .section.orbit-landing{ padding-bottom: 0; }
+    .page:last-of-type{ padding-bottom: 8px; }
 
-      .highlights .quick-grid{ grid-template-columns: 1fr; }
-      .news-list.clean{ grid-template-columns: 1fr; }
-    }
-
-    /* Footer partner: card like header buttons, bigger logo */
+    /* Footer partner card */
     footer .foot-partners{ margin:14px 0 0; display:flex; justify-content:center; }
     footer .partner-card{
       display:inline-flex; align-items:center; justify-content:center;
@@ -171,7 +160,17 @@
       transform: translateY(-1px);
       box-shadow:0 10px 28px rgba(0,0,0,.12);
     }
-    footer .partner-card img{ height:48px; width:auto; display:block; }
+    footer .partner-card img{ height:50px; width:auto; display:block; }
+
+    /* Mobile */
+    @media (max-width: 900px){
+      .container.wide{ max-width: 100%; }
+      .emblem-circle{ width: 260px; }
+      .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
+      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
+      .pub-grid{ grid-template-columns:1fr; }
+      .news-list.clean{ grid-template-columns:1fr; }
+    }
   </style>
 </head>
 
@@ -204,7 +203,7 @@
   </header>
 
   <main id="main" role="main">
-    <!-- Orbit landing (hero removed) -->
+    <!-- Orbit landing -->
     <section class="section orbit-landing">
       <div class="container wide">
         <div class="orbit">
@@ -217,7 +216,7 @@
             <p class="tagline-sub">Metabolism and innate immunity through lipids and membranes</p>
           </div>
 
-          <!-- Left: Macrophage → nlrp3.html (only the circle is the link) -->
+          <!-- Left: Macrophage → nlrp3.html (only circle clickable) -->
           <article class="tile orbit-left">
             <a aria-label="Macrophage" class="circle-card" href="nlrp3.html">
               <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
@@ -228,7 +227,7 @@
             </div>
           </article>
 
-          <!-- Top-right: Hypothalamic neuron → brain.html (only the circle is the link) -->
+          <!-- Top-right: Hypothalamic neuron → brain.html (only circle clickable) -->
           <article class="tile orbit-rt">
             <a aria-label="Hypothalamic neuron" class="circle-card" href="brain.html">
               <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
@@ -239,7 +238,7 @@
             </div>
           </article>
 
-          <!-- Bottom-right: Pancreatic β cell → insulin.html (only the circle is the link) -->
+          <!-- Bottom-right: Pancreatic β cell → insulin.html (only circle clickable) -->
           <article class="tile orbit-rb">
             <a aria-label="Pancreatic β cell" class="circle-card" href="insulin.html">
               <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
@@ -253,17 +252,47 @@
       </div>
     </section>
 
-    <!-- Micro-highlights band -->
-    <section class="section highlights">
+    <!-- Latest publications band -->
+    <section class="section pubs">
       <div class="container wide">
-        <div class="quick-grid">
-          <a class="cardbox navbox" href="join.html">Open positions</a>
-          <a class="cardbox navbox" href="publications.html">Latest publications</a>
-        </div>
+        <h2>Latest publications</h2>
+        <ul class="pub-grid">
+          <li>
+            <a class="cardbox pub-item" href="publications.html#science-immunology">
+              <div class="pub-card">
+                <div class="pub-venue">Science Immunology</div>
+                <h3 class="pub-title">Recent work from the lab</h3>
+                <div class="pub-meta">Year · Authors</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="cardbox pub-item" href="publications.html#nature-immunology">
+              <div class="pub-card">
+                <div class="pub-venue">Nature Immunology</div>
+                <h3 class="pub-title">Recent work from the lab</h3>
+                <div class="pub-meta">Year · Authors</div>
+              </div>
+            </a>
+          </li>
+          <li>
+            <a class="cardbox pub-item" href="publications.html#nature-metabolism">
+              <div class="pub-card">
+                <div class="pub-venue">Nature Metabolism</div>
+                <h3 class="pub-title">Recent work from the lab</h3>
+                <div class="pub-meta">Year · Authors</div>
+              </div>
+            </a>
+          </li>
+        </ul>
+
+        <p style="text-align:center;margin:14px 0 0;">
+          We currently have <a class="cardbox navbox" href="join.html" style="display:inline-block;">open positions available</a>
+        </p>
       </div>
     </section>
 
-    <!-- News (wider + 3 columns) -->
+    <!-- News -->
     <section class="page">
       <div class="container wide">
         <h2>News</h2>
@@ -306,7 +335,7 @@
     <a href="privacy.html">Vie privée</a>
     <div class="foot-partners">
       <a aria-label="IGBMC" class="cardbox partner-card" href="https://www.igbmc.fr" target="_blank" rel="noopener">
-        <img alt="IGBMC" src="assets/igbmc.png" width="200" height="60">
+        <img alt="IGBMC" src="assets/igbmc.png" width="220" height="60">
       </a>
     </div>
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
