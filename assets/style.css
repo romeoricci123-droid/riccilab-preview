@@ -1307,5 +1307,22 @@ header .nav nav > a[aria-current="page"]::after{
   position:absolute; left:12px; right:12px; bottom:6px; height:2px;
   background:#fff; border-radius:2px;
 }
+/* HOME ONLY: let circle halos/shadows breathe—don't clip inside tiles */
+body[data-page="home"] .tile{
+  overflow: visible !important;     /* <-- fixes the cut */
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+/* keep tiles inert on hover so no rectangle shows up */
+body[data-page="home"] .tile:hover,
+body[data-page="home"] .tile:focus-within{
+  transform: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+/* text under the circle shouldn’t steal hover */
+body[data-page="home"] .tile .body{ pointer-events: none; }
 
 
