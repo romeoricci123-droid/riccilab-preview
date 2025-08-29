@@ -103,7 +103,13 @@
           <aside class="research-aside">
             <div class="emblem-panel">
               <div class="pad">
-                <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.webp" width="160" height="160" />
+                <!-- Emblem (circular + fallback) -->
+<div class="emblem-circle">
+  <picture>
+    <source srcset="assets/emblem.webp?v=1" type="image/webp" />
+    <img src="assets/emblem.svg" alt="Ricci Lab emblem" width="160" height="160" decoding="async" loading="lazy" />
+  </picture>
+</div>
                 <div style="margin-top:12px"></div>
               </div>
               <a aria-label="IGBMC" class="cardbox partner-card" href="https://www.igbmc.fr" rel="noopener" target="_blank">
