@@ -39,8 +39,12 @@
       "url": "https://www.igbmc.fr"
     },
     "member": [
-      { "@type": "Person", "name": "Romeo Ricci", "jobTitle": "Principal Investigator",
-        "affiliation": { "@type": "Organization", "name": "IGBMC" } }
+      {
+        "@type": "Person",
+        "name": "Romeo Ricci",
+        "jobTitle": "Principal Investigator",
+        "affiliation": { "@type": "Organization", "name": "IGBMC" }
+      }
     ]
   }
   </script>
@@ -49,7 +53,7 @@
   <style>
     /* Emblem: larger, with inner padding so nothing gets clipped */
     .emblem-circle{
-      width: 420px;                 /* bigger emblem */
+      width: 420px;                 /* big emblem (you liked this size) */
       aspect-ratio: 1 / 1;
       border-radius: 50%;
       overflow: hidden;
@@ -58,7 +62,7 @@
       background:#000;
     }
     .emblem-circle img{
-      max-width: 84%;               /* more “safe area” – upper-right label won’t cut */
+      max-width: 80%;               /* extra safe area → prevents any label clipping */
       height:auto; object-fit:contain; display:block;
     }
 
@@ -78,26 +82,38 @@
     /* Make panels smaller WITHOUT shrinking text */
     .orbit .tile .activity-thumb{ height:120px; }   /* smaller media */
     .orbit .tile .body{ padding:10px 12px; }        /* tighter chrome */
-    .orbit .tile .body h3{ margin-bottom:6px; }     /* keep font size as in theme */
-    .orbit .tile .body p{ margin:0; }               /* keep text legible */
+    .orbit .tile .body h3{ margin-bottom:6px; }     /* keep theme font size */
+    .orbit .tile .body p{ margin:0; }               /* legible body copy */
 
-    /* “Stacked” tagline under emblem */
+    /* Stacked tagline under emblem */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.85; line-height:1.25; }
 
-    /* Pull News up a bit to use vertical space */
-    .orbit-landing{ padding-bottom: 8px; }
+    /* Use vertical space efficiently */
+    .section.orbit-landing{ padding-bottom: 0; }
+    .page:last-of-type{ padding-bottom: 8px; }
 
-    /* Footer partner row to use the space beneath legal/privacy */
-    footer .foot-partners{ margin-top:10px; }
-    footer .foot-partners img{ height:26px; width:auto; vertical-align:middle; opacity:.92; }
+    /* Footer partner: card look like header buttons */
+    footer .foot-partners{ margin:14px 0 0; display:flex; justify-content:center; }
+    footer .partner-card{
+      display:inline-flex; align-items:center; justify-content:center;
+      padding:10px 14px; border-radius:12px; background:#fff;
+      box-shadow:0 6px 20px rgba(0,0,0,.08);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    footer .partner-card:hover,
+    footer .partner-card:focus-visible{
+      transform: translateY(-1px);
+      box-shadow:0 10px 28px rgba(0,0,0,.12);
+    }
+    footer .partner-card img{ height:40px; width:auto; display:block; }
 
     /* Mobile stacking */
     @media (max-width: 900px){
       .emblem-circle{ width: 260px; }
       .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
       .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
-      .orbit .tile .activity-thumb{ height:140px; } /* a bit taller on mobile */
+      .orbit .tile .activity-thumb{ height:140px; } /* a touch taller on mobile */
     }
   </style>
 </head>
@@ -222,8 +238,8 @@
     <a href="legal.html">Mentions légales</a> ·
     <a href="privacy.html">Vie privée</a>
     <div class="foot-partners">
-      <a aria-label="IGBMC" href="https://www.igbmc.fr" target="_blank" rel="noopener">
-        <img alt="IGBMC" src="assets/igbmc.png">
+      <a aria-label="IGBMC" class="cardbox partner-card" href="https://www.igbmc.fr" target="_blank" rel="noopener">
+        <img alt="IGBMC" src="assets/igbmc.png" width="140" height="40">
       </a>
     </div>
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
