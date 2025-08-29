@@ -150,3 +150,49 @@ document.addEventListener('DOMContentLoaded', function () {
     t.nodeValue = t.nodeValue.replace(/ *— */g, ' · ');
   });
 });
+/* Mobile menu UX: close on Esc, outside click, link click; lock scroll when open */
+document.addEventListener('DOMContentLoaded', function () {
+  var btn = document.getElementById('navToggle');
+  var nav = document.getElementById('site-nav');
+  if (!btn || !nav) return;
+
+  // Add a tiny style once for scroll lock
+  if (!document.getElementById('navScrollLockStyle')) {
+    var style = document.createElement('style');
+    style.id = 'navScrollLockStyle';
+    style.textContent = 'body.nav-open{overflow:hidden}';
+    document.head.appendChild(style);
+  }
+
+  // Keep body scroll lock in sync with nav state
+  function syncLock() {
+    if (nav.classList.contains('open')) document.body.classList.add('nav-open');
+    else document.body.classList.remove('nav-open');
+  }
+  syncLock();
+  new MutationObserver(syncLock).observe(nav, { attributes: true, attributeFilter: ['class'] });
+
+  // Close helpers
+  function closeNav() {
+    if (!nav.classList.contains('open')) return;
+    nav.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+  }
+
+  // Close on Esc
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeNav();
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function (e) {
+    if (!nav.classList.contains('open')) return;
+    if (!nav.contains(e.target) && !btn.contains(e.target)) closeNav();
+  });
+
+  // Close after choosing a link
+  nav.addEventListener('click', function (e) {
+    var a = e.target && e.target.closest('a');
+    if (a) closeNav();
+  });
+});
