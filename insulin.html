@@ -82,7 +82,13 @@
           <aside class="page-aside">
             <div class="emblem-panel">
               <div class="pad">
-                <img alt="Ricci Lab emblem" decoding="async" loading="lazy" src="assets/emblem.svg" />
+               <!-- Emblem (circular + fallback) -->
+<div class="emblem-circle">
+  <picture>
+    <source srcset="assets/emblem.webp?v=1" type="image/webp" />
+    <img src="assets/emblem.svg" alt="Ricci Lab emblem" width="160" height="160" decoding="async" loading="lazy" />
+  </picture>
+</div>
               </div>
             </div>
           </aside>
