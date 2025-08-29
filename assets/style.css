@@ -1246,5 +1246,38 @@ body[data-page="home"] a.emblem-link{ width: 420px !important; height: 420px !im
 
 /* 6) Center captions under circles */
 body[data-page="home"] .orbit .tile{ text-align: center !important; }
+/* HOME: circles/emblem must never show an underline or square edge on hover */
+body[data-page="home"] a.round-link,
+body[data-page="home"] a.round-link:hover,
+body[data-page="home"] a.round-link:focus,
+body[data-page="home"] a.round-link:focus-visible,
+body[data-page="home"] a.round-link:active {
+  text-decoration: none !important;   /* defeats global a:hover underline */
+}
+
+/* Extra belt & suspenders: ensure no background/padding sneaks in */
+body[data-page="home"] a.round-link {
+  background: #000 !important;
+  padding: 0 !important;
+}
+
+/* Keep the halo clean; it's purely a shadow, not a filled overlay */
+body[data-page="home"] a.round-link::after {
+  background: transparent !important;
+}
+
+/* Make sure images still behave as intended */
+body[data-page="home"] a.emblem-link img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 78% !important;
+  max-height: 78% !important;
+  object-fit: contain !important;
+}
+body[data-page="home"] a.circle-card img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
 
 
