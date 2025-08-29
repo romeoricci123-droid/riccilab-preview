@@ -70,3 +70,20 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   mo.observe(document.documentElement, { childList: true, subtree: true });
 });
+/* External links: open in new tab with rel safety */
+document.addEventListener('DOMContentLoaded', function () {
+  var here = location.hostname.replace(/^www\./, '');
+  document.querySelectorAll('a[href^="http"]').forEach(function (a) {
+    try {
+      var u = new URL(a.href);
+      var host = u.hostname.replace(/^www\./, '');
+      if (host && host !== here) {
+        a.setAttribute('target', '_blank');
+        var rel = (a.getAttribute('rel') || '').split(/\s+/);
+        if (rel.indexOf('noopener') === -1) rel.push('noopener');
+        if (rel.indexOf('noreferrer') === -1) rel.push('noreferrer');
+        a.setAttribute('rel', rel.join(' ').trim());
+      }
+    } catch (e) { /* ignore invalid URLs */ }
+  });
+});
