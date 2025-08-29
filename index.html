@@ -49,18 +49,18 @@
   }
   </script>
 
-  <!-- Page-local styles for orbit landing, circular tiles, wider layout, sticky footer -->
+  <!-- Page-local styles for orbit landing, circular-only links, wider layout, sticky footer -->
   <style>
-    /* Sticky footer layout */
+    /* Sticky footer layout (footer stays at bottom on short pages) */
     html, body { height: 100%; }
     body { min-height: 100vh; display: flex; flex-direction: column; }
     main { flex: 1 0 auto; }
     footer { flex-shrink: 0; }
 
-    /* Wider containers on this page only */
-    .container.wide{ max-width: 1400px; }
+    /* Wider containers only on this page */
+    .container.wide{ max-width: 1500px; }
 
-    /* Emblem: big, circular, with safe inner padding so nothing clips */
+    /* Emblem: big, circular, with inner padding so nothing clips */
     .emblem-circle{
       width: 420px;
       aspect-ratio: 1 / 1;
@@ -71,14 +71,14 @@
       background:#000;
     }
     .emblem-circle img{
-      max-width: 80%;  /* inner padding → prevents 'Hypothalamic neuron' from clipping */
+      max-width: 80%;  /* inner safe area */
       height:auto; object-fit:contain; display:block;
     }
 
-    /* Orbit layout around the emblem */
+    /* Orbit layout: emblem center, three panels around */
     .orbit{
       display:grid;
-      grid-template-columns: 1fr 460px 1fr; /* center widened for emblem */
+      grid-template-columns: 1fr 460px 1fr; /* widened center for emblem */
       grid-template-rows: auto auto;
       gap: 20px 36px;
       align-items:center;
@@ -88,20 +88,42 @@
     .orbit-rt{     grid-column:3; grid-row:1; }
     .orbit-rb{     grid-column:3; grid-row:2; }
 
-    /* Circular featured tiles (image in a circle, text unchanged size) */
+    /* Circular featured tiles: only the circle is clickable */
     .tile .circle-card{
       width: 220px; height: 220px;
-      border-radius: 50%; overflow: hidden;
+      border-radius: 50%;
+      overflow: hidden;
       background: #000; display: grid; place-items: center;
       margin: 0 auto 10px;
       box-shadow: 0 6px 20px rgba(0,0,0,.08);
+      border: none; /* no gray lines */
+      position: relative; isolation: isolate;
+      transition: transform .12s ease, box-shadow .12s ease;
     }
     .tile .circle-card img{
       width:100%; height:100%; object-fit: cover; display:block;
     }
-    .orbit .tile .body{ padding: 10px 12px; text-align:center; }
-    .orbit .tile .body h3{ margin-bottom:6px; }  /* keep theme font size */
-    .orbit .tile .body p{ margin:0; }
+    /* Clickable hint: subtle halo + arrow appears on hover/focus */
+    .tile .circle-card::after{
+      content: "Explore ↗";
+      position: absolute; inset: auto 0 10px 0;
+      margin: 0 auto; width: max-content; padding: 4px 8px;
+      font-size: .85rem; color: #fff; background: rgba(0,0,0,.45);
+      border-radius: 999px; opacity: 0; transform: translateY(4px);
+      transition: opacity .12s ease, transform .12s ease;
+    }
+    .tile .circle-card:hover,
+    .tile .circle-card:focus-visible{
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.12);
+    }
+    .tile .circle-card:hover::after,
+    .tile .circle-card:focus-visible::after{ opacity: 1; transform: translateY(0); }
+
+    /* Titles and copy (not links), no borders/lines */
+    .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; }
+    .orbit .tile .body h3{ margin: 0 0 6px; }
+    .orbit .tile .body p{ margin: 0; }
 
     /* Stacked tagline under emblem */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
@@ -111,7 +133,14 @@
     .section.orbit-landing{ padding-bottom: 0; }
     .page:last-of-type{ padding-bottom: 8px; }
 
-    /* News: wider & multi-column to use space; cards align with overall layout */
+    /* Micro-highlights band (Open positions / Latest publications) */
+    .highlights{ padding-top: 8px; padding-bottom: 8px; }
+    .highlights .quick-grid{
+      display:grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap:12px;
+    }
+    .highlights .quick-grid .navbox{ text-align:center; }
+
+    /* News: wider & 3 columns */
     .news-list.clean{
       display:grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
@@ -119,11 +148,17 @@
     }
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
+
     @media (max-width: 900px){
+      .emblem-circle{ width: 260px; }
+      .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
+      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
+
+      .highlights .quick-grid{ grid-template-columns: 1fr; }
       .news-list.clean{ grid-template-columns: 1fr; }
     }
 
-    /* Footer partner: card like header buttons, larger logo */
+    /* Footer partner: card like header buttons, bigger logo */
     footer .foot-partners{ margin:14px 0 0; display:flex; justify-content:center; }
     footer .partner-card{
       display:inline-flex; align-items:center; justify-content:center;
@@ -137,13 +172,6 @@
       box-shadow:0 10px 28px rgba(0,0,0,.12);
     }
     footer .partner-card img{ height:48px; width:auto; display:block; }
-
-    /* Mobile stacking */
-    @media (max-width: 900px){
-      .emblem-circle{ width: 260px; }
-      .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
-      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
-    }
   </style>
 </head>
 
@@ -189,59 +217,51 @@
             <p class="tagline-sub">Metabolism and innate immunity through lipids and membranes</p>
           </div>
 
-          <!-- Left: Macrophage → nlrp3.html (circle tile) -->
+          <!-- Left: Macrophage → nlrp3.html (only the circle is the link) -->
           <article class="tile orbit-left">
-            <a aria-label="Macrophage" class="tile-link" href="nlrp3.html">
-              <div class="circle-card">
-                <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
-              </div>
-              <div class="body">
-                <h3>Macrophage</h3>
-                <p>Innate immune sensing and inflammasome assembly.</p>
-              </div>
+            <a aria-label="Macrophage" class="circle-card" href="nlrp3.html">
+              <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
             </a>
+            <div class="body">
+              <h3>Macrophage</h3>
+              <p>Innate immune sensing and inflammasome assembly.</p>
+            </div>
           </article>
 
-          <!-- Top-right: Hypothalamic neuron → brain.html (circle tile) -->
+          <!-- Top-right: Hypothalamic neuron → brain.html (only the circle is the link) -->
           <article class="tile orbit-rt">
-            <a aria-label="Hypothalamic neuron" class="tile-link" href="brain.html">
-              <div class="circle-card">
-                <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
-              </div>
-              <div class="body">
-                <h3>Hypothalamic neuron</h3>
-                <p>Membrane trafficking and neuropeptide release.</p>
-              </div>
+            <a aria-label="Hypothalamic neuron" class="circle-card" href="brain.html">
+              <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
             </a>
+            <div class="body">
+              <h3>Hypothalamic neuron</h3>
+              <p>Membrane trafficking and neuropeptide release.</p>
+            </div>
           </article>
 
-          <!-- Bottom-right: Pancreatic β cell → insulin.html (circle tile) -->
+          <!-- Bottom-right: Pancreatic β cell → insulin.html (only the circle is the link) -->
           <article class="tile orbit-rb">
-            <a aria-label="Pancreatic β cell" class="tile-link" href="insulin.html">
-              <div class="circle-card">
-                <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
-              </div>
-              <div class="body">
-                <h3>Pancreatic β cell</h3>
-                <p>Insulin granule turnover and β-cell function.</p>
-              </div>
+            <a aria-label="Pancreatic β cell" class="circle-card" href="insulin.html">
+              <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
             </a>
+            <div class="body">
+              <h3>Pancreatic β cell</h3>
+              <p>Insulin granule turnover and β-cell function.</p>
+            </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- Optional micro-highlights band (easy to remove if you prefer minimal) -->
-    <!--
-    <section class="section">
+    <!-- Micro-highlights band -->
+    <section class="section highlights">
       <div class="container wide">
-        <div class="grid" style="grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;">
+        <div class="quick-grid">
           <a class="cardbox navbox" href="join.html">Open positions</a>
           <a class="cardbox navbox" href="publications.html">Latest publications</a>
         </div>
       </div>
     </section>
-    -->
 
     <!-- News (wider + 3 columns) -->
     <section class="page">
