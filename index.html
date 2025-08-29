@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
 
-  <!-- Favicon / icons -->
+  <!-- Favicon and icons -->
   <link rel="icon" href="assets/favicon.png" sizes="32x32">
   <link rel="manifest" href="manifest.webmanifest">
   <meta name="theme-color" content="#0d1220">
@@ -14,7 +14,7 @@
   <!-- Basic SEO -->
   <meta name="description" content="Ricci Lab · Organelle crosstalk in disease. Metabolism and innate immunity through lipids and membranes.">
 
-  <!-- Open Graph / Twitter -->
+  <!-- Open Graph and Twitter -->
   <meta property="og:title" content="Ricci Lab">
   <meta property="og:description" content="Metabolism and innate immunity through the lens of lipids and membranes.">
   <meta property="og:image" content="https://riccilab.org/assets/og-hero.jpg">
@@ -49,18 +49,17 @@
   }
   </script>
 
-  <!-- Page-local styles: wider layout, circular-only links, pubs band, sticky footer -->
   <style>
-    /* Sticky footer layout */
+    /* Sticky footer */
     html, body { height: 100%; }
     body { min-height: 100vh; display: flex; flex-direction: column; }
     main { flex: 1 0 auto; }
     footer { flex-shrink: 0; }
 
-    /* Wider containers only on this page */
+    /* Wider containers on home */
     .container.wide{ max-width: 1600px; }
 
-    /* Emblem: big circle with inner safe padding */
+    /* Emblem */
     .emblem-circle{
       width: 420px;
       aspect-ratio: 1 / 1;
@@ -71,69 +70,88 @@
       background:#000;
     }
     .emblem-circle img{
-      max-width: 78%;  /* safe area so no label gets clipped */
+      max-width: 78%;
       height:auto; object-fit:contain; display:block;
     }
 
-    /* Orbit layout (emblem centered, three circular panels around) */
+    /* Orbit layout removes empty white space on sides */
     .orbit{
       display:grid;
-      grid-template-columns: 1fr 480px 1fr;
+      grid-template-columns: minmax(260px,1fr) 520px minmax(260px,1fr);
       grid-template-rows: auto auto;
-      gap: 20px 40px;
+      gap: 24px 40px;
       align-items:center;
     }
     .orbit-center{ grid-column:2; grid-row:1 / span 2; text-align:center; }
-    .orbit-left{   grid-column:1; grid-row:1 / span 2; }
-    .orbit-rt{     grid-column:3; grid-row:1; }
-    .orbit-rb{     grid-column:3; grid-row:2; }
+    .orbit-left{   grid-column:1; grid-row:1 / span 2; justify-self:start; }
+    .orbit-rt{     grid-column:3; grid-row:1; justify-self:end; }
+    .orbit-rb{     grid-column:3; grid-row:2; justify-self:end; }
 
-    /* Circular featured panels — only the circle is clickable, no frames/borders */
+    /* Circles only clickable. No frames. No grey boxes. */
+    .tile{ background:transparent; border:none; box-shadow:none; }
     .tile .circle-card{
-      width: 240px; height: 240px;
+      width: 300px; height: 300px;
       border-radius: 50%;
       overflow: hidden;
       background: #000;
       display: grid; place-items: center;
-      margin: 0 auto 10px;
-      border: none;           /* no border */
-      box-shadow: none;       /* no frame */
+      margin: 0 0 10px 0;
+      border: none;
+      box-shadow: none;
       position: relative; isolation: isolate;
       transition: transform .14s ease, outline-color .14s ease, outline-width .14s ease;
       outline: 0 solid rgba(255,255,255,0);
       outline-offset: 0;
     }
-    .tile .circle-card img{ width:100%; height:100%; object-fit: cover; display:block; }
-    /* Subtle hint on hover/focus to show they are interactive */
+    .tile .circle-card img{ width:100%; height:100%; object-fit:cover; display:block; }
     .tile .circle-card:hover,
     .tile .circle-card:focus-visible{
       transform: translateY(-2px);
       outline: 6px solid rgba(255,255,255,.14);
       outline-offset: 6px;
     }
-    .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; }
+    .orbit .tile .body{ padding: 8px 6px; text-align:center; border:none; background:transparent; box-shadow:none; }
     .orbit .tile .body h3{ margin: 0 0 6px; }
     .orbit .tile .body p{ margin: 0; }
 
-    /* Tagline under emblem */
+    /* Tagline */
     .tagline{ margin:16px 0 4px; font-size:1.25rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.85; line-height:1.25; }
 
-    /* Latest publications band (three cards) */
-    .pubs{ padding-top: 8px; padding-bottom: 8px; }
+    /* Hiring callout high visibility */
+    .hiring {
+      background: linear-gradient(135deg, #fff7e6, #ffffff);
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      border-radius: 18px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 22px 0 10px;
+    }
+    .hiring .dot { width: 14px; height: 14px; border-radius: 999px; background: #f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); }
+    .hiring .copy { flex: 1 1 auto; font-size: 1.1rem; }
+    .hiring .cta {
+      flex: 0 0 auto; display: inline-block; padding: 10px 14px; border-radius: 12px;
+      font-weight: 600; text-decoration: none; background: #111; color: #fff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18); transition: transform .12s ease, box-shadow .12s ease;
+    }
+    .hiring .cta:hover, .hiring .cta:focus-visible{ transform: translateY(-1px); box-shadow: 0 10px 26px rgba(0,0,0,.22); }
+
+    /* Publications band with agreed anchors */
+    .section.pubs{ padding-top: 8px; padding-bottom: 8px; }
     .pub-grid{
       display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
       list-style:none; margin:0; padding:0;
     }
-    .pub-item{
-      display:block; text-decoration:none;
-    }
+    .pub-item{ display:block; text-decoration:none; }
     .pub-card{ padding:14px 16px; border-radius:14px; }
     .pub-venue{ font-weight:600; margin-bottom:6px; }
     .pub-title{ margin:0 0 6px; font-size:1.05rem; }
     .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    /* News: 3 columns inside the same wide container so left/right align */
+    /* News grid */
     .news-list.clean{
       display:grid;
       grid-template-columns: repeat(3, minmax(0,1fr));
@@ -143,7 +161,7 @@
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
 
-    /* Reduce extra white space at bottom of main content */
+    /* Spacing tweaks */
     .section.orbit-landing{ padding-bottom: 0; }
     .page:last-of-type{ padding-bottom: 8px; }
 
@@ -167,9 +185,12 @@
       .container.wide{ max-width: 100%; }
       .emblem-circle{ width: 260px; }
       .orbit{ grid-template-columns:1fr; grid-template-rows:auto; gap:14px; }
-      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; }
+      .orbit-center, .orbit-left, .orbit-rt, .orbit-rb{ grid-column:1; grid-row:auto; justify-self:center; }
+      .tile .circle-card{ width: 260px; height: 260px; }
       .pub-grid{ grid-template-columns:1fr; }
       .news-list.clean{ grid-template-columns:1fr; }
+      .hiring{ flex-direction: column; align-items: start; }
+      .hiring .cta{ width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -181,11 +202,7 @@
     <div class="container nav">
       <div class="brand"><span class="lab">Ricci Lab</span></div>
 
-      <!-- Mobile-only hamburger -->
-      <button class="hamburger" id="navToggle"
-              aria-controls="site-nav"
-              aria-expanded="false"
-              aria-label="Menu">
+      <button class="hamburger" id="navToggle" aria-controls="site-nav" aria-expanded="false" aria-label="Menu">
         <span class="bar"></span><span class="bar"></span><span class="bar"></span>
       </button>
 
@@ -216,7 +233,7 @@
             <p class="tagline-sub">Metabolism and innate immunity through lipids and membranes</p>
           </div>
 
-          <!-- Left: Macrophage → nlrp3.html (only circle clickable) -->
+          <!-- Left: Macrophage -->
           <article class="tile orbit-left">
             <a aria-label="Macrophage" class="circle-card" href="nlrp3.html">
               <img alt="Macrophage" decoding="async" loading="lazy" src="assets/nlrp3.webp">
@@ -227,7 +244,7 @@
             </div>
           </article>
 
-          <!-- Top-right: Hypothalamic neuron → brain.html (only circle clickable) -->
+          <!-- Top right: Hypothalamic neuron -->
           <article class="tile orbit-rt">
             <a aria-label="Hypothalamic neuron" class="circle-card" href="brain.html">
               <img alt="Hypothalamic neuron" decoding="async" loading="lazy" src="assets/brain.svg">
@@ -238,21 +255,28 @@
             </div>
           </article>
 
-          <!-- Bottom-right: Pancreatic β cell → insulin.html (only circle clickable) -->
+          <!-- Bottom right: Pancreatic β cell -->
           <article class="tile orbit-rb">
             <a aria-label="Pancreatic β cell" class="circle-card" href="insulin.html">
               <img alt="Pancreatic β cell" decoding="async" loading="lazy" src="assets/beta.webp">
             </a>
             <div class="body">
               <h3>Pancreatic β cell</h3>
-              <p>Insulin granule turnover and β-cell function.</p>
+              <p>Insulin granule turnover and β cell function.</p>
             </div>
           </article>
+        </div>
+
+        <!-- Hiring callout -->
+        <div class="hiring" role="region" aria-label="Open positions">
+          <span class="dot" aria-hidden="true"></span>
+          <div class="copy">We currently have open positions available</div>
+          <a class="cta" href="join.html">See roles</a>
         </div>
       </div>
     </section>
 
-    <!-- Latest publications band -->
+    <!-- Latest publications band with agreed anchors -->
     <section class="section pubs">
       <div class="container wide">
         <h2>Latest publications</h2>
@@ -261,7 +285,7 @@
             <a class="cardbox pub-item" href="publications.html#science-immunology">
               <div class="pub-card">
                 <div class="pub-venue">Science Immunology</div>
-                <h3 class="pub-title">Recent work from the lab</h3>
+                <h3 class="pub-title">Replace with real title</h3>
                 <div class="pub-meta">Year · Authors</div>
               </div>
             </a>
@@ -270,7 +294,7 @@
             <a class="cardbox pub-item" href="publications.html#nature-immunology">
               <div class="pub-card">
                 <div class="pub-venue">Nature Immunology</div>
-                <h3 class="pub-title">Recent work from the lab</h3>
+                <h3 class="pub-title">Replace with real title</h3>
                 <div class="pub-meta">Year · Authors</div>
               </div>
             </a>
@@ -279,16 +303,12 @@
             <a class="cardbox pub-item" href="publications.html#nature-metabolism">
               <div class="pub-card">
                 <div class="pub-venue">Nature Metabolism</div>
-                <h3 class="pub-title">Recent work from the lab</h3>
+                <h3 class="pub-title">Replace with real title</h3>
                 <div class="pub-meta">Year · Authors</div>
               </div>
             </a>
           </li>
         </ul>
-
-        <p style="text-align:center;margin:14px 0 0;">
-          We currently have <a class="cardbox navbox" href="join.html" style="display:inline-block;">open positions available</a>
-        </p>
       </div>
     </section>
 
@@ -341,8 +361,8 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
   </footer>
 
-  <!-- Mobile nav script -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
 </html>
+
 
