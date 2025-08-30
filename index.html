@@ -232,6 +232,20 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   filter: brightness(1.02);
   outline:none;
 }
+ /* HOMEPAGE — emblem: weak round shadow, stronger on hover */
+body[data-page="home"] a.emblem-link{
+  display:block;
+  border-radius:50%;
+  background:#fff;
+  box-shadow:0 6px 18px rgba(0,0,0,.12); /* faint round shadow */
+  transition: transform .14s ease, box-shadow .14s ease, filter .14s ease !important;
+}
+body[data-page="home"] a.emblem-link:hover,
+body[data-page="home"] a.emblem-link:focus-visible{
+  transform: translateY(-3px);
+  box-shadow:0 14px 28px rgba(0,0,0,.18); /* stronger on hover */
+  filter: brightness(1.02);
+}
   </style>
 </head>
 
