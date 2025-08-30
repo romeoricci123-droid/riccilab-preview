@@ -51,7 +51,6 @@
   }
   </script>
 
-  <!-- Home-only styles (no CSS shadows on circles; only SVG shadows) -->
   <style>
     /* Wider canvas */
     body[data-page="home"] .container.wide{ width: min(1840px, 95%) !important; }
@@ -212,10 +211,13 @@ body[data-page="home"] .pub-grid > li > a.cardbox.pub-item > .pub-card{
 body[data-page="home"] .pub-grid > li > a.cardbox.pub-item{
   background: linear-gradient(135deg, #ffe9d6, #ffffff) !important; /* soft warm orange → white */
 }
- /* HOMEPAGE — blue gradient for News cards */
+/* HOMEPAGE — blue gradient for News cards */
 body[data-page="home"] .news-list.clean > li > a.cardbox.news-item{
   background: linear-gradient(135deg, #e6f2ff, #ffffff) !important; /* pale blue → white */
 }
+
+  </style>
+</head>
 
 <body data-page="home">
   <a href="#main" class="skip">Skip to content</a>
