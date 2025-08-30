@@ -239,6 +239,21 @@ body[data-page="home"] a.emblem-link svg{
 }
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
+  /* Emblem: make the shadow round by applying drop-shadow to the CLIPPED GROUP, not the whole SVG */
+body[data-page="home"] a.emblem-link svg{
+  filter: none !important;       /* kill any square shadow on the whole svg */
+  overflow: visible;             /* so shadow isn't cut at edges */
+  transition: transform .12s ease;
+}
+
+body[data-page="home"] a.emblem-link svg #emblem-visual{
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.10));  /* faint, round */
+  transition: filter .15s ease;
+}
+
+body[data-page="home"] a.emblem-link:hover svg #emblem-visual{
+  filter: drop-shadow(0 20px 48px rgba(0,0,0,.22));  /* stronger on hover */
+}
   </style>
 </head>
 
