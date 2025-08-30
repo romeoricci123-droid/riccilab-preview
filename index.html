@@ -215,7 +215,21 @@ body[data-page="home"] .pub-grid > li > a.cardbox.pub-item{
 body[data-page="home"] .news-list.clean > li > a.cardbox.news-item{
   background: linear-gradient(135deg, #e6f2ff, #ffffff) !important; /* pale blue → white */
 }
-
+/* HOMEPAGE — shadow for IGBMC logo card */
+body[data-page="home"] footer .foot-partners .partner-card{
+  display:inline-block;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08) !important;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] footer .foot-partners .partner-card:active{
+  transform: translateY(-2px);
+  box-shadow:0 14px 36px rgba(0,0,0,.18) !important;
+  filter: brightness(1.02);
+  outline:none;
+}
   </style>
 </head>
 
