@@ -167,6 +167,46 @@
       .news-list.clean{ grid-template-columns:1fr; }
       .hiring .row{ flex-direction:column; align-items:start; }
     }
+  /* Home: soft static shadow + stronger on hover for pubs, news, and IGBMC box */
+body[data-page="home"] .pub-grid .pub-item .pub-card{
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] .pub-grid .pub-item:hover .pub-card,
+body[data-page="home"] .pub-grid .pub-item:focus-visible .pub-card{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+  filter: brightness(1.02);
+  outline: none;
+}
+
+body[data-page="home"] .news-list.clean .news-item{
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] .news-list.clean .news-item:hover,
+body[data-page="home"] .news-list.clean .news-item:focus-visible{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+  filter: brightness(1.02);
+  outline: none;
+}
+
+body[data-page="home"] footer .foot-partners .partner-card{
+  border:1px solid rgba(0,0,0,.06);
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] footer .foot-partners .partner-card:hover,
+body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+  filter: brightness(1.02);
+  outline: none;
+}
   </style>
 </head>
 
