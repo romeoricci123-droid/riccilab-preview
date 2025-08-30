@@ -1428,5 +1428,28 @@ body[data-page="home"] a.emblem-link .round-mask {
     border-radius:14px;
   }
 }
+@media (min-width: 1101px){
+  /* use the full header width for the nav */
+  body[data-page="home"] header .container.nav{ display:flex; }
+  body[data-page="home"] header .container.nav .brand{ display:none; }
+
+  /* equal width buttons across the row */
+  body[data-page="home"] header .container.nav #site-nav{
+    flex:1;
+    display:grid;
+    grid-template-columns: repeat(8, 1fr);
+    gap:12px;
+    width:100%;
+  }
+
+  /* make each button larger and fill its cell */
+  body[data-page="home"] header .container.nav #site-nav > a.navbox{
+    display:block;
+    text-align:center;
+    padding:14px 18px;
+    font-size:1.06rem;
+    border-radius:14px;
+  }
+}
 
 
