@@ -591,6 +591,25 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
       });
     });
   </script>
+  <script>
+  // Emblem: strengthen the round shadow on hover by swapping the circle's filter
+  (function(){
+    var emblem = document.querySelector('a.emblem-link');
+    if (!emblem) return;
+    var svg = emblem.querySelector('svg');
+    var circle = svg && svg.querySelector('g.shadow > circle');
+    if (!circle) return;
+
+    emblem.addEventListener('mouseenter', function(){
+      circle.setAttribute('filter', 'url(#ds-round-hover)');
+      emblem.querySelector('svg').style.transform = 'translateY(-2px)';
+    });
+    emblem.addEventListener('mouseleave', function(){
+      circle.setAttribute('filter', 'url(#ds-round-base)');
+      emblem.querySelector('svg').style.transform = '';
+    });
+  })();
+</script>
   <!-- Mobile nav -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
