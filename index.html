@@ -232,46 +232,12 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   filter: brightness(1.02);
   outline:none;
 }
-/* Ensure that the emblem's container (link) allows the shadow to be visible */
-body[data-page="home"] a.emblem-link {
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);  /* Apply a stronger shadow like Latest Publications */
-  overflow: visible;
-  border-radius: 50%;  /* Keeps the round shape for the shadow */
+
+body[data-page="home"] a.emblem-link:hover,
+body[data-page="home"] a.emblem-link:focus-visible {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24) !important;
 }
 
-/* Ensure the SVG image is clipped properly inside the circle */
-body[data-page="home"] a.emblem-link svg {
-  width: 100%;
-  height: 100%;
-  display: block;
-  clip-path: circle(50% at 50% 50%);  /* Clipping the SVG image inside the circular area */
-}
-/* Apply proper positioning for the SVG to avoid clipping */
-body[data-page="home"] a.emblem-link svg {
-  width: 100%;
-  height: 100%;
-  display: block;               /* Ensures SVG is displayed as a block */
-  clip-path: circle(50% at 50% 50%); /* Ensures SVG is clipped to a circle */
-}
-
-/* Remove any internal SVG filter (if exists) to avoid conflicting shadows */
-body[data-page="home"] a.emblem-link svg .shadow {
-  filter: none !important; /* This will ensure no internal SVG shadow remains */
-}
-}
-    /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
-body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
-  body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
-
-/* Add shadow on hover for emblem */
-a.emblem-link:hover {
-  box-shadow: 0 10px 30px rgba(0,0,0,0.24);
-  transition: box-shadow 0.15s;
-}
   </style>
 </head>
 
