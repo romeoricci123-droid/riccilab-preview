@@ -312,11 +312,14 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
     </feMerge>
   </filter>
 </defs>
-                <!-- CLIPPED VISUAL ONLY (no circle, no SVG filter) -->
-<g id="emblem-visual" clip-path="url(#clip-emblem)">
+                <g class="shadow">
+  <!-- This circle does NOT render itself; its filter outputs only the shadow -->
+  <circle cx="260" cy="260" r="260" fill="#000" filter="url(#ds-round-base)"></circle>
+
   <image href="assets/emblem.webp?v=7"
          x="57" y="57" width="406" height="406"
-         preserveAspectRatio="xMidYMid meet"></image>
+         preserveAspectRatio="xMidYMid meet"
+         clip-path="url(#clip-emblem)"></image>
 </g>
               </svg>
             </a>
@@ -344,12 +347,12 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
                   </filter>
                 </defs>
                 <g class="shadow">
-  <circle cx="260" cy="260" r="260" fill="#000" filter="url(#ds-round-base)"></circle>
-  <image href="assets/emblem.webp?v=7"
-         x="57" y="57" width="406" height="406"
-         preserveAspectRatio="xMidYMid meet"
-         clip-path="url(#clip-emblem)"></image>
-</g>
+                  <circle cx="140" cy="140" r="140" fill="#000"></circle>
+                  <image href="assets/nlrp3.webp"
+                         x="0" y="0" width="280" height="280"
+                         preserveAspectRatio="xMidYMid slice"
+                         clip-path="url(#clip-left)"></image>
+                </g>
               </svg>
             </a>
             <div class="body">
@@ -588,25 +591,6 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
       });
     });
   </script>
-  <script>
-  // Emblem: strengthen the round shadow on hover by swapping the circle's filter
-  (function(){
-    var emblem = document.querySelector('a.emblem-link');
-    if (!emblem) return;
-    var svg = emblem.querySelector('svg');
-    var circle = svg && svg.querySelector('g.shadow > circle');
-    if (!circle) return;
-
-    emblem.addEventListener('mouseenter', function(){
-      circle.setAttribute('filter', 'url(#ds-round-hover)');
-      emblem.querySelector('svg').style.transform = 'translateY(-2px)';
-    });
-    emblem.addEventListener('mouseleave', function(){
-      circle.setAttribute('filter', 'url(#ds-round-base)');
-      emblem.querySelector('svg').style.transform = '';
-    });
-  })();
-</script>
   <!-- Mobile nav -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
