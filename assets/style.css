@@ -1469,5 +1469,22 @@ body[data-page="home"] a.emblem-link .round-mask {
     border-radius: 14px !important;
   }
 }
+/* HOME: force equal-width, larger header buttons across the full header width */
+@media (min-width: 1101px){
+  body[data-page="home"] header .nav nav#site-nav{
+    display: grid !important;
+    grid-template-columns: repeat(8, 1fr) !important; /* 8 links */
+    gap: 12px !important;
+    width: 100% !important;
+  }
+  body[data-page="home"] header .nav nav#site-nav > a.navbox{
+    display: block !important;
+    width: 100% !important;      /* each fills its grid cell */
+    padding: 16px 20px !important;
+    font-size: 1.1rem !important;
+    border-radius: 14px !important;
+    text-align: center !important;
+  }
+}
 
 
