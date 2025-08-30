@@ -1324,5 +1324,17 @@ body[data-page="home"] .tile:focus-within{
 }
 /* text under the circle shouldn’t steal hover */
 body[data-page="home"] .tile .body{ pointer-events: none; }
+/* HOMEPAGE: never underline links on hover (prevents the white slice on circles) */
+body[data-page="home"] a:hover { 
+  text-decoration: none !important; 
+}
+
+/* Extra belt-and-suspenders for the round links */
+body[data-page="home"] a.round-link,
+body[data-page="home"] a.round-link:hover,
+body[data-page="home"] a.round-link:focus-visible {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
 
 
