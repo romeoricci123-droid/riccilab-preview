@@ -233,18 +233,29 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   outline:none;
 }
 body[data-page="home"] a.emblem-link {
-  display: inline-flex; /* Ensure proper layout */
-  align-items: center;
+  display: inline-flex; /* Ensures proper display */
   justify-content: center;
-  overflow: visible; /* Prevent clipping of shadow */
+  align-items: center;
+  position: relative; /* Ensures the shadow is properly positioned */
+  overflow: visible;  /* Allows shadow to be visible outside the boundary */
+}
+
+body[data-page="home"] a.emblem-link svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
 body[data-page="home"] a.round-link {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Apply the same shadow as publications */
-  border-radius: 50%; /* Ensure the shadow is applied to the circle */
-  overflow: visible; /* Ensure the shadow isn't clipped */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Apply the same shadow as the publications boxes */
+  border-radius: 50%; /* Keep the round shadow */
+  position: relative; /* Fix positioning */
+  overflow: visible; /* Prevent clipping */
 }
 
+body[data-page="home"] a.emblem-link svg .shadow {
+  filter: none !important; /* Ensure no conflicting shadow from SVG */
+}
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
   </style>
