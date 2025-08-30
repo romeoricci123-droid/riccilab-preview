@@ -286,18 +286,17 @@ body[data-page="home"] a.emblem-link:focus-visible {
                   
   <!-- Round shadow: base -->
   <filter id="ds-round-base" x="-60%" y="-60%" width="220%" height="220%">
-    <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
-    <feOffset dx="0" dy="16" result="off"/>
-    <feColorMatrix in="off" type="matrix"
-      values="0 0 0 0 0
-              0 0 0 0 0
-              0 0 0 0 0
-              0 0 0 0.18 0" result="shadow"/>
-    <!-- IMPORTANT: output only the shadow (no SourceGraphic merge) -->
-    <feMerge>
-      <feMergeNode in="shadow"/>
-    </feMerge>
-  </filter>
+  <feGaussianBlur in="SourceAlpha" stdDeviation="22" result="blur"/>
+  <feOffset dx="0" dy="24" result="off"/>
+  <feColorMatrix in="off" type="matrix"
+    values="0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0 0
+            0 0 0 0.38 0" result="shadow"/>
+  <feMerge>
+    <feMergeNode in="shadow"/>
+  </feMerge>
+</filter>
 <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
   <svg class="circle-svg" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
     <defs>
@@ -606,13 +605,6 @@ body[data-page="home"] a.emblem-link:focus-visible {
       });
     });
   </script>
-<script>
-  // Kill the emblem SVG's built-in filter so only the CSS drop-shadow remains
-  (function () {
-    var g = document.querySelector('a.emblem-link svg g.shadow');
-    if (g) g.removeAttribute('filter');
-  })();
-</script>
   <!-- Mobile nav -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
