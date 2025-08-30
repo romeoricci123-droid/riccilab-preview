@@ -278,28 +278,11 @@ body[data-page="home"] a.emblem-link:focus-visible {
           <div class="orbit-center">     
 <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
   <svg class="circle-svg" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
-    <defs>
-      <clipPath id="clip-emblem" clipPathUnits="userSpaceOnUse">
-        <circle cx="260" cy="260" r="260"/>
-      </clipPath>
-      <filter id="ds-round-base" x="-60%" y="-60%" width="220%" height="220%">
-        <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="blur"/>
-        <feOffset dx="0" dy="10" result="off"/>
-        <feColorMatrix in="off" type="matrix"
-          values="0 0 0 0 0
-                  0 0 0 0 0
-                  0 0 0 0 0
-                  0 0 0 0.24 0" result="shadow"/>
-        <feMerge>
-          <feMergeNode in="shadow"/>
-        </feMerge>
-      </filter>
-    <g class="shadow" filter="url(#ds-round-base)">
+    <g class="shadow">
       <circle cx="260" cy="260" r="260" fill="#000"></circle>
       <image href="assets/emblem.webp"
-       x="57" y="57" width="406" height="406"
-       preserveAspectRatio="xMidYMid meet"
-       clip-path="url(#clip-emblem)"></image>
+             x="57" y="57" width="406" height="406"
+             preserveAspectRatio="xMidYMid meet"></image>
     </g>
   </svg>
 </a>
