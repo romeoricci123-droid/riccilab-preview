@@ -1336,5 +1336,14 @@ body[data-page="home"] a.round-link:focus-visible {
   text-decoration: none !important;
   border-bottom: 0 !important;
 }
+/* HOMEPAGE wide containers: actually widen (beat the 1200px cap) */
+body[data-page="home"] .container.wide {
+  width: min(1680px, 94%) !important;   /* use more screen */
+}
+@media (min-width: 1800px) {
+  body[data-page="home"] .container.wide {
+    width: min(1800px, 92%) !important; /* breathe even more on big screens */
+  }
+}
 
 
