@@ -234,15 +234,22 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
 }
 /* Ensure that the emblem's container (link) allows the shadow to be visible */
 body[data-page="home"] a.emblem-link {
-  display: inline-flex;         /* Ensures proper layout */
+  display: inline-flex;
   justify-content: center;
   align-items: center;
-  position: relative;           /* Necessary for the shadow positioning */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);  /* Apply shadow directly to the link */
-  overflow: visible;            /* Make sure shadow is visible outside the container */
-  border-radius: 50%;           /* Keeps the round shape for the shadow */
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);  /* Apply a stronger shadow like Latest Publications */
+  overflow: visible;
+  border-radius: 50%;  /* Keeps the round shape for the shadow */
 }
 
+/* Ensure the SVG image is clipped properly inside the circle */
+body[data-page="home"] a.emblem-link svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  clip-path: circle(50% at 50% 50%);  /* Clipping the SVG image inside the circular area */
+}
 /* Apply proper positioning for the SVG to avoid clipping */
 body[data-page="home"] a.emblem-link svg {
   width: 100%;
