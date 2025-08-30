@@ -265,6 +265,13 @@ body[data-page="home"] a.emblem-link svg .shadow {
 }
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
+  body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
+
+/* Add shadow on hover for emblem */
+a.emblem-link:hover {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.24);
+  transition: box-shadow 0.15s;
+}
   </style>
 </head>
 
