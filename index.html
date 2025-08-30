@@ -221,6 +221,22 @@ body[data-page="home"] .news-list.clean .news-item:focus-visible{
   filter: brightness(1.02);
   outline: none;
 }
+  /* HOME: shadow for News boxes (same as Latest publications) */
+body[data-page="home"] .news-list.clean a.news-item{
+  display: block;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;
+  background:#fff;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] .news-list.clean a.news-item:hover,
+body[data-page="home"] .news-list.clean a.news-item:focus-visible{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.14);
+  filter: brightness(1.02);
+  outline:none;
+}
   </style>
 </head>
 
