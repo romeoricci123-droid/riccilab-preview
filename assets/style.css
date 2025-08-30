@@ -1407,5 +1407,26 @@ body[data-page="home"] a.emblem-link .round-mask {
   background: transparent !important;
   filter: none !important;
 }
+@media (min-width: 1101px){
+  /* hide brand on home header */
+  body[data-page="home"] header .container.nav .brand{ display:none; }
+
+  /* lay out nav as equal columns across full width */
+  body[data-page="home"] header .container.nav nav{
+    display:grid; 
+    grid-template-columns: repeat(8, minmax(0, 1fr));
+    gap: 12px;
+    width:100%;
+  }
+
+  /* make each button larger */
+  body[data-page="home"] header .container.nav nav > a.navbox{
+    display:block;
+    text-align:center;
+    padding:14px 18px;
+    font-size:1.05rem;
+    border-radius:14px;
+  }
+}
 
 
