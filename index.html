@@ -233,28 +233,24 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   outline:none;
 }
 body[data-page="home"] a.emblem-link {
-  display: inline-flex; /* Ensures proper display */
+  display: inline-flex;  /* Ensure proper positioning */
   justify-content: center;
   align-items: center;
-  position: relative; /* Ensures the shadow is properly positioned */
-  overflow: visible;  /* Allows shadow to be visible outside the boundary */
+  position: relative;    /* Ensure positioning is correct for the shadow */
+  overflow: visible;     /* Allow shadow to render outside the link */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);  /* Apply the shadow directly to the link */
+  border-radius: 50%;    /* Ensure the shadow is applied around the circle */
 }
 
 body[data-page="home"] a.emblem-link svg {
-  display: block;
-  width: 100%;
+  width: 100%;           /* Ensure it fills the container */
   height: 100%;
-}
-
-body[data-page="home"] a.round-link {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Apply the same shadow as the publications boxes */
-  border-radius: 50%; /* Keep the round shadow */
-  position: relative; /* Fix positioning */
-  overflow: visible; /* Prevent clipping */
+  display: block;        /* Prevent any inline display issues */
+  clip-path: circle(50% at 50% 50%); /* Ensure the content stays within the circular boundary */
 }
 
 body[data-page="home"] a.emblem-link svg .shadow {
-  filter: none !important; /* Ensure no conflicting shadow from SVG */
+  filter: none !important;  /* Remove any shadow from the SVG itself to avoid conflicts */
 }
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
