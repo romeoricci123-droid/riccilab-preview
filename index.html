@@ -287,37 +287,39 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
             <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
               <svg class="circle-svg" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
                 <defs>
-                  <clipPath id="clip-emblem" clipPathUnits="userSpaceOnUse">
-                    <circle cx="260" cy="260" r="260"></circle>
-                  </clipPath>
-                  <!-- soft shadow -->
-                  <filter id="ds-strong" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
-                    <feOffset dx="0" dy="16" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.32 0" result="shadow"/>
-                    <feMerge>
-                      <feMergeNode in="shadow"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                  <filter id="ds-hover" x="-60%" y="-60%" width="220%" height="220%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="16" result="blur"/>
-                    <feOffset dx="0" dy="22" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.38 0" result="shadow"/>
-                    <feMerge>
-                      <feMergeNode in="shadow"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
-                  </filter>
-                </defs>
+  <clipPath id="clip-emblem" clipPathUnits="userSpaceOnUse">
+    <circle cx="260" cy="260" r="260"></circle>
+  </clipPath>
+
+  <!-- Round shadow: base -->
+  <filter id="ds-round-base" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="14" result="blur"/>
+    <feOffset dx="0" dy="16" result="off"/>
+    <feColorMatrix in="off" type="matrix"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0.18 0" result="shadow"/>
+    <!-- IMPORTANT: output only the shadow (no SourceGraphic merge) -->
+    <feMerge>
+      <feMergeNode in="shadow"/>
+    </feMerge>
+  </filter>
+
+  <!-- Round shadow: hover (stronger) -->
+  <filter id="ds-round-hover" x="-70%" y="-70%" width="240%" height="240%">
+    <feGaussianBlur in="SourceAlpha" stdDeviation="18" result="blur"/>
+    <feOffset dx="0" dy="22" result="off"/>
+    <feColorMatrix in="off" type="matrix"
+      values="0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0 0
+              0 0 0 0.26 0" result="shadow"/>
+    <feMerge>
+      <feMergeNode in="shadow"/>
+    </feMerge>
+  </filter>
+</defs>
                 <g class="shadow">
                   <circle cx="260" cy="260" r="260" fill="#000"></circle>
                   <image href="assets/emblem.webp?v=7"
