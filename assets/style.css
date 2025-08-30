@@ -1470,21 +1470,19 @@ body[data-page="home"] a.emblem-link .round-mask {
   }
 }
 /* HOME: force equal-width, larger header buttons across the full header width */
-@media (min-width: 1101px){
+@media (min-width:1101px){
   body[data-page="home"] header .nav nav#site-nav{
     display: grid !important;
-    grid-template-columns: repeat(8, 1fr) !important; /* 8 links */
-    gap: 12px !important;
-    width: 100% !important;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 12px;
+    width: 100%;
   }
   body[data-page="home"] header .nav nav#site-nav > a.navbox{
     display: block !important;
-    width: 100% !important;      /* each fills its grid cell */
+    width: 100%;
     padding: 16px 20px !important;
-    font-size: 1.1rem !important;
-    border-radius: 14px !important;
-    text-align: center !important;
+    font-size: 1.1rem;
+    border-radius: 14px;
+    text-align: center;
   }
 }
-
-
