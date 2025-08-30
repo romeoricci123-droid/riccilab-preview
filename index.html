@@ -232,25 +232,29 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   filter: brightness(1.02);
   outline:none;
 }
+/* Ensure that the emblem's container (link) allows the shadow to be visible */
 body[data-page="home"] a.emblem-link {
-  display: inline-flex;  /* Ensure proper positioning */
+  display: inline-flex;         /* Ensures proper layout */
   justify-content: center;
   align-items: center;
-  position: relative;    /* Ensure positioning is correct for the shadow */
-  overflow: visible;     /* Allow shadow to render outside the link */
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);  /* Apply the shadow directly to the link */
-  border-radius: 50%;    /* Ensure the shadow is applied around the circle */
+  position: relative;           /* Necessary for the shadow positioning */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);  /* Apply shadow directly to the link */
+  overflow: visible;            /* Make sure shadow is visible outside the container */
+  border-radius: 50%;           /* Keeps the round shape for the shadow */
 }
 
+/* Apply proper positioning for the SVG to avoid clipping */
 body[data-page="home"] a.emblem-link svg {
-  width: 100%;           /* Ensure it fills the container */
+  width: 100%;
   height: 100%;
-  display: block;        /* Prevent any inline display issues */
-  clip-path: circle(50% at 50% 50%); /* Ensure the content stays within the circular boundary */
+  display: block;               /* Ensures SVG is displayed as a block */
+  clip-path: circle(50% at 50% 50%); /* Ensures SVG is clipped to a circle */
 }
 
+/* Remove any internal SVG filter (if exists) to avoid conflicting shadows */
 body[data-page="home"] a.emblem-link svg .shadow {
-  filter: none !important;  /* Remove any shadow from the SVG itself to avoid conflicts */
+  filter: none !important; /* This will ensure no internal SVG shadow remains */
+}
 }
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
