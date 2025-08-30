@@ -1367,5 +1367,45 @@ body[data-page="home"] a.emblem-link img{
     mix-blend-mode: normal; /* default; set to multiply only if you still see white */
   }
 }
+/* ==== HOMEPAGE — Round circles: move shadow to the circular content ==== */
+
+/* 1) Never let parent layers paint a rectangular shadow/background */
+body[data-page="home"] .tile,
+body[data-page="home"] .tile * {
+  box-shadow: none !important;
+}
+body[data-page="home"] .round-mask {
+  background: transparent !important;   /* kill black fill on parent */
+  filter: none !important;               /* no parent filter (rectangular) */
+}
+
+/* 2) Small circles: the clipped child casts the shadow */
+body[data-page="home"] .round-mask .bgfill {
+  width: 100% !important;
+  height: 100% !important;
+  clip-path: circle(50% at 50% 50%) !important;  /* hard circular clip */
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+
+  /* shadow follows the circle alpha — no rectangles */
+  filter: drop-shadow(0 16px 38px rgba(0,0,0,.30)) !important;
+  transition: filter .14s ease !important;
+}
+body[data-page="home"] .round-link:hover .bgfill,
+body[data-page="home"] .round-link:focus-visible .bgfill {
+  filter: drop-shadow(0 22px 54px rgba(0,0,0,.36)) !important;
+}
+
+/* 3) Emblem: make the actual image the clipped/shadowed layer */
+body[data-page="home"] a.emblem-link img {
+  clip-path: circle(50% at 50% 50%) !important;
+  filter: drop-shadow(0 22px 60px rgba(0,0,0,.34)) !important;
+}
+/* Ensure no parent is adding a background/shadow there either */
+body[data-page="home"] a.emblem-link .round-mask {
+  background: transparent !important;
+  filter: none !important;
+}
 
 
