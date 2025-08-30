@@ -312,14 +312,11 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
     </feMerge>
   </filter>
 </defs>
-                <g class="shadow">
-  <!-- This circle does NOT render itself; its filter outputs only the shadow -->
-  <circle cx="260" cy="260" r="260" fill="#000" filter="url(#ds-round-base)"></circle>
-
+                <!-- CLIPPED VISUAL ONLY (no circle, no SVG filter) -->
+<g id="emblem-visual" clip-path="url(#clip-emblem)">
   <image href="assets/emblem.webp?v=7"
          x="57" y="57" width="406" height="406"
-         preserveAspectRatio="xMidYMid meet"
-         clip-path="url(#clip-emblem)"></image>
+         preserveAspectRatio="xMidYMid meet"></image>
 </g>
               </svg>
             </a>
