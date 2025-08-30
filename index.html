@@ -245,6 +245,8 @@ body[data-page="home"] a.emblem-link:active svg{
   filter: drop-shadow(0 14px 36px rgba(0,0,0,.18));
   transform: translateY(-1px);
 }
+    /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
+body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
   </style>
 </head>
 
