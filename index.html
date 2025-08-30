@@ -233,8 +233,18 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   outline:none;
 }
 body[data-page="home"] a.emblem-link {
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Same shadow as publications, but round */
+  display: inline-flex; /* Ensure proper layout */
+  align-items: center;
+  justify-content: center;
+  overflow: visible; /* Prevent clipping of shadow */
 }
+
+body[data-page="home"] a.round-link {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Apply the same shadow as publications */
+  border-radius: 50%; /* Ensure the shadow is applied to the circle */
+  overflow: visible; /* Ensure the shadow isn't clipped */
+}
+
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
   </style>
