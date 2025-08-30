@@ -591,6 +591,13 @@ body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
       });
     });
   </script>
+<script>
+  // Kill the emblem SVG's built-in filter so only the CSS drop-shadow remains
+  (function () {
+    var g = document.querySelector('a.emblem-link svg g.shadow');
+    if (g) g.removeAttribute('filter');
+  })();
+</script>
   <!-- Mobile nav -->
   <script src="assets/nav.js?v=2" defer></script>
 </body>
