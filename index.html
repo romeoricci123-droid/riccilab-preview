@@ -276,19 +276,6 @@ body[data-page="home"] a.emblem-link:focus-visible {
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">     
-  <!-- Round shadow: base -->
-  <filter id="ds-round-base" x="-60%" y="-60%" width="220%" height="220%">
-  <feGaussianBlur in="SourceAlpha" stdDeviation="15" result="blur"/>
-  <feOffset dx="0" dy="10" result="off"/>
-  <feColorMatrix in="off" type="matrix"
-    values="0 0 0 0 0
-            0 0 0 0 0
-            0 0 0 0 0
-            0 0 0 0.14 0" result="shadow"/>
-  <feMerge>
-    <feMergeNode in="shadow"/>
-  </feMerge>
-</filter>
 <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
   <svg class="circle-svg" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
     <defs>
@@ -302,7 +289,7 @@ body[data-page="home"] a.emblem-link:focus-visible {
           values="0 0 0 0 0
                   0 0 0 0 0
                   0 0 0 0 0
-                  0 0 0 0.24 0" result="shadow"/>
+                  0 0 0 0.14 0" result="shadow"/>
         <feMerge>
           <feMergeNode in="shadow"/>
         </feMerge>
