@@ -1345,5 +1345,27 @@ body[data-page="home"] .container.wide {
     width: min(1800px, 92%) !important; /* breathe even more on big screens */
   }
 }
+/* HOME — small research circles: fill the disc so no inner rectangle shows */
+body[data-page="home"] a.circle-card img{
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;   /* fill the circle, crop if needed */
+  display: block !important;
+  background: transparent !important;
+}
+
+/* Keep the emblem safe (label not cropped) */
+body[data-page="home"] a.emblem-link img{
+  max-width: 78% !important;
+  max-height: 78% !important;
+  object-fit: contain !important;
+}
+
+/* Optional: if any SVG has a white canvas baked in, blend it into the black disc */
+@supports (mix-blend-mode: multiply) {
+  body[data-page="home"] a.circle-card img{
+    mix-blend-mode: normal; /* default; set to multiply only if you still see white */
+  }
+}
 
 
