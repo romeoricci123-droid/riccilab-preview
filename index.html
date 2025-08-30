@@ -23,8 +23,8 @@
   <meta content="width=device-width, initial-scale=1" name="viewport" />
   <title>Ricci Lab</title>
 
-  <!-- Global stylesheet (cache-busted) -->
-  <link href="assets/style.css?v=svg-circles-1" rel="stylesheet" />
+  <!-- Global stylesheet (keep) -->
+  <link href="assets/style.css?v=svg-circles-2" rel="stylesheet" />
   <link rel="canonical" href="https://riccilab.org/">
 
   <!-- Schema -->
@@ -35,53 +35,64 @@
     "name": "Ricci Lab",
     "url": "https://riccilab.org",
     "logo": "https://riccilab.org/assets/emblem.webp",
-    "parentOrganization": {
-      "@type": "Organization",
-      "name": "IGBMC",
-      "url": "https://www.igbmc.fr"
-    },
-    "member": [
-      {
-        "@type": "Person",
-        "name": "Romeo Ricci",
-        "jobTitle": "Principal Investigator",
-        "affiliation": { "@type": "Organization", "name": "IGBMC" }
-      }
-    ]
+    "parentOrganization": { "@type": "Organization", "name": "IGBMC", "url": "https://www.igbmc.fr" },
+    "member": [{ "@type": "Person", "name": "Romeo Ricci", "jobTitle": "Principal Investigator",
+      "affiliation": { "@type": "Organization", "name": "IGBMC" } }]
   }
   </script>
 
-  <!-- Home-only styles (no CSS shadows on circles; only SVG shadows) -->
+  <!-- Home-only styles -->
   <style>
-    /* Wider canvas */
-    body[data-page="home"] .container.wide{ width: min(1840px, 95%) !important; }
+    /* Use more width on large screens */
+    body[data-page="home"] .container.wide{ width:min(1840px,95%) !important; }
 
-    /* Header: black animated buttons + current marker */
-    body[data-page="home"] header .nav nav > a.navbox{
+    /* ===== Header re-layout (no brand; buttons fill full width) ===== */
+    header .nav{ display:block; padding:12px 0; }
+    header .nav .hamburger{ display:none; } /* desktop only; mobile rules keep their own */
+    /* full-width, equal columns for all nav items */
+    header .nav #site-nav{
+      display:grid !important;
+      grid-template-columns: repeat(8, minmax(0,1fr));
+      gap: 12px;
+      align-items: stretch;
+    }
+    header .nav #site-nav > a{
+      display:flex !important; align-items:center; justify-content:center;
+      padding: 12px 14px !important;
       background:#000 !important; color:#fff !important; border:1px solid #000 !important;
-      box-shadow:0 6px 16px rgba(0,0,0,.18) !important;
+      border-radius:12px !important; text-decoration:none !important;
+      /* base shadow (static) */
+      box-shadow: 0 2px 8px rgba(0,0,0,.14) !important;
       transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
-      transform: translateY(0) !important;
     }
-    body[data-page="home"] header .nav nav > a.navbox:hover,
-    body[data-page="home"] header .nav nav > a.navbox:focus-visible{
-      transform: translateY(-1px) !important;
-      box-shadow: 0 10px 22px rgba(0,0,0,.24) !important;
-      filter: brightness(1.06) !important;
+    header .nav #site-nav > a:hover,
+    header .nav #site-nav > a:focus-visible{
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(0,0,0,.24) !important; filter: brightness(1.06);
+      text-decoration:none !important;
     }
-    body[data-page="home"] header .nav nav > a.navbox[aria-current="page"]{
+    /* current page marker that fits black */
+    header .nav #site-nav > a[aria-current="page"]{
+      box-shadow: inset 0 0 0 2px #fff, 0 2px 8px rgba(0,0,0,.14) !important;
       position:relative;
-      box-shadow: inset 0 0 0 2px #fff, 0 6px 16px rgba(0,0,0,.18) !important;
-      outline: none !important;
-    }
-    body[data-page="home"] header .nav nav > a.navbox[aria-current="page"]::after{
-      content:""; position:absolute; left:12px; right:12px; bottom:6px; height:2px; background:#fff; border-radius:2px;
     }
 
-    /* Orbit layout, stretched */
+    /* Mobile: keep your hamburger menu behavior from style.css */
+    @media (max-width: 760px){
+      header .nav { position:relative; }
+      header .nav .hamburger{ display:inline-flex; }
+      header .nav #site-nav{ display:none !important; }          /* collapsed by default; nav.js toggles .open */
+      header .nav #site-nav.open{
+        display:flex !important; flex-direction:column; gap:8px;
+        background:#fff; border-bottom:1px solid var(--line); position:absolute; top:100%; left:0; right:0; padding:8px 12px;
+      }
+      header .nav #site-nav > a{ background:#000 !important; }
+    }
+
+    /* ===== Orbit layout (stretched) ===== */
     .orbit{
       display:grid;
-      grid-template-columns: minmax(360px,1fr) 640px minmax(360px,1fr);
+      grid-template-columns: minmax(360px,1fr) 680px minmax(360px,1fr);
       grid-template-rows: auto auto;
       gap: 28px 56px;
       align-items:center;
@@ -95,53 +106,43 @@
     body[data-page="home"] .tile,
     body[data-page="home"] .tile .body{ border:none !important; background:transparent !important; box-shadow:none !important; }
     body[data-page="home"] .tile{ overflow: visible !important; }
-    body[data-page="home"] .tile:hover,
-    body[data-page="home"] .tile:focus-within{ transform:none !important; box-shadow:none !important; background:transparent !important; }
     .tile .body{ padding:8px 6px; }
 
     .tagline{ margin:16px 0 4px; font-size:1.35rem; line-height:1.2; }
     .tagline-sub{ margin:0; opacity:.9; line-height:1.25; }
-
-    /* Round links (no CSS shadows here; lift only) */
-    .round-link{
-      display:block; margin:0 auto 10px; position:relative; isolation:isolate;
-      border-radius:50%; overflow:visible !important;
-      text-decoration:none !important; border:none !important; outline:none !important; background:transparent !important;
-      -webkit-tap-highlight-color:transparent; cursor:pointer;
-      transition: transform .14s ease !important;
-    }
-    .round-link:hover{ transform: translateY(-3px); }
-    .round-link:active{ transform: translateY(-1px); }
+    /* never underline round links on hover (desktop artifact) */
     body[data-page="home"] a.round-link, body[data-page="home"] a.round-link *{
       text-decoration:none !important; border-bottom:0 !important;
     }
 
-    /* Sizes (bigger) */
-    a.emblem-link{ width:520px; height:520px; }
-    a.circle-card{ width:280px; height:280px; }
+    /* Sizes (bigger as requested) */
+    a.emblem-link{ width:540px; height:540px; }
+    a.circle-card{ width:300px; height:300px; }
 
-    /* SVG fits its box exactly; no overflow */
+    .round-link{ display:block; margin:0 auto 10px; transition:transform .14s ease; }
+    .round-link:hover{ transform: translateY(-3px); }
+    .round-link:active{ transform: translateY(-1px); }
     .circle-svg{ display:block; width:100%; height:100%; }
 
-    /* Hiring banner (animated) */
-    .hiring{
-      display:block; text-decoration:none; color:inherit;
-      background:linear-gradient(135deg,#fff7e6,#ffffff);
-      border:1px solid rgba(0,0,0,.06);
-      box-shadow:0 10px 30px rgba(0,0,0,.08);
-      border-radius:18px; padding:24px 22px; margin:26px 0 10px;
-      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+    /* ===== Card & logo base shadows (static) + stronger on hover ===== */
+    .hiring,
+    .cardbox.pub-item,
+    .cardbox.news-item,
+    .partner-card{
+      box-shadow: 0 2px 8px rgba(0,0,0,.14);               /* static */
+      transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
     }
-    .hiring:hover, .hiring:focus-visible{
+    .hiring:hover, .hiring:focus-visible,
+    .cardbox.pub-item:hover, .cardbox.pub-item:focus-visible,
+    .cardbox.news-item:hover, .cardbox.news-item:focus-visible,
+    .partner-card:hover, .partner-card:focus-visible{
       transform: translateY(-2px);
-      box-shadow: 0 12px 30px rgba(0,0,0,.14);
+      box-shadow: 0 10px 24px rgba(0,0,0,.24);
       filter: brightness(1.02);
+      text-decoration:none;
     }
-    .hiring .row{ display:flex; align-items:center; gap:16px; }
-    .hiring .dot{ width:14px; height:14px; border-radius:999px; background:#f59e0b; box-shadow: 0 0 0 6px rgba(245,158,11,.18); }
-    .hiring .copy{ font-size:1.6rem; font-weight:800; }
 
-    /* Publications / News unchanged */
+    /* Publications and News grids (unchanged, wide) */
     .pub-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; list-style:none; margin:0; padding:0; }
     .pub-item{ display:block; text-decoration:none; }
     .pub-card{ padding:14px 16px; border-radius:14px; }
@@ -149,10 +150,7 @@
     .pub-title{ margin:0 0 6px; font-size:1.05rem; }
     .pub-meta{ opacity:.85; font-size:.95rem; }
 
-    .news-list.clean{
-      display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px;
-      list-style:none; margin:0; padding:0;
-    }
+    .news-list.clean{ display:grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap:16px; list-style:none; margin:0; padding:0; }
     .news-list .news-item{ display:block; }
     .news-list .news-body{ padding:14px 16px; }
 
@@ -175,9 +173,9 @@
 
   <header>
     <div class="container nav">
-      <div class="brand"><span class="lab">Ricci Lab</span></div>
+      <!-- brand removed as requested -->
 
-      <!-- Mobile hamburger -->
+      <!-- Mobile hamburger (works with your existing nav.js) -->
       <button class="hamburger" id="navToggle"
               aria-controls="site-nav"
               aria-expanded="false"
@@ -204,45 +202,25 @@
       <div class="container wide">
         <div class="orbit">
           <div class="orbit-center">
-            <!-- Emblem: SVG-clipped circle with SVG drop shadow -->
+            <!-- Emblem: SVG circle with LARGE filter region (no bottom bar) -->
             <a class="round-link emblem-link" href="research.html" aria-label="Go to Research">
-              <svg class="circle-svg" viewBox="0 0 520 520" width="520" height="520" aria-hidden="true">
+              <svg class="circle-svg" viewBox="0 0 540 540" width="540" height="540" aria-hidden="true">
                 <defs>
                   <clipPath id="clip-emblem" clipPathUnits="userSpaceOnUse">
-                    <circle cx="260" cy="260" r="260"></circle>
+                    <circle cx="270" cy="270" r="270"></circle>
                   </clipPath>
-                  <!-- soft shadow -->
-                  <filter id="ds-strong" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="12" result="blur"/>
-                    <feOffset dx="0" dy="16" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.32 0" result="shadow"/>
-                    <feMerge>
-                      <feMergeNode in="shadow"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
+                  <!-- Very large region to prevent any clipping artifacts -->
+                  <filter id="ds-strong" x="-150%" y="-150%" width="400%" height="400%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="18" stdDeviation="14" flood-color="#000" flood-opacity="0.34"/>
                   </filter>
-                  <filter id="ds-hover" x="-60%" y="-60%" width="220%" height="220%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="16" result="blur"/>
-                    <feOffset dx="0" dy="22" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.38 0" result="shadow"/>
-                    <feMerge>
-                      <feMergeNode in="shadow"/>
-                      <feMergeNode in="SourceGraphic"/>
-                    </feMerge>
+                  <filter id="ds-hover" x="-180%" y="-180%" width="460%" height="460%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="24" stdDeviation="18" flood-color="#000" flood-opacity="0.40"/>
                   </filter>
                 </defs>
                 <g class="shadow" filter="url(#ds-strong)">
-                  <circle cx="260" cy="260" r="260" fill="#000"></circle>
+                  <circle cx="270" cy="270" r="270" fill="#000"></circle>
                   <image href="assets/emblem.webp?v=7"
-                         x="57" y="57" width="406" height="406"
+                         x="59" y="59" width="422" height="422"
                          preserveAspectRatio="xMidYMid meet"
                          clip-path="url(#clip-emblem)"></image>
                 </g>
@@ -255,26 +233,22 @@
           <!-- Left: Macrophage -->
           <article class="tile orbit-left">
             <a aria-label="Macrophage" class="round-link circle-card" href="nlrp3.html">
-              <svg class="circle-svg" viewBox="0 0 280 280" width="280" height="280" aria-hidden="true">
+              <svg class="circle-svg" viewBox="0 0 300 300" width="300" height="300" aria-hidden="true">
                 <defs>
                   <clipPath id="clip-left" clipPathUnits="userSpaceOnUse">
-                    <circle cx="140" cy="140" r="140"></circle>
+                    <circle cx="150" cy="150" r="150"></circle>
                   </clipPath>
-                  <filter id="ds-small" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
-                    <feOffset dx="0" dy="16" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.30 0" result="shadow"/>
-                    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  <filter id="ds-small" x="-150%" y="-150%" width="400%" height="400%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.30"/>
+                  </filter>
+                  <filter id="ds-small-hover" x="-180%" y="-180%" width="460%" height="460%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="22" stdDeviation="16" flood-color="#000" flood-opacity="0.36"/>
                   </filter>
                 </defs>
                 <g class="shadow" filter="url(#ds-small)">
-                  <circle cx="140" cy="140" r="140" fill="#000"></circle>
+                  <circle cx="150" cy="150" r="150" fill="#000"></circle>
                   <image href="assets/nlrp3.webp"
-                         x="0" y="0" width="280" height="280"
+                         x="0" y="0" width="300" height="300"
                          preserveAspectRatio="xMidYMid slice"
                          clip-path="url(#clip-left)"></image>
                 </g>
@@ -289,26 +263,22 @@
           <!-- Top-right: Hypothalamic neuron -->
           <article class="tile orbit-rt">
             <a aria-label="Hypothalamic neuron" class="round-link circle-card" href="brain.html">
-              <svg class="circle-svg" viewBox="0 0 280 280" width="280" height="280" aria-hidden="true">
+              <svg class="circle-svg" viewBox="0 0 300 300" width="300" height="300" aria-hidden="true">
                 <defs>
                   <clipPath id="clip-rt" clipPathUnits="userSpaceOnUse">
-                    <circle cx="140" cy="140" r="140"></circle>
+                    <circle cx="150" cy="150" r="150"></circle>
                   </clipPath>
-                  <filter id="ds-small-2" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
-                    <feOffset dx="0" dy="16" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.30 0" result="shadow"/>
-                    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  <filter id="ds-small-2" x="-150%" y="-150%" width="400%" height="400%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.30"/>
+                  </filter>
+                  <filter id="ds-small-2-hover" x="-180%" y="-180%" width="460%" height="460%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="22" stdDeviation="16" flood-color="#000" flood-opacity="0.36"/>
                   </filter>
                 </defs>
                 <g class="shadow" filter="url(#ds-small-2)">
-                  <circle cx="140" cy="140" r="140" fill="#000"></circle>
+                  <circle cx="150" cy="150" r="150" fill="#000"></circle>
                   <image href="assets/brain.svg"
-                         x="0" y="0" width="280" height="280"
+                         x="0" y="0" width="300" height="300"
                          preserveAspectRatio="xMidYMid slice"
                          clip-path="url(#clip-rt)"></image>
                 </g>
@@ -323,26 +293,22 @@
           <!-- Bottom-right: Pancreatic β cell -->
           <article class="tile orbit-rb">
             <a aria-label="Pancreatic β cell" class="round-link circle-card" href="insulin.html">
-              <svg class="circle-svg" viewBox="0 0 280 280" width="280" height="280" aria-hidden="true">
+              <svg class="circle-svg" viewBox="0 0 300 300" width="300" height="300" aria-hidden="true">
                 <defs>
                   <clipPath id="clip-rb" clipPathUnits="userSpaceOnUse">
-                    <circle cx="140" cy="140" r="140"></circle>
+                    <circle cx="150" cy="150" r="150"></circle>
                   </clipPath>
-                  <filter id="ds-small-3" x="-50%" y="-50%" width="200%" height="200%">
-                    <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="blur"/>
-                    <feOffset dx="0" dy="16" result="off"/>
-                    <feColorMatrix in="off" type="matrix"
-                      values="0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0 0
-                              0 0 0 0.30 0" result="shadow"/>
-                    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+                  <filter id="ds-small-3" x="-150%" y="-150%" width="400%" height="400%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000" flood-opacity="0.30"/>
+                  </filter>
+                  <filter id="ds-small-3-hover" x="-180%" y="-180%" width="460%" height="460%" filterUnits="objectBoundingBox" color-interpolation-filters="sRGB">
+                    <feDropShadow dx="0" dy="22" stdDeviation="16" flood-color="#000" flood-opacity="0.36"/>
                   </filter>
                 </defs>
                 <g class="shadow" filter="url(#ds-small-3)">
-                  <circle cx="140" cy="140" r="140" fill="#000"></circle>
+                  <circle cx="150" cy="150" r="150" fill="#000"></circle>
                   <image href="assets/beta.webp"
-                         x="0" y="0" width="280" height="280"
+                         x="0" y="0" width="300" height="300"
                          preserveAspectRatio="xMidYMid slice"
                          clip-path="url(#clip-rb)"></image>
                 </g>
@@ -407,7 +373,7 @@
         <h2>News</h2>
         <ul class="news-list clean">
           <li>
-            <a class="cardbox news-item" href="news.html#2025-09-30-a">
+            <a class="cardbox news-item" href="news.html#2025-09-30-a" target="_blank" rel="noopener">
               <div class="news-body">
                 <div class="meta">30 Sep 2025</div>
                 <h3>HDR of Karl Vivot</h3>
@@ -416,7 +382,7 @@
             </a>
           </li>
           <li>
-            <a class="cardbox news-item" href="news.html#2024-01-23">
+            <a class="cardbox news-item" href="news.html#2024-01-23" target="_blank" rel="noopener">
               <div class="news-body">
                 <div class="meta">23 Jan 2024</div>
                 <h3>Chaire d'excellence France 2030</h3>
@@ -425,7 +391,7 @@
             </a>
           </li>
           <li>
-            <a class="cardbox news-item" href="news.html#2025-09-30-b">
+            <a class="cardbox news-item" href="news.html#2025-09-30-b" target="_blank" rel="noopener">
               <div class="news-body">
                 <div class="meta">30 Sep 2025</div>
                 <h3>Minisymposium at IGBMC</h3>
@@ -450,7 +416,7 @@
     <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
   </footer>
 
-  <!-- Publications data (cache-busted) -->
+  <!-- Publications data -->
   <script src="assets/publications.js?v=10"></script>
   <script>
     (function () {
@@ -474,23 +440,19 @@
 
           if (p.doi) {
             a.href = 'https://doi.org/' + p.doi;
-            a.target = '_blank';
-            a.rel = 'noopener';
+            a.target = '_blank'; a.rel = 'noopener';
           } else if (p.url) {
             a.href = p.url;
-            a.target = '_blank';
-            a.rel = 'noopener';
+            a.target = '_blank'; a.rel = 'noopener';
           } else {
             a.href = 'publications.html';
-            a.removeAttribute('target');
-            a.removeAttribute('rel');
+            a.removeAttribute('target'); a.removeAttribute('rel');
           }
         } else {
           t.textContent = 'Recent work from the lab';
           m.textContent = '';
           a.href = 'publications.html';
-          a.removeAttribute('target');
-          a.removeAttribute('rel');
+          a.removeAttribute('target'); a.removeAttribute('rel');
         }
       }
       setCard('science immunology', 'pub-si-link', 'pub-si-title', 'pub-si-meta');
@@ -498,21 +460,22 @@
       setCard('nature metabolism',  'pub-nm-link', 'pub-nm-title', 'pub-nm-meta');
     })();
 
-    // Hover: strengthen SVG shadow (no rectangles). Works without extra CSS:
+    /* Strengthen circle shadow on hover by swapping SVG filter (no CSS boxes involved) */
     document.querySelectorAll('.round-link').forEach(function(link){
       link.addEventListener('mouseenter', function(){
-        var g = link.querySelector('svg .shadow');
-        if (!g) return;
-        // swap to stronger filter if available
+        var g = link.querySelector('svg .shadow'); if (!g) return;
         var svg = link.querySelector('svg');
-        if (svg && svg.querySelector('#ds-hover')) g.setAttribute('filter', 'url(#ds-hover)');
+        if (!svg) return;
+        var vb = svg.getAttribute('viewBox');
+        if (vb === '0 0 540 540')      g.setAttribute('filter', 'url(#ds-hover)');
+        else if (svg.querySelector('#ds-small-hover')) g.setAttribute('filter', 'url(#ds-small-hover)');
       });
       link.addEventListener('mouseleave', function(){
-        var g = link.querySelector('svg .shadow');
-        if (!g) return;
-        // back to base filter
-        var base = g.closest('svg').getAttribute('viewBox') === '0 0 520 520' ? 'url(#ds-strong)' : 'url(#ds-small)';
-        g.setAttribute('filter', base);
+        var g = link.querySelector('svg .shadow'); if (!g) return;
+        var svg = link.querySelector('svg'); if (!svg) return;
+        var vb = svg.getAttribute('viewBox');
+        if (vb === '0 0 540 540')      g.setAttribute('filter', 'url(#ds-strong)');
+        else if (svg.querySelector('#ds-small')) g.setAttribute('filter', 'url(#ds-small)');
       });
     });
   </script>
