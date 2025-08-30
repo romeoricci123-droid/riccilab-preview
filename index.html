@@ -232,10 +232,18 @@ body[data-page="home"] footer .foot-partners .partner-card:focus-visible{
   filter: brightness(1.02);
   outline:none;
 }
-/* Emblem: shadow handled inside the SVG filters (no CSS drop-shadow) */
+/* Emblem: soft round shadow (no rectangular SVG shadow) */
 body[data-page="home"] a.emblem-link svg{
-  filter: none !important;
-  transition: transform .12s ease;
+  filter: drop-shadow(0 12px 28px rgba(0,0,0,.10));
+  transition: filter .15s ease, transform .12s ease;
+}
+body[data-page="home"] a.emblem-link:hover svg{
+  filter: drop-shadow(0 20px 48px rgba(0,0,0,.22));
+  transform: translateY(-2px);
+}
+body[data-page="home"] a.emblem-link:active svg{
+  filter: drop-shadow(0 14px 36px rgba(0,0,0,.18));
+  transform: translateY(-1px);
 }
     /* Kill the SVG filter on the emblem’s inner group to avoid double shadow */
 body[data-page="home"] a.emblem-link svg .shadow{ filter: none !important; }
