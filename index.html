@@ -183,6 +183,31 @@ body[data-page="home"] .news-list.clean > li > a.cardbox.news-item:focus-visible
   filter: brightness(1.02);
   outline:none;
 }
+ /* HOMEPAGE — make Latest publications match News card shadow */
+body[data-page="home"] .pub-grid > li > a.cardbox.pub-item{
+  display:block;
+  background:#fff;
+  border:1px solid rgba(0,0,0,.06);
+  border-radius:14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08) !important;
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease !important;
+}
+body[data-page="home"] .pub-grid > li > a.cardbox.pub-item:hover,
+body[data-page="home"] .pub-grid > li > a.cardbox.pub-item:focus-visible{
+  transform: translateY(-2px);
+  box-shadow:0 12px 30px rgba(0,0,0,.14) !important;
+  filter: brightness(1.02);
+  outline:none;
+}
+
+/* Neutralize inner .pub-card so there is only ONE box casting the shadow */
+body[data-page="home"] .pub-grid > li > a.cardbox.pub-item > .pub-card{
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  border-radius:12px;  /* keep inner rounding for content */
+  padding:14px 16px;   /* preserve spacing */
+}
   </style>
 </head>
 
