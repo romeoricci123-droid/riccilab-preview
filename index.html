@@ -577,7 +577,7 @@ body[data-page="home"] a.emblem-link:focus-visible{
     })();
 
     // Hover: strengthen SVG shadow (no rectangles). Works without extra CSS:
-    document.querySelectorAll('.round-link').forEach(function(link){
+   document.querySelectorAll('.round-link:not(.emblem-link)').forEach(function(link){
       link.addEventListener('mouseenter', function(){
         var g = link.querySelector('svg .shadow');
         if (!g) return;
